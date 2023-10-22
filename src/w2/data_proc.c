@@ -80,6 +80,12 @@ void print_data(pinky_knuckle_cm* pData, char* pName){
         printf("%d ", pData->split_count[i]);
     }
     printf("\n\r");
+    printf("m+1std:       %f %s.\n\r", pData->m_p_1std, UNIT);
+    printf("m-1std:       %f %s.\n\r", pData->m_m_1std, UNIT);
+    printf("m+2std:       %f %s.\n\r", pData->m_p_2std, UNIT);
+    printf("m-2std:       %f %s.\n\r", pData->m_m_2std, UNIT);
+    printf("m+3std:       %f %s.\n\r", pData->m_p_3std, UNIT);
+    printf("m-3std:       %f %s.\n\r", pData->m_m_3std, UNIT);
     return;
 }
 
@@ -145,6 +151,16 @@ void get_split_data(pinky_knuckle_cm* pData){
     return;
 }
 
+void get_std(pinky_knuckle_cm* pData){
+    pData->m_p_1std = pData->mean + pData->variance;
+    pData->m_m_1std = pData->mean - pData->variance;
+    pData->m_p_2std = pData->mean + 2 * pData->variance;
+    pData->m_m_2std = pData->mean - 2 * pData->variance;
+    pData->m_p_3std = pData->mean + 3 * pData->variance;
+    pData->m_m_3std = pData->mean - 3 * pData->variance;
+    return;
+}
+
 void get_stats(pinky_knuckle_cm* pData){
     get_min(pData);
     get_max(pData);
@@ -152,5 +168,6 @@ void get_stats(pinky_knuckle_cm* pData){
     get_variance(pData);
     get_split_points(pData);
     get_split_data(pData);
+    get_std(pData);
     return;
 }

@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "data_proc.h"
+#include "data_plot.h"
 
 #define MALE_DATA    "./dataset/data_male.csv"
 #define FEMALE_DATA  "./dataset/data_female.csv"
+#define TEST_IMAGE   "./output/test_image.png"
 
 int main(void) {
     printf("Program started!\n");
@@ -31,6 +33,9 @@ int main(void) {
     print_data(&male_data, "Male");
     print_data(&female_data, "Female");
     print_data(&all_data, "All");
+
+    // plot data
+    test_plot(&male_data, TEST_IMAGE);
 
     printf("Program ended!\n\r");
     return 0;

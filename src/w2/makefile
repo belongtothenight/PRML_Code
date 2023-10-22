@@ -1,18 +1,23 @@
 CFLAG=-Wno-implicit-function-declaration
 
-data_proc: data_proc.c data_proc.h
-	gcc $(CFLAG) -c data_proc.c
+all: main data_proc data_plot
+	@echo Compiling...
+	gcc $(CFLAG) -o main main.o data_proc.o data_plot.o
+	@echo Compiling Done.
 
+clean_win:
+	del *.o
+	del *.h.gch
+
+clean_linux:
+	rm *.o
+
+# Dependencies ===================================
 main: main.c
 	gcc $(CFLAG) -c main.c
 
-all: main data_proc
-	@echo Compiling...
-	gcc $(CFLAG) -o main main.o data_proc.o
-	@echo Compiling Done.
+data_proc: data_proc.c data_proc.h
+	gcc $(CFLAG) -c data_proc.c
 
-clean_o_win:
-	del *.o
-
-clean_o_linux:
-	rm *.o
+data_plot: data_plot.c data_plot.h
+	gcc $(CFLAG) -c data_plot.c
