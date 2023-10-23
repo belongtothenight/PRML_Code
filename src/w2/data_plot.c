@@ -85,20 +85,15 @@ void test_plot(pinky_knuckle_cm* pData, char* pFilename){
     return;
 }
 
-void save_data_as_text(pinky_knuckle_cm* pData, char* pFilename){
+void save_data_div5_cnt(pinky_knuckle_cm* pData, char* pFilename){
     FILE* gnuplot = plot_save_open(pFilename);
     fprintf(gnuplot, "set table '%s'\n", pFilename);
     fprintf(gnuplot, "plot '-'\n");
-    float sum = 0;
-    for (int i = 0; i < NORMAL_SPLIT_PARTS + 2; i++){
-        sum += pData->normal_split_count[i];
-    }
-    printf("Sum: %f\n\r", sum);
     float x = 0;
     float y = 0;
-    for (int i = 0; i < NORMAL_SPLIT_PARTS + 2; i++){
-        x = (float)(pData->normal_split_points_center[i]);
-        y = (float)(pData->normal_split_count[i]/sum);
+    for (int i = 0; i < SPLIT_PARTS; i++){
+        x = (float)(pData->split_points_center[i]);
+        y = (float)(pData->split_count[i]/(float)pData->size);
         fprintf(gnuplot, "%g %g\n", x, y);
         printf("Plot %g %g\n", x, y);
     }
@@ -109,7 +104,7 @@ void save_data_as_text(pinky_knuckle_cm* pData, char* pFilename){
     return;
 }
 
-void save_line_as_text(char* pFilename, float x_min, float x_max, float mu, float sigma){
+void save_data_div5_norm(char* pFilename, float x_min, float x_max, float mu, float sigma){
     FILE* gnuplot = plot_save_open();
     fprintf(gnuplot, "set xrange [%g:%g]\n", x_min, x_max);
     fprintf(gnuplot, "invsqrt2pi = 0.398942280401433\n");
@@ -123,16 +118,23 @@ void save_line_as_text(char* pFilename, float x_min, float x_max, float mu, floa
     return;
 }
 
-void plot_data_vs_normal(pinky_knuckle_cm* pData, char* pFilename){
+void save_data_div5_vert_grid(char* pFilename, float y_min, float y_max){
+    
+}
+
+void plot_data_div5(pinky_knuckle_cm* pData, char* pFilename){
     // plot data vs normal distribution with 8 parts
     FILE* gnuplot = plot_open(pFilename);
     float x_min = pData->normal_split_points[0]-pData->variance;
     float x_max = pData->normal_split_points[6]+pData->variance;
+    float y_min = 0;
+    float y_max = 1;
     fprintf(gnuplot, "set title 'Pinky Knuckle Diameter'\n");
     fprintf(gnuplot, "set xrange [%g:%g]\n", x_min, x_max);
+    fprintf(gnuplot, "set yrange [%g:%g]\n", y_min, y_max);
     //
-    save_data_as_text(pData, TMP_DATA_FILE1);
-    save_line_as_text(TMP_DATA_FILE2, x_min, x_max, pData->mean, pData->variance);
+    save_data_div5_cnt(pData, TMP_DATA_FILE1);
+    save_data_div5_norm(TMP_DATA_FILE2, x_min, x_max, pData->mean, pData->variance);
     fprintf(gnuplot, "plot '%s', '%s'\n", TMP_DATA_FILE1, TMP_DATA_FILE2);
     plot_close(gnuplot);
     return;

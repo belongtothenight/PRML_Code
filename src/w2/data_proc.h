@@ -13,10 +13,13 @@ typedef struct{
     float max;
     float mean;
     float variance;
+    //
     float split_points[SPLIT_PARTS + 1];
     float split_step;
+    float split_points_center[SPLIT_PARTS];
     float split_data[SPLIT_PARTS][MAX_SIZE];
     int split_count[SPLIT_PARTS];
+    //
     float normal_split_points[NORMAL_SPLIT_PARTS+1]; // m_p_3std, m_p_2std, m_p_1std, m, m_m_1std, m_m_2std, m_m_3std
     float normal_split_points_center[NORMAL_SPLIT_PARTS + 2];
     float normal_split_data[NORMAL_SPLIT_PARTS+2][MAX_SIZE];
@@ -32,6 +35,7 @@ void get_max(pinky_knuckle_cm* pData);
 void get_mean(pinky_knuckle_cm* pData);
 void get_variance(pinky_knuckle_cm* pData);
 void get_split_points(pinky_knuckle_cm* pData);
+void get_split_points_center(pinky_knuckle_cm *pData);
 void get_split_data(pinky_knuckle_cm* pData);
 void get_normal_split_points(pinky_knuckle_cm* pData);
 void get_normal_split_points_center(pinky_knuckle_cm* pData);

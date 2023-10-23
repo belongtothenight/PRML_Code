@@ -19,6 +19,9 @@ void initialize_data(pinky_knuckle_cm* pData){
         pData->split_count[i] = 0;
     }
     for (int i = 0; i < SPLIT_PARTS; i++){
+        pData->split_points_center[i] = 0;
+    }
+    for (int i = 0; i < SPLIT_PARTS; i++){
         for (int j = 0; j < MAX_SIZE; j++){
             pData->split_data[i][j] = 0;
         }
@@ -89,6 +92,11 @@ void print_data(pinky_knuckle_cm* pData, char* pName){
     }
     printf("%s.\n\r", UNIT);
     printf("Split step:        %f %s.\n\r", pData->split_step, UNIT);
+    printf("Split points center: ");
+    for (int i = 0; i < SPLIT_PARTS; i++){
+        printf("%f ", pData->split_points_center[i]);
+    }
+    printf("%s.\n\r", UNIT);
     printf("Split count:       ");
     for (int i = 0; i < SPLIT_PARTS; i++){
         printf("%d ", pData->split_count[i]);
@@ -161,6 +169,14 @@ void get_split_points(pinky_knuckle_cm* pData){
     return;
 }
 
+void get_split_points_center(pinky_knuckle_cm* pData){
+    float step = pData->split_step;
+    for (int i = 0; i < SPLIT_PARTS; i++){
+        pData->split_points_center[i] = pData->split_points[0] + 0.5 * step + i * step;
+    }
+    return;
+}
+
 void get_split_data(pinky_knuckle_cm* pData){
     // use split_points to split data into SPLIT_PARTS parts
     for (int i = 0; i < SPLIT_PARTS; i++){
@@ -219,6 +235,7 @@ void get_stats(pinky_knuckle_cm* pData){
     get_mean(pData);
     get_variance(pData);
     get_split_points(pData);
+    get_split_points_center(pData);
     get_split_data(pData);
     get_normal_split_points(pData);
     get_normal_split_points_center(pData);

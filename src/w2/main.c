@@ -6,7 +6,7 @@
 #define MALE_DATA    "./dataset/data_male.csv"
 #define FEMALE_DATA  "./dataset/data_female.csv"
 #define TEST_IMAGE   "./output/test_image.png"
-#define PLOT_IMAGE   "./output/plot_image.png"
+#define PLOT_IMAGE   "./output/div5_p1.png"
 
 int main(void) {
     printf("Program started!\n");
@@ -37,7 +37,7 @@ int main(void) {
 
     // plot data
     // test_plot(&male_data, TEST_IMAGE);
-    plot_data_vs_normal(&male_data, PLOT_IMAGE);
+    plot_data_div5(&male_data, PLOT_IMAGE);
 
     printf("Program ended!\n\r");
     return 0;
