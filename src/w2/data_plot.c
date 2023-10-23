@@ -17,7 +17,7 @@ FILE* plot_open(char* pFilename){
         printf("gnuplot not found...\n");
         exit(1);
     }
-    fprintf(gnuplot, "set terminal %s\n", GNUPLOT_TERMINAL);
+    fprintf(gnuplot, "set terminal %s font \"sans,12\"\n", GNUPLOT_TERMINAL);
     fprintf(gnuplot, "set terminal push\n");
     fprintf(gnuplot, "set terminal pngc\n");
     // fprintf(gnuplot, "set terminal pngcairo\n");
@@ -26,15 +26,15 @@ FILE* plot_open(char* pFilename){
     fprintf(gnuplot, "set xzeroaxis;\n");
     fprintf(gnuplot, "set yzeroaxis;\n");
     // fprintf(gnuplot, "set border 0\n");
-    // fprintf(gnuplot, "set xtics axis\n");
-    // fprintf(gnuplot, "set ytics axis\n");
+    fprintf(gnuplot, "set xtics axis\n");
+    fprintf(gnuplot, "set ytics axis\n");
     fprintf(gnuplot, "set ticscale 0;\n");
     fprintf(gnuplot, "set xtics add (\"\" 0)\n");
     fprintf(gnuplot, "set ytics add (\"\" 0)\n");
-    fprintf(gnuplot, "set arrow 1 from 0,0 to graph 1, first 0 filled head\n");
-    fprintf(gnuplot, "set arrow 2 from 0,0 to first 0, graph 1 filled head\n");
-    fprintf(gnuplot, "set arrow 3 from 0,0 to graph 0, first 0 filled head\n");
-    fprintf(gnuplot, "set arrow 4 from 0,0 to first 0, graph 0 filled head\n");
+    // fprintf(gnuplot, "set arrow 1 from 0,0 to graph 1, first 0 filled head\n");
+    // fprintf(gnuplot, "set arrow 2 from 0,0 to first 0, graph 1 filled head\n");
+    // fprintf(gnuplot, "set arrow 3 from 0,0 to graph 0, first 0 filled head\n");
+    // fprintf(gnuplot, "set arrow 4 from 0,0 to first 0, graph 0 filled head\n");
     return gnuplot;
 }
 
@@ -112,30 +112,26 @@ void save_data_div5_norm(char* pFilename, float x_min, float x_max, float mu, fl
     fprintf(gnuplot, "set table '%s'\n", pFilename);
     fprintf(gnuplot, "plot normal(x,%g,%g) with lines lw 2\n", mu, sqrt(sigma));
     printf("mu: %f\n\r", mu);
-    printf("sigma: %f\n\r", sigma);
+    printf("sigma: %f\n\r", sqrt(sigma));
     fprintf(gnuplot, "unset table\n");
     plot_save_close(gnuplot);
     return;
 }
 
-void save_data_div5_vert_grid(char* pFilename, float y_min, float y_max){
-    
-}
-
-void plot_data_div5(pinky_knuckle_cm* pData, char* pFilename){
+void plot_data_div5(pinky_knuckle_cm* pData, char* pFilename, char* pTMP1, char* pTMP2){
     // plot data vs normal distribution with 8 parts
-    FILE* gnuplot = plot_open(pFilename);
-    float x_min = pData->normal_split_points[0]-pData->variance;
-    float x_max = pData->normal_split_points[6]+pData->variance;
+    float x_min = pData->split_points[0]-(pData->split_step/2);
+    float x_max = pData->split_points[SPLIT_PARTS]+(pData->split_step/2);
     float y_min = 0;
     float y_max = 1;
+    //
+    save_data_div5_cnt(pData, pTMP1);
+    save_data_div5_norm(pTMP2, x_min, x_max, pData->mean, pData->variance);
+    FILE* gnuplot = plot_open(pFilename);
     fprintf(gnuplot, "set title 'Pinky Knuckle Diameter'\n");
     fprintf(gnuplot, "set xrange [%g:%g]\n", x_min, x_max);
     fprintf(gnuplot, "set yrange [%g:%g]\n", y_min, y_max);
-    //
-    save_data_div5_cnt(pData, TMP_DATA_FILE1);
-    save_data_div5_norm(TMP_DATA_FILE2, x_min, x_max, pData->mean, pData->variance);
-    fprintf(gnuplot, "plot '%s', '%s'\n", TMP_DATA_FILE1, TMP_DATA_FILE2);
+    fprintf(gnuplot, "plot '%s' title 'data' with lines lw 3, '%s' title 'normal distribution' with lines lw 3\n", pTMP1, pTMP2);
     plot_close(gnuplot);
     return;
 }

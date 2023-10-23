@@ -7,8 +7,6 @@
 
 /* "qt" for qt terminal, "wxt" for wxt terminal */
 #define GNUPLOT_TERMINAL "wxt"
-#define TMP_DATA_FILE1   "./output/div5_p1_tmp_data1.dat"
-#define TMP_DATA_FILE2   "./output/div5_p1_tmp_data2.dat"
 
 /******************************************************************************************/
 // help functions 
@@ -24,7 +22,6 @@ void test_plot(pinky_knuckle_cm* pData, char* pFilename);
 // plot div5
 void save_data_div5_cnt(pinky_knuckle_cm *pData, char *pFilename);
 void save_data_div5_norm(char* pFilename, float x_min, float x_max, float mu, float sigma);
-void save_data_div5_vert_grid(char* pFilename, float y_min, float y_max);
-void plot_data_div5(pinky_knuckle_cm* pData, char* pFilename);
+void plot_data_div5(pinky_knuckle_cm* pData, char* pFilename, char* pTMP1, char* pTMP2);
 
 #endif // DATA_PLOT_H
