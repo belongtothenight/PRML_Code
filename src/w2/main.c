@@ -36,8 +36,8 @@ int main(void) {
     print_data(&all_data, "All");
 
     // plot data
-    test_plot(&male_data, TEST_IMAGE);
-    // plot_data_vs_normal(&male_data, PLOT_IMAGE);
+    // test_plot(&male_data, TEST_IMAGE);
+    plot_data_vs_normal(&male_data, PLOT_IMAGE);
 
     printf("Program ended!\n\r");
     return 0;

@@ -23,6 +23,20 @@ void initialize_data(pinky_knuckle_cm* pData){
             pData->split_data[i][j] = 0;
         }
     }
+    for (int i = 0; i < NORMAL_SPLIT_PARTS + 1; i++){
+        pData->normal_split_points[i] = 0;
+    }
+    for (int i = 0; i < NORMAL_SPLIT_PARTS + 2; i++){
+        pData->normal_split_points_center[i] = 0;
+    }
+    for (int i = 0; i < NORMAL_SPLIT_PARTS + 2; i++){
+        for (int j = 0; j < MAX_SIZE; j++){
+            pData->normal_split_data[i][j] = 0;
+        }
+    }
+    for (int i = 0; i < NORMAL_SPLIT_PARTS + 2; i++){
+        pData->normal_split_count[i] = 0;
+    }
     return;
 }
 
@@ -59,33 +73,42 @@ void combine_data(pinky_knuckle_cm* pMaleData, pinky_knuckle_cm* pFemaleData, pi
 
 void print_data(pinky_knuckle_cm* pData, char* pName){
     printf("Printing %s data:===============================\n\r", pName);
-    printf("Size:         %d\n\r", pData->size);
-    printf("Diameter:     ");
+    printf("Size:              %d\n\r", pData->size);
+    printf("Diameter:          ");
     for (int i = 0; i < pData->size; i++){
         printf("%f ", pData->diameter[i]);
     }
     printf("%s.\n\r", UNIT);
-    printf("Min:          %f %s.\n\r", pData->min, UNIT);
-    printf("Max:          %f %s.\n\r", pData->max, UNIT);
-    printf("Mean:         %f %s.\n\r", pData->mean, UNIT);
-    printf("Variance:     %f %s.\n\r", pData->variance, UNIT);
+    printf("Min:               %f %s.\n\r", pData->min, UNIT);
+    printf("Max:               %f %s.\n\r", pData->max, UNIT);
+    printf("Mean:              %f %s.\n\r", pData->mean, UNIT);
+    printf("Variance:          %f %s.\n\r", pData->variance, UNIT);
     printf("Split points: ");
     for (int i = 0; i < SPLIT_PARTS + 1; i++){
         printf("%f ", pData->split_points[i]);
     }
     printf("%s.\n\r", UNIT);
-    printf("Split step:   %f %s.\n\r", pData->split_step, UNIT);
-    printf("Split count:  ");
+    printf("Split step:        %f %s.\n\r", pData->split_step, UNIT);
+    printf("Split count:       ");
     for (int i = 0; i < SPLIT_PARTS; i++){
         printf("%d ", pData->split_count[i]);
     }
     printf("\n\r");
-    printf("m+1std:       %f %s.\n\r", pData->m_p_1std, UNIT);
-    printf("m-1std:       %f %s.\n\r", pData->m_m_1std, UNIT);
-    printf("m+2std:       %f %s.\n\r", pData->m_p_2std, UNIT);
-    printf("m-2std:       %f %s.\n\r", pData->m_m_2std, UNIT);
-    printf("m+3std:       %f %s.\n\r", pData->m_p_3std, UNIT);
-    printf("m-3std:       %f %s.\n\r", pData->m_m_3std, UNIT);
+    printf("Normal split points center: ");
+    for (int i = 0; i < NORMAL_SPLIT_PARTS + 2; i++){
+        printf("%f ", pData->normal_split_points_center[i]);
+    }
+    printf("%s.\n\r", UNIT);
+    printf("Normal split points: ");
+    for (int i = 0; i < NORMAL_SPLIT_PARTS + 1; i++){
+        printf("%f ", pData->normal_split_points[i]);
+    }
+    printf("%s.\n\r", UNIT);
+    printf("Norm split cnt:    ");
+    for (int i = 0; i < NORMAL_SPLIT_PARTS + 2; i++){
+        printf("%d ", pData->normal_split_count[i]);
+    }
+    printf("\n\r");
     return;
 }
 
@@ -151,13 +174,42 @@ void get_split_data(pinky_knuckle_cm* pData){
     return;
 }
 
-void get_std(pinky_knuckle_cm* pData){
-    pData->m_p_1std = pData->mean + pData->variance;
-    pData->m_m_1std = pData->mean - pData->variance;
-    pData->m_p_2std = pData->mean + 2 * pData->variance;
-    pData->m_m_2std = pData->mean - 2 * pData->variance;
-    pData->m_p_3std = pData->mean + 3 * pData->variance;
-    pData->m_m_3std = pData->mean - 3 * pData->variance;
+void get_normal_split_points(pinky_knuckle_cm* pData){
+    for (int i = 0; i < NORMAL_SPLIT_PARTS + 1; i++){
+        pData->normal_split_points[i] = pData->mean + (i - 3) * pData->variance;
+    }
+    return;
+}
+
+void get_normal_split_points_center(pinky_knuckle_cm* pData){
+    float normal_step = pData->variance;
+    for (int i = 0; i < NORMAL_SPLIT_PARTS + 2; i++){
+        pData->normal_split_points_center[i] = pData->normal_split_points[0] - 0.5 * normal_step + i * normal_step;
+    }
+    return;
+}
+
+void get_normal_split_data(pinky_knuckle_cm* pData){
+    // use normal distribution to split data into normal_split_data parts
+    for (int i = 0; i < NORMAL_SPLIT_PARTS + 1; i++){
+        for (int j = 0; j < pData->size; j++){
+            if (pData->diameter[j] >= pData->normal_split_points[i] && pData->diameter[j] < pData->normal_split_points[i + 1]){
+                pData->normal_split_data[i][pData->normal_split_count[i]] = pData->diameter[j];
+                pData->normal_split_count[i+1]++;
+            }
+        }
+    }
+    for (int i = 0; i < pData->size; i++){
+        if (pData->diameter[i] < pData->normal_split_points[0]){
+            pData->normal_split_data[0][pData->normal_split_count[0]] = pData->diameter[i];
+            pData->normal_split_count[0]++;
+        } else if (pData->diameter[i] >= pData->normal_split_points[NORMAL_SPLIT_PARTS]){
+            pData->normal_split_data[NORMAL_SPLIT_PARTS+1][pData->normal_split_count[NORMAL_SPLIT_PARTS+1]] = pData->diameter[i];
+            pData->normal_split_count[NORMAL_SPLIT_PARTS+1]++;
+        } else {
+            continue;
+        }
+    }
     return;
 }
 
@@ -168,6 +220,8 @@ void get_stats(pinky_knuckle_cm* pData){
     get_variance(pData);
     get_split_points(pData);
     get_split_data(pData);
-    get_std(pData);
+    get_normal_split_points(pData);
+    get_normal_split_points_center(pData);
+    get_normal_split_data(pData);
     return;
 }
