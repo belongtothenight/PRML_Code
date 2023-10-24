@@ -10,7 +10,7 @@ typedef struct{
     float x_min;
     float x_max;
     int arr_length;
-    float cdf;
+    float integral;
 }norm_dist;
 
 // Initialize a normal distribution struct
@@ -29,9 +29,9 @@ float* get_norm_dist_y_arr(norm_dist* pNd, float* x_arr);
 void pour_arr_to_file(float* arr, int arr_length, char* file_name);
 
 // Calculate CDF of the normal distribution
-float norm_dist_cdf(norm_dist* pNd, float x);
+void norm_dist_integral(norm_dist* pNd, float* x_arr, float* y_arr);
 
 // CDF check function
-void norm_dist_cdf_check(norm_dist* pNd);
+void norm_dist_integral_check(norm_dist* pNd);
 
 #endif // NORMAL_DISTRIBUTION_H
