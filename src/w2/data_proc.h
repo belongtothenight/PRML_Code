@@ -8,11 +8,14 @@
 
 typedef struct{
     int size;
-    float diameter[MAX_SIZE];
+    float data_element[MAX_SIZE];
     float min;
     float max;
     float mean;
-    float variance;
+    float variance_biased;
+    float variance_unbiased;
+    float mu;
+    float sigma;
     //
     float split_points[SPLIT_PARTS + 1];
     float split_step;
@@ -24,22 +27,24 @@ typedef struct{
     float normal_split_points_center[NORMAL_SPLIT_PARTS + 2];
     float normal_split_data[NORMAL_SPLIT_PARTS+2][MAX_SIZE];
     int normal_split_count[NORMAL_SPLIT_PARTS+2];
-} pinky_knuckle_cm;
+} dataset;
 
-void initialize_data(pinky_knuckle_cm* pData);
-void read_csv(char* pFilename, pinky_knuckle_cm* pData);
-void combine_data(pinky_knuckle_cm* pMaleData, pinky_knuckle_cm* pFemaleData, pinky_knuckle_cm* pAllData);
-void print_data(pinky_knuckle_cm* pData, char* pName);
-void get_min(pinky_knuckle_cm* pData);
-void get_max(pinky_knuckle_cm* pData);
-void get_mean(pinky_knuckle_cm* pData);
-void get_variance(pinky_knuckle_cm* pData);
-void get_split_points(pinky_knuckle_cm* pData);
-void get_split_points_center(pinky_knuckle_cm *pData);
-void get_split_data(pinky_knuckle_cm* pData);
-void get_normal_split_points(pinky_knuckle_cm* pData);
-void get_normal_split_points_center(pinky_knuckle_cm* pData);
-void get_normal_split_data(pinky_knuckle_cm* pData);
-void get_stats(pinky_knuckle_cm* pData);
+void initialize_data(dataset* pData);
+void read_csv(char* pFilename, dataset* pData);
+void combine_data(dataset* pMaleData, dataset* pFemaleData, dataset* pAllData);
+void print_data(dataset* pData, char* pName);
+void get_min(dataset* pData);
+void get_max(dataset* pData);
+void get_mean(dataset* pData);
+void get_variance(dataset* pData);
+void get_sigma(dataset* pData);
+void get_split_points(dataset* pData);
+void get_split_points_center(dataset *pData);
+void get_split_data(dataset* pData);
+void split_data_checker(dataset* pData);
+void get_normal_split_points(dataset* pData);
+void get_normal_split_points_center(dataset* pData);
+void get_normal_split_data(dataset* pData);
+void get_stats(dataset* pData);
 
 #endif // DATA_PROC_H

@@ -17,11 +17,11 @@ void plot_save_close(FILE *gnuplot);
 
 /******************************************************************************************/
 // plot functions
-void test_plot(pinky_knuckle_cm* pData, char* pFilename);
+void test_plot(dataset* pData, char* pFilename);
 
 // plot div5
-void save_data_div5_cnt(pinky_knuckle_cm *pData, char *pFilename);
+void save_data_div5_cnt(dataset *pData, char *pFilename);
 void save_data_div5_norm(char* pFilename, float x_min, float x_max, float mu, float sigma);
-void plot_data_div5(pinky_knuckle_cm* pData, char* pFilename, char* pTMP1, char* pTMP2);
+void plot_data_div5(dataset* pData, char* pFilename, char* pTMP1, char* pTMP2);
 
 #endif // DATA_PLOT_H

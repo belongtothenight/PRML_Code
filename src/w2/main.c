@@ -18,9 +18,9 @@
 
 int main(void) {
     printf("Program started!\n");
-    pinky_knuckle_cm male_data;
-    pinky_knuckle_cm female_data;
-    pinky_knuckle_cm all_data;
+    dataset male_data;
+    dataset female_data;
+    dataset all_data;
 
     // initialize data to 0
     initialize_data(&male_data);

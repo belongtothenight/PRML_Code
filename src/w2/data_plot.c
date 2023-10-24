@@ -66,7 +66,7 @@ void plot_save_close(FILE* gnuplot){
     return;
 }
 
-void test_plot(pinky_knuckle_cm* pData, char* pFilename){
+void test_plot(dataset* pData, char* pFilename){
     FILE* gnuplot = plot_open(pFilename);
     fprintf(gnuplot, "set title 'Pinky Knuckle Diameter'\n");
     fprintf(gnuplot, "set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 pi -1 ps 1.5\n");
@@ -75,8 +75,8 @@ void test_plot(pinky_knuckle_cm* pData, char* pFilename){
     fprintf(gnuplot, "plot '-'\n");
     float x = 0;
     for (int i = 0; i < pData->size; i++){
-        fprintf(gnuplot, "%g %g\n", x, pData->diameter[i]);
-        printf("Plot %g %g\n", x, pData->diameter[i]);
+        fprintf(gnuplot, "%g %g\n", x, pData->data_element[i]);
+        printf("Plot %g %g\n", x, pData->data_element[i]);
         x++;
     }
     fprintf(gnuplot, "e with linespoints ls 1\n");
@@ -85,7 +85,7 @@ void test_plot(pinky_knuckle_cm* pData, char* pFilename){
     return;
 }
 
-void save_data_div5_cnt(pinky_knuckle_cm* pData, char* pFilename){
+void save_data_div5_cnt(dataset* pData, char* pFilename){
     FILE* gnuplot = plot_save_open(pFilename);
     fprintf(gnuplot, "set table '%s'\n", pFilename);
     fprintf(gnuplot, "plot '-'\n");
@@ -110,15 +110,13 @@ void save_data_div5_norm(char* pFilename, float x_min, float x_max, float mu, fl
     fprintf(gnuplot, "invsqrt2pi = 0.398942280401433\n");
     fprintf(gnuplot, "normal(x,mu,sigma)=sigma<=0?1/0:invsqrt2pi/sigma*exp(-0.5*((x-mu)/sigma)**2)\n");
     fprintf(gnuplot, "set table '%s'\n", pFilename);
-    fprintf(gnuplot, "plot normal(x,%g,%g) with lines lw 2\n", mu, sqrt(sigma));
-    printf("mu: %f\n\r", mu);
-    printf("sigma: %f\n\r", sqrt(sigma));
+    fprintf(gnuplot, "plot normal(x,%g,%g) with lines lw 2\n", mu, sigma);
     fprintf(gnuplot, "unset table\n");
     plot_save_close(gnuplot);
     return;
 }
 
-void plot_data_div5(pinky_knuckle_cm* pData, char* pFilename, char* pTMP1, char* pTMP2){
+void plot_data_div5(dataset* pData, char* pFilename, char* pTMP1, char* pTMP2){
     // plot data vs normal distribution with 8 parts
     float x_min = pData->split_points[0]-(pData->split_step/2);
     float x_max = pData->split_points[SPLIT_PARTS]+(pData->split_step/2);
@@ -126,7 +124,7 @@ void plot_data_div5(pinky_knuckle_cm* pData, char* pFilename, char* pTMP1, char*
     float y_max = 1;
     //
     save_data_div5_cnt(pData, pTMP1);
-    save_data_div5_norm(pTMP2, x_min, x_max, pData->mean, pData->variance);
+    save_data_div5_norm(pTMP2, x_min, x_max, pData->mu, pData->sigma);
     FILE* gnuplot = plot_open(pFilename);
     fprintf(gnuplot, "set title 'Pinky Knuckle Diameter'\n");
     fprintf(gnuplot, "set xrange [%g:%g]\n", x_min, x_max);
