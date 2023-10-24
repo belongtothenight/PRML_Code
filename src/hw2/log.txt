@@ -1,0 +1,80 @@
+Program started!
+Opened ./dataset/data_male.csv successfully
+Opened ./dataset/data_female.csv successfully
+All dataset size: 40.
+PASS: Split data check!
+PASS: Split data check!
+PASS: Split data check!
+Printing Male data:===============================
+Size:              20
+data_element:          10.180000 10.180000 10.510000 10.370000 10.460000 10.530000 9.580000 11.110000 9.290000 11.440000 10.560000 10.830000 10.360000 10.430000 9.850000 10.730000 10.100000 11.330000 10.320000 9.680000 mm.
+Min:               9.290000 mm.
+Max:               11.440000 mm.
+Mean:              10.392000 mm.
+Variance_biased:   0.286166 mm.
+Variance_unbiased: 0.301227 mm.
+Mu:                10.392000 mm.
+Sigma:             0.534945 mm.
+Split points: 9.290000 9.720000 10.150000 10.580000 11.009999 11.440000 mm.
+Split step:        0.430000 mm.
+Split points center: 9.505000 9.934999 10.365000 10.795000 11.224999 mm.
+Split count:       3 2 10 2 3
+Normal split points center: 9.337705 9.638932 9.940159 10.241386 10.542614 10.843841 11.145068 11.446296 mm.      
+Normal split points: 9.488318 9.789546 10.090773 10.392000 10.693228 10.994454 11.295682 mm.
+Norm split cnt:    1 2 1 6 5 2 1 2
+Printing Female data:===============================
+Size:              20
+data_element:          9.830000 11.070000 10.190000 10.130000 9.920000 9.930000 10.460000 10.460000 10.100000 10.580000 10.720000 9.630000 10.570000 10.390000 9.800000 9.880000 10.180000 9.720000 10.200000 10.230000 mm.
+Min:               9.630000 mm.
+Max:               11.070000 mm.
+Mean:              10.199499 mm.
+Variance_biased:   0.130105 mm.
+Variance_unbiased: 0.136952 mm.
+Mu:                10.199499 mm.
+Sigma:             0.360700 mm.
+Split points: 9.630000 9.918000 10.206000 10.493999 10.782000 11.070000 mm.
+Split step:        0.288000 mm.
+Split points center: 9.774000 10.062000 10.350000 10.638000 10.926000 mm.
+Split count:       5 7 4 3 1
+Normal split points center: 9.720166 9.857118 9.994070 10.131022 10.267975 10.404927 10.541880 10.678832 mm.      
+Normal split points: 9.788642 9.925594 10.062547 10.199499 10.336452 10.473404 10.610356 mm.
+Norm split cnt:    2 4 1 4 2 3 2 2
+Printing All data:===============================
+Size:              40
+data_element:          10.180000 10.180000 10.510000 10.370000 10.460000 10.530000 9.580000 11.110000 9.290000 11.440000 10.560000 10.830000 10.360000 10.430000 9.850000 10.730000 10.100000 11.330000 10.320000 9.680000 9.830000 11.070000 10.190000 10.130000 9.920000 9.930000 10.460000 10.460000 10.100000 10.580000 10.720000 9.630000 10.570000 10.390000 9.800000 9.880000 10.180000 9.720000 10.200000 10.230000 mm.
+Min:               9.290000 mm.
+Max:               11.440000 mm.
+Mean:              10.295751 mm.
+Variance_biased:   0.217399 mm.
+Variance_unbiased: 0.222974 mm.
+Mu:                10.295751 mm.
+Sigma:             0.466261 mm.
+Split points: 9.290000 9.720000 10.150000 10.580000 11.009999 11.440000 mm.
+Split step:        0.430000 mm.
+Split points center: 9.505000 9.934999 10.365000 10.795000 11.224999 mm.
+Split count:       4 10 18 4 4
+Normal split points center: 9.515343 9.738316 9.961289 10.184263 10.407237 10.630211 10.853185 11.076159 mm.      
+Normal split points: 9.626829 9.849803 10.072777 10.295751 10.518724 10.741698 10.964672 mm.
+Norm split cnt:    2 5 4 9 9 6 1 4
+Plot 9.505 0.15
+Plot 9.935 0.1
+Plot 10.365 0.5
+Plot 10.795 0.1
+Plot 11.225 0.15
+Closed ./output/div5_p1_tmp_data1.dat successfully
+Closed gnuplot successfully
+Plot 9.774 0.25
+Plot 10.062 0.35
+Plot 10.35 0.2
+Plot 10.638 0.15
+Plot 10.926 0.05
+Closed ./output/div5_p2_tmp_data3.dat successfully
+Closed gnuplot successfully
+Plot 9.505 0.1
+Plot 9.935 0.25
+Plot 10.365 0.45
+Plot 10.795 0.1
+Plot 11.225 0.1
+Closed ./output/div5_p3_tmp_data5.dat successfully
+Closed gnuplot successfully
+Program ended!
