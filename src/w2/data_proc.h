@@ -15,7 +15,7 @@ typedef struct{
     float variance_biased;
     float variance_unbiased;
     float mu;
-    float sigma;
+    float sigma; // standard deviation
     //
     float split_points[SPLIT_PARTS + 1];
     float split_step;
