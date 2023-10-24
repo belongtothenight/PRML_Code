@@ -80,32 +80,32 @@ void combine_data(dataset* pMaleData, dataset* pFemaleData, dataset* pAllData){
 }
 
 void print_data(dataset* pData, char* pName){
-    printf("Printing %s data:===============================\n\r", pName);
-    printf("Size:              %d\n\r", pData->size);
-    printf("data_element:          ");
+    printf("\n\rPrinting %s data:===============================\n\r", pName);
+    printf("Size:                       %d\n\r", pData->size);
+    printf("data_element:               ");
     for (int i = 0; i < pData->size; i++){
         printf("%f ", pData->data_element[i]);
     }
     printf("%s.\n\r", UNIT);
-    printf("Min:               %f %s.\n\r", pData->min, UNIT);
-    printf("Max:               %f %s.\n\r", pData->max, UNIT);
-    printf("Mean:              %f %s.\n\r", pData->mean, UNIT);
-    printf("Variance_biased:   %f %s.\n\r", pData->variance_biased, UNIT);
-    printf("Variance_unbiased: %f %s.\n\r", pData->variance_unbiased, UNIT);
-    printf("Mu:                %f %s.\n\r", pData->mu, UNIT);
-    printf("Sigma:             %f %s.\n\r", pData->sigma, UNIT);
-    printf("Split points: ");
+    printf("Min:                        %f %s.\n\r", pData->min, UNIT);
+    printf("Max:                        %f %s.\n\r", pData->max, UNIT);
+    printf("Mean:                       %f %s.\n\r", pData->mean, UNIT);
+    printf("Variance_biased:            %f %s.\n\r", pData->variance_biased, UNIT);
+    printf("Variance_unbiased:          %f %s.\n\r", pData->variance_unbiased, UNIT);
+    printf("Mu:                         %f %s.\n\r", pData->mu, UNIT);
+    printf("Sigma:                      %f %s.\n\r", pData->sigma, UNIT);
+    printf("Split points:               ");
     for (int i = 0; i < SPLIT_PARTS + 1; i++){
         printf("%f ", pData->split_points[i]);
     }
     printf("%s.\n\r", UNIT);
-    printf("Split step:        %f %s.\n\r", pData->split_step, UNIT);
-    printf("Split points center: ");
+    printf("Split step:                 %f %s.\n\r", pData->split_step, UNIT);
+    printf("Split points center:        ");
     for (int i = 0; i < SPLIT_PARTS; i++){
         printf("%f ", pData->split_points_center[i]);
     }
     printf("%s.\n\r", UNIT);
-    printf("Split count:       ");
+    printf("Split count:                ");
     for (int i = 0; i < SPLIT_PARTS; i++){
         printf("%d ", pData->split_count[i]);
     }
@@ -115,12 +115,12 @@ void print_data(dataset* pData, char* pName){
         printf("%f ", pData->normal_split_points_center[i]);
     }
     printf("%s.\n\r", UNIT);
-    printf("Normal split points: ");
+    printf("Normal split points:        ");
     for (int i = 0; i < NORMAL_SPLIT_PARTS + 1; i++){
         printf("%f ", pData->normal_split_points[i]);
     }
     printf("%s.\n\r", UNIT);
-    printf("Norm split cnt:    ");
+    printf("Norm split cnt:             ");
     for (int i = 0; i < NORMAL_SPLIT_PARTS + 2; i++){
         printf("%d ", pData->normal_split_count[i]);
     }

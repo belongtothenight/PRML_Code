@@ -1,8 +1,8 @@
 CFLAG=-Wno-implicit-function-declaration
 
-all: main data_proc data_plot output_format
+all: main data_proc data_plot output_format normal_distribution
 	@echo Compiling...
-	gcc $(CFLAG) -o main main.o data_proc.o data_plot.o output_format.o
+	gcc $(CFLAG) -o main main.o data_proc.o data_plot.o output_format.o normal_distribution.o
 	@echo Compiling Done.
 
 clean_win:
@@ -24,3 +24,6 @@ data_plot: data_plot.c data_plot.h
 
 output_format: output_format.c output_format.h
 	gcc $(CFLAG) -c output_format.c
+
+normal_distribution: normal_distribution.c normal_distribution.h
+	gcc $(CFLAG) -c normal_distribution.c
