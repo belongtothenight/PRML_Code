@@ -19,6 +19,8 @@
 #define INTEGRAL_STEP 0.0001
 #define TMP_DATA_FILE7   "./output/div5_p1_tmp_norm_dist_x.dat"
 #define TMP_DATA_FILE8   "./output/div5_p1_tmp_norm_dist_y.dat"
+#define TMP_DATA_FILE9   "./output/div5_p2_tmp_norm_dist_x.dat"
+#define TMP_DATA_FILE10  "./output/div5_p2_tmp_norm_dist_y.dat"
 
 int main(void) {
     printf("Program started!\n");
@@ -47,14 +49,21 @@ int main(void) {
     print_data(&female_data, "Female");
     print_data(&all_data, "All");
 
-    // calculate normal distribution
-    norm_dist norm_dist_data;
-    get_norm_dist(&norm_dist_data, male_data.mu, male_data.sigma, male_data.min, male_data.max, INTEGRAL_STEP);
-    print_norm_dist(&norm_dist_data);
-    float* pNorm_dist_x_arr = get_norm_dist_x_arr(&norm_dist_data);
-    pour_arr_to_file(pNorm_dist_x_arr, norm_dist_data.arr_length, TMP_DATA_FILE7);
-    float* pNorm_dist_y_arr = get_norm_dist_y_arr(&norm_dist_data, pNorm_dist_x_arr);
-    pour_arr_to_file(pNorm_dist_y_arr, norm_dist_data.arr_length, TMP_DATA_FILE8);
+    // calculate male normal distribution
+    norm_dist norm_dist_data_male;
+    input_struct input_struct_data_male;
+    input_struct_data_male.tmp_file_1 = TMP_DATA_FILE7;
+    input_struct_data_male.tmp_file_2 = TMP_DATA_FILE8;
+    cal_norm_dist(&norm_dist_data_male, male_data.mu, male_data.sigma, male_data.min, male_data.max, INTEGRAL_STEP, &input_struct_data_male);
+
+    // calculate female normal distribution
+    norm_dist norm_dist_data_female;
+    input_struct input_struct_data_female;
+    input_struct_data_female.tmp_file_1 = TMP_DATA_FILE9;
+    input_struct_data_female.tmp_file_2 = TMP_DATA_FILE10;
+    cal_norm_dist(&norm_dist_data_female, female_data.mu, female_data.sigma, female_data.min, female_data.max, INTEGRAL_STEP, &input_struct_data_female);
+
+
 
     // plot data
     // test_plot(&male_data, TEST_IMAGE);
@@ -63,9 +72,11 @@ int main(void) {
     // plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
 
     // free memory
-    free(pNorm_dist_x_arr);
-    free(pNorm_dist_y_arr);
-
+    free(input_struct_data_male.pX_arr);
+    free(input_struct_data_male.pY_arr);
+    free(input_struct_data_female.pX_arr);
+    free(input_struct_data_female.pY_arr);
+    
     printf("Program ended!\n\r");
     return 0;
 }

@@ -60,7 +60,7 @@ void pour_arr_to_file(float* arr, int arr_length, char* file_name){
     return;
 }
 
-void norm_dist_integral(norm_dist* pNd, float* x_arr, float* y_arr){
+void norm_dist_integral(norm_dist* pNd, float* y_arr){
     for(int i = 0; i < pNd->arr_length; i++){
         pNd->integral += pNd->integral_step * (y_arr[i] + y_arr[i + 1]) / 2;
     }
@@ -68,5 +68,34 @@ void norm_dist_integral(norm_dist* pNd, float* x_arr, float* y_arr){
 }
 
 void norm_dist_integral_check(norm_dist* pNd){
+    output_format Format;
+    get_format(&Format);
+    if (pNd->integral < INTEGRAL_BAR){
+        printf("%sERROR%s: The integral of the normal distribution is less than %f.\n\r", Format.foreground.red, Format.style.reset, INTEGRAL_BAR);
+        // exit(1);
+    } else {
+        printf("%sSUCCESS%s: The integral of the normal distribution is greater than %f.\n\r", Format.foreground.green, Format.style.reset, INTEGRAL_BAR);
+    }
+    return;
+}
 
+void print_input_struct(input_struct* pIs){
+    printf("\n\rInput struct:======================================\n\r");
+    printf("pX_arr:     %p\n\r", pIs->pX_arr);
+    printf("pY_arr:     %p\n\r", pIs->pY_arr);
+    printf("tmp_file_1: %s\n\r", pIs->tmp_file_1);
+    printf("tmp_file_2: %s\n\r", pIs->tmp_file_2);
+    return;
+}
+
+void cal_norm_dist(norm_dist* pNd, float mu, float sigma, float x_min, float x_max, float integral_step, input_struct* pInput_struct){
+    get_norm_dist(pNd, mu, sigma, x_min, x_max, integral_step);
+    float* pNorm_dist_x_arr = get_norm_dist_x_arr(pNd);
+    pour_arr_to_file(pNorm_dist_x_arr, pNd->arr_length, pInput_struct->tmp_file_1);
+    float* pNorm_dist_y_arr = get_norm_dist_y_arr(pNd, pNorm_dist_x_arr);
+    pour_arr_to_file(pNorm_dist_y_arr, pNd->arr_length, pInput_struct->tmp_file_2);
+    norm_dist_integral(pNd, pNorm_dist_y_arr);
+    print_norm_dist(pNd);
+    print_input_struct(pInput_struct);
+    norm_dist_integral_check(pNd);
 }
