@@ -22,8 +22,8 @@ void cal_intersection(norm_dist* pND1, norm_dist* pND2, float* y_arr1, float* y_
             break;
         }
     }
-    for (int i = 0; i < pND2->arr_length; i++){
-        if (y_arr2[i] > y_arr1[i]){
+    for (int i = pND2->arr_length-1; i >= 0; i--){
+        if (y_arr1[i] > y_arr2[i]){
             pIntersection->idx2 = i;
             pIntersection->y2 = y_arr2[i];
             pIntersection->x2 = pND2->x_min + i * pND2->integral_step;
