@@ -3,6 +3,7 @@
 #include "data_proc.h"
 #include "data_plot.h"
 #include "normal_distribution.h"
+#include "output_csv.h"
 
 #define MALE_DATA        "./dataset/data_male.csv"
 #define FEMALE_DATA      "./dataset/data_female.csv"
@@ -23,6 +24,9 @@
 #define TMP_DATA_FILE10  "./output/div5_p2_tmp_norm_dist_y.dat"
 #define TMP_DATA_FILE11  "./output/div5_p3_tmp_norm_dist_x.dat"
 #define TMP_DATA_FILE12  "./output/div5_p3_tmp_norm_dist_y.dat"
+#define OUTPUT_CSV_FILE1 "./output/div5_p1_output.csv"
+#define OUTPUT_CSV_FILE2 "./output/div5_p2_output.csv"
+#define OUTPUT_CSV_FILE3 "./output/div5_p3_output.csv"
 
 int main(void) {
     printf("Program started!\n");
@@ -72,6 +76,10 @@ int main(void) {
     input_struct_data_all.tmp_file_2 = TMP_DATA_FILE12;
     cal_norm_dist(&norm_dist_data_all, all_data.mu, all_data.sigma, all_data.min, all_data.max, INTEGRAL_STEP, &input_struct_data_all, "ALL");
 
+    // output data to csv
+    output_csv(OUTPUT_CSV_FILE1, &male_data, &norm_dist_data_male);
+    output_csv(OUTPUT_CSV_FILE2, &female_data, &norm_dist_data_female);
+    output_csv(OUTPUT_CSV_FILE3, &all_data, &norm_dist_data_all);
 
     // plot data
     plot_data_div5(&male_data, DIV5_MALE_IMG, TMP_DATA_FILE1, TMP_DATA_FILE2);

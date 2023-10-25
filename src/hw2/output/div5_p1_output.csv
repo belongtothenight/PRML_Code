@@ -1,0 +1,24 @@
+Stats (mm)
+Size, 20
+Min, 9.290000
+Max, 11.440000
+Variance_biased, 0.286166
+Variance_unbiased, 0.301227
+Mu, 10.392000
+Sigma, 0.534945
+Split points, 9.29, 9.72, 10.15, 10.58, 11.01, 11.44
+Split step, 0.43
+Split points center, 9.505, 9.935, 10.365, 10.795, 11.225
+Split count, 3, 2, 10, 2, 3
+Normal split points, 9.48832, 9.78955, 10.0908, 10.392, 10.6932, 10.9945, 11.2957
+Normal split points center, 9.3377, 9.63893, 9.94016, 10.2414, 10.5426, 10.8438, 11.1451, 11.4463
+Normal split count, 1, 2, 1, 6, 5, 2, 1, 2
+
+Normal distribution (mm)
+Mu, 10.392000
+Sigma, 0.534945
+Integral step, 0.000100
+X min, 9.290000
+X max, 11.440000
+Arr length, 21500
+Integral, 0.955244

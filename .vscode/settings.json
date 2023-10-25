@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "normal_distribution.h": "c"
+        "normal_distribution.h": "c",
+        "stdio.h": "c"
     }
 }

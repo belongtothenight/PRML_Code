@@ -10,5 +10,4 @@ Code is compiled on Windows 11 x64 platform with command ```make all ; ./main.ex
 
 1. Male / Female data stacked together graph.
 2. Diameter to perimeter conversion.
-3. Add output csv function.
-4. Calcuate minimum error boundary.
+3. Calcuate minimum error boundary.
