@@ -17,6 +17,7 @@ void output_csv(char *pFilename, dataset *pDS, norm_dist *pND){
     fprintf(fp, "Size, %d\n", pDS->size);
     fprintf(fp, "Min, %f\n", pDS->min);
     fprintf(fp, "Max, %f\n", pDS->max);
+    fprintf(fp, "Mean, %f\n", pDS->mean);
     fprintf(fp, "Variance_biased, %f\n", pDS->variance_biased);
     fprintf(fp, "Variance_unbiased, %f\n", pDS->variance_unbiased);
     fprintf(fp, "Mu, %f\n", pND->mu);
