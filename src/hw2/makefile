@@ -17,6 +17,7 @@ clean_win_output:
 	# del *.csv
 	# del *.png
 	# del *.exe
+	mkdir $(OUT)
 
 clean_linux:
 	rm *.o
@@ -28,6 +29,7 @@ clean_linux_output:
 	# rm *.csv
 	# rm *.png
 	# rm *.exe
+	mkdir $(OUT)
 
 # Dependencies ===================================
 main: main.c

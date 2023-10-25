@@ -21,9 +21,9 @@ FILE* plot_open(char* pFilename){
         printf("%sERROR%s: gnuplot not found...\n\r", Format.foreground.red, Format.style.reset);
         exit(1);
     }
-    fprintf(gnuplot, "set terminal %s font \"sans,12\"\n", GNUPLOT_TERMINAL);
+    fprintf(gnuplot, "set terminal %s font \"arial,10\"\n", GNUPLOT_TERMINAL);
     fprintf(gnuplot, "set terminal push\n");
-    fprintf(gnuplot, "set terminal pngc\n");
+    fprintf(gnuplot, "set terminal pngcairo font \"arial,35\" size 1920,1080\n");
     // fprintf(gnuplot, "set terminal pngcairo\n");
     fprintf(gnuplot, "set output '%s'\n", pFilename);
     // formatting
@@ -165,7 +165,7 @@ void plot_data_div5(dataset* pData, char* pFilename, char* pTMP1, char* pTMP2){
     fprintf(gnuplot, "set boxwidth 0.6 relative\n");
     fprintf(gnuplot, "set style fill solid\n");
     fprintf(gnuplot, "set xtics ('%g' %g, '%g' %g, '%g' %g, '%g' %g, '%g' %g)\n", pData->split_points_center[0], pData->split_points_center[0], pData->split_points_center[1], pData->split_points_center[1], pData->split_points_center[2], pData->split_points_center[2], pData->split_points_center[3], pData->split_points_center[3], pData->split_points_center[4], pData->split_points_center[4]);
-    fprintf(gnuplot, "plot '%s' title 'data' with boxes, '%s' title 'normal distribution' with lines lw 3\n", pTMP1, pTMP2);
+    fprintf(gnuplot, "plot '%s' title 'data' with boxes, '%s' title 'normal distribution' with lines lw 5\n", pTMP1, pTMP2);
     plot_close(gnuplot);
     return;
 }
@@ -189,7 +189,7 @@ void plot_stacked_data_div5(dataset* pData1, dataset* pData2, intersection* pITS
     fprintf(gnuplot, "set yrange [%g:%g]\n", y_min, y_max);
     fprintf(gnuplot, "set xlabel 'Pinky Knuckle Diameter (%s)' offset char 0, char -1\n", UNIT);
     fprintf(gnuplot, "set ylabel 'Probability'\n");
-    fprintf(gnuplot, "plot '%s' title 'male' with lines lw 3, '%s' title 'femlae' with lines lw 3, '%s' title 'decision boundary' with lines lw 3\n", pTMP1, pTMP2, pTMP3);
+    fprintf(gnuplot, "plot '%s' title 'male' with lines lw 5, '%s' title 'female' with lines lw 5, '%s' title 'decision boundary' with lines lw 5\n", pTMP1, pTMP2, pTMP3);
     plot_close(gnuplot);
     return;
 }
