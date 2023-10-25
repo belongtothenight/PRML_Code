@@ -7,7 +7,7 @@
 #define DATA_PLOT_H
 
 /* "qt" for qt terminal, "wxt" for wxt terminal */
-#define GNUPLOT_TERMINAL "wxt"
+#define GNUPLOT_TERMINAL "wxt enhanced"
 
 /******************************************************************************************/
 // help functions 

@@ -30,7 +30,7 @@ FILE* plot_open(char* pFilename){
     fprintf(gnuplot, "set xzeroaxis;\n");
     fprintf(gnuplot, "set yzeroaxis;\n");
     // fprintf(gnuplot, "set border 0\n");
-    fprintf(gnuplot, "set xtics axis\n");
+    fprintf(gnuplot, "set xtics axis offset char 0, char -0.5\n");
     fprintf(gnuplot, "set ytics axis\n");
     fprintf(gnuplot, "set ticscale 0;\n");
     fprintf(gnuplot, "set xtics add (\"\" 0)\n");
@@ -160,7 +160,7 @@ void plot_data_div5(dataset* pData, char* pFilename, char* pTMP1, char* pTMP2){
     fprintf(gnuplot, "set title 'Pinky Knuckle Diameter'\n");
     fprintf(gnuplot, "set xrange [%g:%g]\n", x_min, x_max);
     fprintf(gnuplot, "set yrange [%g:%g]\n", y_min, y_max);
-    fprintf(gnuplot, "set xlabel 'Pinky Knuckle Diameter (%s)'\n", UNIT);
+    fprintf(gnuplot, "set xlabel 'Pinky Knuckle Diameter (%s)' offset char 0, char -1\n", UNIT);
     fprintf(gnuplot, "set ylabel 'Probability'\n");
     fprintf(gnuplot, "set boxwidth 0.6 relative\n");
     fprintf(gnuplot, "set style fill solid\n");
@@ -187,7 +187,7 @@ void plot_stacked_data_div5(dataset* pData1, dataset* pData2, intersection* pITS
     fprintf(gnuplot, "set title 'Pinky Knuckle Diameter Male vs. Female'\n");
     fprintf(gnuplot, "set xrange [%g:%g]\n", x_min, x_max);
     fprintf(gnuplot, "set yrange [%g:%g]\n", y_min, y_max);
-    fprintf(gnuplot, "set xlabel 'Pinky Knuckle Diameter (%s)'\n", UNIT);
+    fprintf(gnuplot, "set xlabel 'Pinky Knuckle Diameter (%s)' offset char 0, char -1\n", UNIT);
     fprintf(gnuplot, "set ylabel 'Probability'\n");
     fprintf(gnuplot, "plot '%s' title 'male' with lines lw 3, '%s' title 'femlae' with lines lw 3, '%s' title 'decision boundary' with lines lw 3\n", pTMP1, pTMP2, pTMP3);
     plot_close(gnuplot);

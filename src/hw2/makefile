@@ -1,5 +1,6 @@
 CFLAG=-Wno-implicit-function-declaration
 LIB=./lib/
+OUT=./output
 
 all: main data_proc data_plot output_format normal_distribution output_csv decision_boundary
 	@echo Compiling...
@@ -10,9 +11,23 @@ clean_win:
 	del *.o
 	del *.h.gch
 
+clean_win_output:
+	rmdir -r $(OUT)
+	# del *.dat
+	# del *.csv
+	# del *.png
+	# del *.exe
+
 clean_linux:
 	rm *.o
 	rm *.h.gch
+
+clean_linux_output:
+	rm -rf $(OUT)
+	# rm *.dat
+	# rm *.csv
+	# rm *.png
+	# rm *.exe
 
 # Dependencies ===================================
 main: main.c

@@ -18,7 +18,7 @@
 #define DIV5_ALL_IMG     "./output/div5_p3.png"
 #define TMP_DATA_FILE5   "./output/div5_p3_tmp_data5.dat"
 #define TMP_DATA_FILE6   "./output/div5_p3_tmp_data6.dat"
-#define INTEGRAL_STEP    0.0001
+#define INTEGRAL_STEP    0.0000001
 #define TMP_DATA_FILE7   "./output/div5_p1_tmp_norm_dist_x.dat"
 #define TMP_DATA_FILE8   "./output/div5_p1_tmp_norm_dist_y.dat"
 #define TMP_DATA_FILE9   "./output/div5_p2_tmp_norm_dist_x.dat"
