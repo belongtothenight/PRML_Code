@@ -27,6 +27,9 @@
 #define OUTPUT_CSV_FILE1 "./output/div5_p1_output.csv"
 #define OUTPUT_CSV_FILE2 "./output/div5_p2_output.csv"
 #define OUTPUT_CSV_FILE3 "./output/div5_p3_output.csv"
+#define DIV5_VS_IMG      "./output/div5_p4.png"
+#define TMP_DATA_FILE13  "./output/div5_p4_tmp_data13.dat"
+#define TMP_DATA_FILE14  "./output/div5_p4_tmp_data14.dat"
 
 int main(void) {
     printf("Program started!\n");
@@ -85,6 +88,7 @@ int main(void) {
     plot_data_div5(&male_data, DIV5_MALE_IMG, TMP_DATA_FILE1, TMP_DATA_FILE2);
     plot_data_div5(&female_data, DIV5_FEMALE_IMG, TMP_DATA_FILE3, TMP_DATA_FILE4);
     plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
+    plot_stacked_data_div5(&male_data, &female_data, DIV5_VS_IMG, TMP_DATA_FILE13, TMP_DATA_FILE14);
 
     // free memory
     free_norm_dist(&input_struct_data_male, "MALE");

@@ -150,3 +150,26 @@ void plot_data_div5(dataset* pData, char* pFilename, char* pTMP1, char* pTMP2){
     plot_close(gnuplot);
     return;
 }
+
+void plot_stacked_data_div5(dataset* pData1, dataset* pData2, char* pFilename, char* pTMP1, char* pTMP2){
+    float x_min1 = pData1->split_points[0]-(pData1->split_step/2);
+    float x_max1 = pData1->split_points[SPLIT_PARTS]+(pData1->split_step/2);
+    float x_min2 = pData2->split_points[0]-(pData2->split_step/2);
+    float x_max2 = pData2->split_points[SPLIT_PARTS]+(pData2->split_step/2);
+    float x_min = (x_min1 < x_min2) ? x_min1 : x_min2;
+    float x_max = (x_max1 > x_max2) ? x_max1 : x_max2;
+    float y_min = 0;
+    float y_max = 1;
+    //
+    save_data_div5_norm(pTMP1, x_min, x_max, pData1->mu, pData1->sigma);
+    save_data_div5_norm(pTMP2, x_min, x_max, pData2->mu, pData2->sigma);
+    FILE* gnuplot = plot_open(pFilename);
+    fprintf(gnuplot, "set title 'Pinky Knuckle Diameter Male vs. Female'\n");
+    fprintf(gnuplot, "set xrange [%g:%g]\n", x_min, x_max);
+    fprintf(gnuplot, "set yrange [%g:%g]\n", y_min, y_max);
+    fprintf(gnuplot, "set xlabel 'Pinky Knuckle Diameter (%s)'\n", UNIT);
+    fprintf(gnuplot, "set ylabel 'Probability'\n");
+    fprintf(gnuplot, "plot '%s' title 'male' with lines lw 3, '%s' title 'femlae' with lines lw 3\n", pTMP1, pTMP2);
+    plot_close(gnuplot);
+    return;
+}

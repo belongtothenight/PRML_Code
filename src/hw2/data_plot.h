@@ -23,5 +23,6 @@ void test_plot(dataset* pData, char* pFilename);
 void save_data_div5_cnt(dataset *pData, char *pFilename);
 void save_data_div5_norm(char* pFilename, float x_min, float x_max, float mu, float sigma);
 void plot_data_div5(dataset* pData, char* pFilename, char* pTMP1, char* pTMP2);
+void plot_stacked_data_div5(dataset* pData1, dataset* pData2, char* pFilename, char* pTMP1, char* pTMP2);
 
 #endif // DATA_PLOT_H
