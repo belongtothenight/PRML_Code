@@ -82,11 +82,6 @@ void combine_data(dataset* pMaleData, dataset* pFemaleData, dataset* pAllData){
 void print_data(dataset* pData, char* pName){
     printf("\n\rPrinting %s data:===============================\n\r", pName);
     printf("Size:                       %d\n\r", pData->size);
-    printf("data_element:               ");
-    for (int i = 0; i < pData->size; i++){
-        printf("%f ", pData->data_element[i]);
-    }
-    printf("%s.\n\r", UNIT);
     printf("Min:                        %f %s.\n\r", pData->min, UNIT);
     printf("Max:                        %f %s.\n\r", pData->max, UNIT);
     printf("Mean:                       %f %s.\n\r", pData->mean, UNIT);

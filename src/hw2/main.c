@@ -16,11 +16,13 @@
 #define DIV5_ALL_IMG     "./output/div5_p3.png"
 #define TMP_DATA_FILE5   "./output/div5_p3_tmp_data5.dat"
 #define TMP_DATA_FILE6   "./output/div5_p3_tmp_data6.dat"
-#define INTEGRAL_STEP 0.0001
+#define INTEGRAL_STEP    0.0001
 #define TMP_DATA_FILE7   "./output/div5_p1_tmp_norm_dist_x.dat"
 #define TMP_DATA_FILE8   "./output/div5_p1_tmp_norm_dist_y.dat"
 #define TMP_DATA_FILE9   "./output/div5_p2_tmp_norm_dist_x.dat"
 #define TMP_DATA_FILE10  "./output/div5_p2_tmp_norm_dist_y.dat"
+#define TMP_DATA_FILE11  "./output/div5_p3_tmp_norm_dist_x.dat"
+#define TMP_DATA_FILE12  "./output/div5_p3_tmp_norm_dist_y.dat"
 
 int main(void) {
     printf("Program started!\n");
@@ -54,29 +56,34 @@ int main(void) {
     input_struct input_struct_data_male;
     input_struct_data_male.tmp_file_1 = TMP_DATA_FILE7;
     input_struct_data_male.tmp_file_2 = TMP_DATA_FILE8;
-    cal_norm_dist(&norm_dist_data_male, male_data.mu, male_data.sigma, male_data.min, male_data.max, INTEGRAL_STEP, &input_struct_data_male);
+    cal_norm_dist(&norm_dist_data_male, male_data.mu, male_data.sigma, male_data.min, male_data.max, INTEGRAL_STEP, &input_struct_data_male, "MALE");
 
     // calculate female normal distribution
     norm_dist norm_dist_data_female;
     input_struct input_struct_data_female;
     input_struct_data_female.tmp_file_1 = TMP_DATA_FILE9;
     input_struct_data_female.tmp_file_2 = TMP_DATA_FILE10;
-    cal_norm_dist(&norm_dist_data_female, female_data.mu, female_data.sigma, female_data.min, female_data.max, INTEGRAL_STEP, &input_struct_data_female);
+    cal_norm_dist(&norm_dist_data_female, female_data.mu, female_data.sigma, female_data.min, female_data.max, INTEGRAL_STEP, &input_struct_data_female, "FEMALE");
 
+    // calculate all normal distribution
+    norm_dist norm_dist_data_all;
+    input_struct input_struct_data_all;
+    input_struct_data_all.tmp_file_1 = TMP_DATA_FILE11;
+    input_struct_data_all.tmp_file_2 = TMP_DATA_FILE12;
+    cal_norm_dist(&norm_dist_data_all, all_data.mu, all_data.sigma, all_data.min, all_data.max, INTEGRAL_STEP, &input_struct_data_all, "ALL");
 
 
     // plot data
-    // test_plot(&male_data, TEST_IMAGE);
-    // plot_data_div5(&male_data, DIV5_MALE_IMG, TMP_DATA_FILE1, TMP_DATA_FILE2);
-    // plot_data_div5(&female_data, DIV5_FEMALE_IMG, TMP_DATA_FILE3, TMP_DATA_FILE4);
-    // plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
+    plot_data_div5(&male_data, DIV5_MALE_IMG, TMP_DATA_FILE1, TMP_DATA_FILE2);
+    plot_data_div5(&female_data, DIV5_FEMALE_IMG, TMP_DATA_FILE3, TMP_DATA_FILE4);
+    plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
 
     // free memory
     free(input_struct_data_male.pX_arr);
     free(input_struct_data_male.pY_arr);
     free(input_struct_data_female.pX_arr);
     free(input_struct_data_female.pY_arr);
-    
+
     printf("Program ended!\n\r");
     return 0;
 }
