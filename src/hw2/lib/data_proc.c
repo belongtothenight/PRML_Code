@@ -11,9 +11,9 @@ void initialize_data(dataset* pData){
     }
     pData->min = 0;
     pData->max = 0;
-    pData->mean = 0;
-    pData->variance_biased = 0;
-    pData->variance_unbiased = 0;
+    pData->mean = 0; // sample mean
+    pData->variance_biased = 0; // population variance
+    pData->variance_unbiased = 0; // sample variance
     pData->mu = 0;
     pData->sigma = 0;
     for (int i = 0; i < SPLIT_PARTS + 1; i++){
