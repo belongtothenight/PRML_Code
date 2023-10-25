@@ -18,8 +18,8 @@ Normal split count, 0, 3, 4, 3, 5, 3, 1, 1
 Normal distribution (mm)
 Mu, 10.145000
 Sigma, 0.603925
-Integral step, 0.000000
+Integral step, 0.000001
 X min, 9.230000
 X max, 11.460000
-Arr length, 22300004
-Integral, 0.878891
+Arr length, 2230001
+Integral, 0.920171
