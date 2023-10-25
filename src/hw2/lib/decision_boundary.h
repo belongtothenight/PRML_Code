@@ -4,6 +4,7 @@
 #define DECISION_BOUNDARY_H
 
 typedef struct{
+    float step; // step size
     int idx1; // index of the first normal distribution
     int idx2; // index of the second normal distribution
     float y1; // y value of the first normal distribution
@@ -17,8 +18,11 @@ typedef struct{
 // Calculate the portion integral of normal distribution
 float cal_portion_integral(norm_dist* pND, float* y_arr, int start, int end);
 
+// Calculate probability of certain x value
+float cal_prob(norm_dist* pND, float x);
+
 // Calculate the intersection of two normal distributions
-void cal_intersection(norm_dist* pND1, norm_dist* pND2, float* y_arr1, float* y_arr2, intersection* pIntersection);
+void cal_intersection(norm_dist* pND1, norm_dist* pND2, intersection* pIntersection);
 
 // Find the minimum error by using intersaction as boundary
 void get_intersection(input_struct* pIS1, norm_dist* pND1, input_struct* pIS2, norm_dist* pND2, intersection* pIntersection);

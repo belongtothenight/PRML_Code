@@ -6,34 +6,35 @@
 #include "./lib/output_csv.h"
 #include "./lib/decision_boundary.h"
 
-#define MALE_DATA        "./dataset/data_male.csv"
-#define FEMALE_DATA      "./dataset/data_female.csv"
-#define TEST_IMAGE       "./output/test_image.png"
-#define DIV5_MALE_IMG    "./output/div5_p1.png"
-#define TMP_DATA_FILE1   "./output/div5_p1_tmp_data1.dat"
-#define TMP_DATA_FILE2   "./output/div5_p1_tmp_data2.dat"
-#define DIV5_FEMALE_IMG  "./output/div5_p2.png"
-#define TMP_DATA_FILE3   "./output/div5_p2_tmp_data3.dat"
-#define TMP_DATA_FILE4   "./output/div5_p2_tmp_data4.dat"
-#define DIV5_ALL_IMG     "./output/div5_p3.png"
-#define TMP_DATA_FILE5   "./output/div5_p3_tmp_data5.dat"
-#define TMP_DATA_FILE6   "./output/div5_p3_tmp_data6.dat"
-#define INTEGRAL_STEP    0.000001
-// #define INTEGRAL_STEP    0.0001
-#define TMP_DATA_FILE7   "./output/div5_p1_tmp_norm_dist_x.dat"
-#define TMP_DATA_FILE8   "./output/div5_p1_tmp_norm_dist_y.dat"
-#define TMP_DATA_FILE9   "./output/div5_p2_tmp_norm_dist_x.dat"
-#define TMP_DATA_FILE10  "./output/div5_p2_tmp_norm_dist_y.dat"
-#define TMP_DATA_FILE11  "./output/div5_p3_tmp_norm_dist_x.dat"
-#define TMP_DATA_FILE12  "./output/div5_p3_tmp_norm_dist_y.dat"
-#define OUTPUT_CSV_FILE1 "./output/div5_p1_output.csv"
-#define OUTPUT_CSV_FILE2 "./output/div5_p2_output.csv"
-#define OUTPUT_CSV_FILE3 "./output/div5_p3_output.csv"
-#define OUTPUT_CSV_FILE4 "./output/div5_boundary_output.csv"
-#define DIV5_VS_IMG      "./output/div5_boundary.png"
-#define TMP_DATA_FILE13  "./output/div5_p4_tmp_data13.dat"
-#define TMP_DATA_FILE14  "./output/div5_p4_tmp_data14.dat"
-#define TMP_DATA_FILE15  "./output/div5_p4_tmp_data15.dat"
+#define MALE_DATA         "./dataset/data_male.csv"
+#define FEMALE_DATA       "./dataset/data_female.csv"
+#define TEST_IMAGE        "./output/test_image.png"
+#define DIV5_MALE_IMG     "./output/div5_p1.png"
+#define TMP_DATA_FILE1    "./output/div5_p1_tmp_data1.dat"
+#define TMP_DATA_FILE2    "./output/div5_p1_tmp_data2.dat"
+#define DIV5_FEMALE_IMG   "./output/div5_p2.png"
+#define TMP_DATA_FILE3    "./output/div5_p2_tmp_data3.dat"
+#define TMP_DATA_FILE4    "./output/div5_p2_tmp_data4.dat"
+#define DIV5_ALL_IMG      "./output/div5_p3.png"
+#define TMP_DATA_FILE5    "./output/div5_p3_tmp_data5.dat"
+#define TMP_DATA_FILE6    "./output/div5_p3_tmp_data6.dat"
+#define INTEGRAL_STEP     0.000001
+// #define INTEGRAL_STEP     0.0001
+#define INTERSECTION_STEP 0.000001
+#define TMP_DATA_FILE7    "./output/div5_p1_tmp_norm_dist_x.dat"
+#define TMP_DATA_FILE8    "./output/div5_p1_tmp_norm_dist_y.dat"
+#define TMP_DATA_FILE9    "./output/div5_p2_tmp_norm_dist_x.dat"
+#define TMP_DATA_FILE10   "./output/div5_p2_tmp_norm_dist_y.dat"
+#define TMP_DATA_FILE11   "./output/div5_p3_tmp_norm_dist_x.dat"
+#define TMP_DATA_FILE12   "./output/div5_p3_tmp_norm_dist_y.dat"
+#define OUTPUT_CSV_FILE1  "./output/div5_p1_output.csv"
+#define OUTPUT_CSV_FILE2  "./output/div5_p2_output.csv"
+#define OUTPUT_CSV_FILE3  "./output/div5_p3_output.csv"
+#define OUTPUT_CSV_FILE4  "./output/div5_boundary_output.csv"
+#define DIV5_VS_IMG       "./output/div5_boundary.png"
+#define TMP_DATA_FILE13   "./output/div5_p4_tmp_data13.dat"
+#define TMP_DATA_FILE14   "./output/div5_p4_tmp_data14.dat"
+#define TMP_DATA_FILE15   "./output/div5_p4_tmp_data15.dat"
 
 int main(void) {
     printf("Program started!\n");
@@ -85,6 +86,7 @@ int main(void) {
 
     // calculate decision boundary
     intersection its;
+    its.step = INTERSECTION_STEP;
     get_intersection(&input_struct_data_male, &norm_dist_data_male, &input_struct_data_female, &norm_dist_data_female, &its);
     printf("Decision boundary: %f\n\r", its.avg_x);
     printf("Minimum error: %f\n\r", its.min_error);

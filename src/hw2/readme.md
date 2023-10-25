@@ -9,3 +9,4 @@ Code is compiled on Windows 11 x64 platform with command ```make all ; .\main.ex
 ## Things to complete
 
 1. Diameter to perimeter conversion.
+2. Fix x_arr and y_arr to make x_arr are the same.
