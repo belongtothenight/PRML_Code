@@ -53,8 +53,6 @@ void output_decision_boundary_csv(char *pFilename, intersection *pIntersection){
         exit(1);
     }
     fprintf(fp, "Intersection\n");
-    fprintf(fp, "Index 1, %d\n", pIntersection->idx1);
-    fprintf(fp, "Index 2, %d\n", pIntersection->idx2);
     fprintf(fp, "Y 1, %f\n", pIntersection->y1);
     fprintf(fp, "Y 2, %f\n", pIntersection->y2);
     fprintf(fp, "X 1, %f\n", pIntersection->x1);

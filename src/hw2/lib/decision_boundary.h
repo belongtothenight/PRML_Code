@@ -5,8 +5,6 @@
 
 typedef struct{
     float step; // step size
-    int idx1; // index of the first normal distribution
-    int idx2; // index of the second normal distribution
     float y1; // y value of the first normal distribution
     float y2; // y value of the second normal distribution
     float x1; // x value of the first normal distribution
@@ -15,11 +13,11 @@ typedef struct{
     float min_error; // minimum error
 } intersection;
 
-// Calculate the portion integral of normal distribution
-float cal_portion_integral(norm_dist* pND, float* y_arr, int start, int end);
-
 // Calculate probability of certain x value
 float cal_prob(norm_dist* pND, float x);
+
+// Calculate the portion integral of normal distribution
+float cal_portion_integral(norm_dist* pND, intersection* pIST, float start, float end);
 
 // Calculate the intersection of two normal distributions
 void cal_intersection(norm_dist* pND1, norm_dist* pND2, intersection* pIntersection);
