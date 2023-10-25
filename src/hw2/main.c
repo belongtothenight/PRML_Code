@@ -28,7 +28,8 @@
 #define OUTPUT_CSV_FILE1 "./output/div5_p1_output.csv"
 #define OUTPUT_CSV_FILE2 "./output/div5_p2_output.csv"
 #define OUTPUT_CSV_FILE3 "./output/div5_p3_output.csv"
-#define DIV5_VS_IMG      "./output/div5_p4.png"
+#define OUTPUT_CSV_FILE4 "./output/div5_boundary_output.csv"
+#define DIV5_VS_IMG      "./output/div5_boundary.png"
 #define TMP_DATA_FILE13  "./output/div5_p4_tmp_data13.dat"
 #define TMP_DATA_FILE14  "./output/div5_p4_tmp_data14.dat"
 #define TMP_DATA_FILE15  "./output/div5_p4_tmp_data15.dat"
@@ -91,11 +92,12 @@ int main(void) {
     output_csv(OUTPUT_CSV_FILE1, &male_data, &norm_dist_data_male);
     output_csv(OUTPUT_CSV_FILE2, &female_data, &norm_dist_data_female);
     output_csv(OUTPUT_CSV_FILE3, &all_data, &norm_dist_data_all);
+    output_decision_boundary_csv(OUTPUT_CSV_FILE4, &its);
 
     // plot data
-    // plot_data_div5(&male_data, DIV5_MALE_IMG, TMP_DATA_FILE1, TMP_DATA_FILE2);
-    // plot_data_div5(&female_data, DIV5_FEMALE_IMG, TMP_DATA_FILE3, TMP_DATA_FILE4);
-    // plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
+    plot_data_div5(&male_data, DIV5_MALE_IMG, TMP_DATA_FILE1, TMP_DATA_FILE2);
+    plot_data_div5(&female_data, DIV5_FEMALE_IMG, TMP_DATA_FILE3, TMP_DATA_FILE4);
+    plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
     plot_stacked_data_div5(&male_data, &female_data, &its, DIV5_VS_IMG, TMP_DATA_FILE13, TMP_DATA_FILE14, TMP_DATA_FILE15);
 
     // free memory

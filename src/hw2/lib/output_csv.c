@@ -3,6 +3,7 @@
 #include "data_proc.h"
 #include "normal_distribution.h"
 #include "output_format.h"
+#include "decision_boundary.h"
 
 void output_csv(char *pFilename, dataset *pDS, norm_dist *pND){
     output_format Format;
@@ -36,6 +37,29 @@ void output_csv(char *pFilename, dataset *pDS, norm_dist *pND){
     fprintf(fp, "X max, %f\n", pND->x_max);
     fprintf(fp, "Arr length, %d\n", pND->arr_length);
     fprintf(fp, "Integral, %f\n", pND->integral);
+
+    fclose(fp);
+    printf("%sSUCCESS%s: Data written to file %s.\n\r", Format.foreground.green, Format.style.reset, pFilename);
+    return;
+}
+
+void output_decision_boundary_csv(char *pFilename, intersection *pIntersection){
+    output_format Format;
+    get_format(&Format);
+    FILE* fp = fopen(pFilename, "w");
+    if (fp == NULL){
+        printf("%sERROR%s: file %s not found...\n\r", Format.foreground.red, Format.style.reset, pFilename);
+        exit(1);
+    }
+    fprintf(fp, "Intersection\n");
+    fprintf(fp, "Index 1, %d\n", pIntersection->idx1);
+    fprintf(fp, "Index 2, %d\n", pIntersection->idx2);
+    fprintf(fp, "Y 1, %f\n", pIntersection->y1);
+    fprintf(fp, "Y 2, %f\n", pIntersection->y2);
+    fprintf(fp, "X 1, %f\n", pIntersection->x1);
+    fprintf(fp, "X 2, %f\n", pIntersection->x2);
+    fprintf(fp, "Average X, %f\n", pIntersection->avg_x);
+    fprintf(fp, "Minimum error, %f\n", pIntersection->min_error);
 
     fclose(fp);
     printf("%sSUCCESS%s: Data written to file %s.\n\r", Format.foreground.green, Format.style.reset, pFilename);

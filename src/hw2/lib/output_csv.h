@@ -6,4 +6,6 @@
 
 void output_csv(char *pFilename, dataset *pDS, norm_dist *pND);
 
+void output_decision_boundary_csv(char *pFilename, intersection *pIntersection);
+
 #endif // OUTPUT_CSV_H

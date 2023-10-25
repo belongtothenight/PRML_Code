@@ -9,4 +9,3 @@ Code is compiled on Windows 11 x64 platform with command ```make all ; ./main.ex
 ## Things to complete
 
 1. Diameter to perimeter conversion.
-2. Calcuate minimum error boundary.
