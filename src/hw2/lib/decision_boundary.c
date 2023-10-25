@@ -52,8 +52,8 @@ void get_intersection(input_struct* pIS1, norm_dist* pND1, input_struct* pIS2, n
     // 3. calculate the intersection of the two normal distributions
     cal_intersection(pND1, pND2, pIS1->pY_arr, pIS2->pY_arr, pIntersection);
     // 4. calculate the portion integral of the two normal distributions
-    pIntersection->min_error += cal_portion_integral(pND1, pIS1->pY_arr, pIntersection->idx1, pND1->arr_length-1);
-    pIntersection->min_error += cal_portion_integral(pND2, pIS2->pY_arr, 0, pIntersection->idx2);
+    pIntersection->min_error += cal_portion_integral(pND1, pIS1->pY_arr, pIntersection->idx1, pND1->arr_length-1) / pND1->integral;
+    pIntersection->min_error += cal_portion_integral(pND2, pIS2->pY_arr, 0, pIntersection->idx2) / pND2->integral;
     // 5. calculate the average x value of the two normal distributions
     pIntersection->avg_x = (pIntersection->x1 + pIntersection->x2) / 2;
     return;

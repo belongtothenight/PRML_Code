@@ -31,6 +31,7 @@
 #define DIV5_VS_IMG      "./output/div5_p4.png"
 #define TMP_DATA_FILE13  "./output/div5_p4_tmp_data13.dat"
 #define TMP_DATA_FILE14  "./output/div5_p4_tmp_data14.dat"
+#define TMP_DATA_FILE15  "./output/div5_p4_tmp_data15.dat"
 
 int main(void) {
     printf("Program started!\n");
@@ -95,7 +96,7 @@ int main(void) {
     // plot_data_div5(&male_data, DIV5_MALE_IMG, TMP_DATA_FILE1, TMP_DATA_FILE2);
     // plot_data_div5(&female_data, DIV5_FEMALE_IMG, TMP_DATA_FILE3, TMP_DATA_FILE4);
     // plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
-    // plot_stacked_data_div5(&male_data, &female_data, DIV5_VS_IMG, TMP_DATA_FILE13, TMP_DATA_FILE14);
+    plot_stacked_data_div5(&male_data, &female_data, &its, DIV5_VS_IMG, TMP_DATA_FILE13, TMP_DATA_FILE14, TMP_DATA_FILE15);
 
     // free memory
     free_norm_dist(&input_struct_data_male, "MALE");
