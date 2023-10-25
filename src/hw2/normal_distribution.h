@@ -50,4 +50,7 @@ void print_input_struct(input_struct* pIs, char* name);
 // Pack all the functions above
 void cal_norm_dist(norm_dist* pNd, float mu, float sigma, float x_min, float x_max, float integral_step, input_struct* pInput_struct, char* name);
 
+// Free memory
+void free_norm_dist(input_struct* pInput_struct, char* name);
+
 #endif // NORMAL_DISTRIBUTION_H

@@ -79,10 +79,9 @@ int main(void) {
     plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
 
     // free memory
-    free(input_struct_data_male.pX_arr);
-    free(input_struct_data_male.pY_arr);
-    free(input_struct_data_female.pX_arr);
-    free(input_struct_data_female.pY_arr);
+    free_norm_dist(&input_struct_data_male, "MALE");
+    free_norm_dist(&input_struct_data_female, "FEMALE");
+    free_norm_dist(&input_struct_data_all, "ALL");
 
     printf("Program ended!\n\r");
     return 0;

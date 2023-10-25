@@ -71,10 +71,10 @@ void norm_dist_integral_check(norm_dist* pNd){
     output_format Format;
     get_format(&Format);
     if (pNd->integral > (float)1){
-        printf("%sERROR%s: The integral of the normal distribution is greater than %d.\n\r", Format.foreground.red, Format.style.reset, 1);
+        printf("%sFAIL%s: The integral of the normal distribution is greater than %d.\n\r", Format.foreground.red, Format.style.reset, 1);
         // exit(1);
     } else {
-        printf("%sSUCCESS%s: The integral of the normal distribution is less than %d.\n\r", Format.foreground.green, Format.style.reset, 1);
+        printf("%sPASS%s: The integral of the normal distribution is less than %d.\n\r", Format.foreground.green, Format.style.reset, 1);
     }
     return;
 }
@@ -84,12 +84,12 @@ void norm_dist_y_check(norm_dist* pNd, float* y_arr){
     get_format(&Format);
     for(int i = 0; i < pNd->arr_length; i++){
         if (y_arr[i] > (float)1){
-            printf("%sERROR%s: The y value of the normal distribution is greater than %d.\n\r", Format.foreground.red, Format.style.reset, 1);
+            printf("%sFAIL%s: The y value of the normal distribution is greater than %d.\n\r", Format.foreground.red, Format.style.reset, 1);
             // exit(1);
             return;
         }
     }
-    printf("%sSUCCESS%s: The y value of the normal distribution is less than %d.\n\r", Format.foreground.green, Format.style.reset, 1);
+    printf("%sPASS%s: The y value of the normal distribution is less than %d.\n\r", Format.foreground.green, Format.style.reset, 1);
     return;
 }
 
@@ -105,7 +105,9 @@ void print_input_struct(input_struct* pIs, char* name){
 void cal_norm_dist(norm_dist* pNd, float mu, float sigma, float x_min, float x_max, float integral_step, input_struct* pInput_struct, char* name){
     get_norm_dist(pNd, mu, sigma, x_min, x_max, integral_step);
     float* pNorm_dist_x_arr = get_norm_dist_x_arr(pNd);
+    pInput_struct->pX_arr = pNorm_dist_x_arr;
     float* pNorm_dist_y_arr = get_norm_dist_y_arr(pNd, pNorm_dist_x_arr);
+    pInput_struct->pY_arr = pNorm_dist_y_arr;
     norm_dist_integral(pNd, pNorm_dist_y_arr);
     print_norm_dist(pNd, name);
     print_input_struct(pInput_struct, name);
@@ -113,5 +115,14 @@ void cal_norm_dist(norm_dist* pNd, float mu, float sigma, float x_min, float x_m
     norm_dist_y_check(pNd, pNorm_dist_y_arr);
     pour_arr_to_file(pNorm_dist_x_arr, pNd->arr_length, pInput_struct->tmp_file_1);
     pour_arr_to_file(pNorm_dist_y_arr, pNd->arr_length, pInput_struct->tmp_file_2);
+    return;
+}
+
+void free_norm_dist(input_struct* pInput_struct, char* name){
+    output_format Format;
+    get_format(&Format);
+    free(pInput_struct->pX_arr);
+    free(pInput_struct->pY_arr);
+    printf("%sSUCCESS%s: Freed memory of %s.\n\r", Format.foreground.green, Format.style.reset, name);
     return;
 }

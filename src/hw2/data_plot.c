@@ -3,6 +3,7 @@
 #include <math.h>
 #include "data_plot.h"
 #include "data_proc.h"
+#include "output_format.h"
 
 /*
 REF
@@ -12,9 +13,11 @@ REF
 
 FILE* plot_open(char* pFilename){
     // open gnuplot interactive session and save to png file simultaneously
+    output_format Format;
+    get_format(&Format);
     FILE* gnuplot = popen("gnuplot --persist", "w");
     if (gnuplot == NULL){
-        printf("gnuplot not found...\n");
+        printf("%sERROR%s: gnuplot not found...\n\r", Format.foreground.red, Format.style.reset);
         exit(1);
     }
     fprintf(gnuplot, "set terminal %s font \"sans,12\"\n", GNUPLOT_TERMINAL);
@@ -47,21 +50,25 @@ void plot_close(FILE* gnuplot){
 }
 
 FILE* plot_save_open(){
+    output_format Format;
+    get_format(&Format);
     FILE* gnuplot;
     gnuplot = popen("gnuplot --persist", "w");
     if (gnuplot == NULL){
-        printf("gnuplot not found...\n");
+        printf("%sERROR%s: gnuplot not found...\n\r", Format.foreground.red, Format.style.reset);
         exit(1);
     }
     return gnuplot;
 }
 
 void plot_save_close(FILE* gnuplot){
+    output_format Format;
+    get_format(&Format);
     if (gnuplot != NULL){
         pclose(gnuplot);
-        printf("Closed gnuplot successfully\n\r");
+        printf("%sSUCCESS%s: gnuplot closed.\n\r", Format.foreground.green, Format.style.reset);
     } else {
-        printf("Error closing gnuplot\n\r");
+        printf("%sERROR%s: Error closing gnuplot\n\r", Format.foreground.red, Format.style.reset);
     }
     return;
 }
@@ -86,6 +93,8 @@ void test_plot(dataset* pData, char* pFilename){
 }
 
 void save_data_div5_cnt(dataset* pData, char* pFilename){
+    output_format Format;
+    get_format(&Format);
     FILE* gnuplot = plot_save_open(pFilename);
     fprintf(gnuplot, "set table '%s'\n", pFilename);
     fprintf(gnuplot, "plot '-'\n");
@@ -100,7 +109,7 @@ void save_data_div5_cnt(dataset* pData, char* pFilename){
     fprintf(gnuplot, "e\n");
     fprintf(gnuplot, "unset table\n");
     pclose(gnuplot);
-    printf("Closed %s successfully\n\r", pFilename);
+    printf("%sSUCCESS%s: Data written to file %s.\n\r", Format.foreground.green, Format.style.reset, pFilename);
     return;
 }
 
@@ -129,6 +138,8 @@ void plot_data_div5(dataset* pData, char* pFilename, char* pTMP1, char* pTMP2){
     fprintf(gnuplot, "set title 'Pinky Knuckle Diameter'\n");
     fprintf(gnuplot, "set xrange [%g:%g]\n", x_min, x_max);
     fprintf(gnuplot, "set yrange [%g:%g]\n", y_min, y_max);
+    fprintf(gnuplot, "set xlabel 'Pinky Knuckle Diameter (%s)'\n", UNIT);
+    fprintf(gnuplot, "set ylabel 'Probability'\n");
     fprintf(gnuplot, "plot '%s' title 'data' with lines lw 3, '%s' title 'normal distribution' with lines lw 3\n", pTMP1, pTMP2);
     plot_close(gnuplot);
     return;

@@ -49,13 +49,15 @@ void initialize_data(dataset* pData){
 }
 
 void read_csv(char* pFilename, dataset* pData){
+    output_format Format;
+    get_format(&Format);
     FILE *fp;
     fp = fopen(pFilename, "r");
     if (fp == NULL){
-        printf("Error opening file\n\r");
+        printf("%sERROR%s: Failed to open file %s.\n\r", Format.foreground.red, Format.style.reset, pFilename);
         exit(1);
     } else {
-        printf("Opened %s successfully\n\r", pFilename);
+        printf("%sSUCCESS%s: File %s opened.\n\r", Format.foreground.green, Format.style.reset, pFilename);
     }
     int read = 0;
     int records = 0;
@@ -65,6 +67,7 @@ void read_csv(char* pFilename, dataset* pData){
     } while (!feof(fp));
     pData->size = records - 1;
     fclose(fp);
+    printf("%sSUCCESS%s: File %s closed.\n\r", Format.foreground.green, Format.style.reset, pFilename);
     return;
 }
 
@@ -217,7 +220,7 @@ void split_data_checker(dataset* pData){
         sum += pData->split_count[i];
     }
     if (sum != pData->size){
-        printf("%sError%s: Split data check failed!\n\r", Format.foreground.red, Format.style.reset);
+        printf("%sFAIL%s: Split data check failed!\n\r", Format.foreground.red, Format.style.reset);
         exit(1);
     } else {
         printf("%sPASS%s: Split data check!\n\r", Format.foreground.green, Format.style.reset);
