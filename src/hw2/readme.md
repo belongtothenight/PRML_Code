@@ -1,6 +1,6 @@
 # Pinky Dimension Distribution
 
-Code is compiled on Windows 11 x64 platform with command ```make clean_win_output ; make all ; .\main.exe ; make clean_win```
+Code is compiled on Windows 11 x64 platform with command ```make all ; .\main.exe ; make clean_win```
 
 ## Dependencies
 

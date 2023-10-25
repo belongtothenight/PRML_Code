@@ -11,25 +11,9 @@ clean_win:
 	del *.o
 	del *.h.gch
 
-clean_win_output:
-	rmdir -r $(OUT)
-	# del *.dat
-	# del *.csv
-	# del *.png
-	# del *.exe
-	mkdir $(OUT)
-
 clean_linux:
 	rm *.o
 	rm *.h.gch
-
-clean_linux_output:
-	rm -rf $(OUT)
-	# rm *.dat
-	# rm *.csv
-	# rm *.png
-	# rm *.exe
-	mkdir $(OUT)
 
 # Dependencies ===================================
 main: main.c
