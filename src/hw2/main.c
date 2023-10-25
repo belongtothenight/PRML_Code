@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "data_proc.h"
-#include "data_plot.h"
-#include "normal_distribution.h"
-#include "output_csv.h"
+#include "./lib/data_proc.h"
+#include "./lib/data_plot.h"
+#include "./lib/normal_distribution.h"
+#include "./lib/output_csv.h"
+#include "./lib/decision_boundary.h"
 
 #define MALE_DATA        "./dataset/data_male.csv"
 #define FEMALE_DATA      "./dataset/data_female.csv"
@@ -79,16 +80,22 @@ int main(void) {
     input_struct_data_all.tmp_file_2 = TMP_DATA_FILE12;
     cal_norm_dist(&norm_dist_data_all, all_data.mu, all_data.sigma, all_data.min, all_data.max, INTEGRAL_STEP, &input_struct_data_all, "ALL");
 
+    // calculate decision boundary
+    intersection its;
+    get_intersection(&input_struct_data_male, &norm_dist_data_male, &input_struct_data_female, &norm_dist_data_female, &its);
+    printf("Decision boundary: %f\n\r", its.avg_x);
+    printf("Minimum error: %f\n\r", its.min_error);
+
     // output data to csv
     output_csv(OUTPUT_CSV_FILE1, &male_data, &norm_dist_data_male);
     output_csv(OUTPUT_CSV_FILE2, &female_data, &norm_dist_data_female);
     output_csv(OUTPUT_CSV_FILE3, &all_data, &norm_dist_data_all);
 
     // plot data
-    plot_data_div5(&male_data, DIV5_MALE_IMG, TMP_DATA_FILE1, TMP_DATA_FILE2);
-    plot_data_div5(&female_data, DIV5_FEMALE_IMG, TMP_DATA_FILE3, TMP_DATA_FILE4);
-    plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
-    plot_stacked_data_div5(&male_data, &female_data, DIV5_VS_IMG, TMP_DATA_FILE13, TMP_DATA_FILE14);
+    // plot_data_div5(&male_data, DIV5_MALE_IMG, TMP_DATA_FILE1, TMP_DATA_FILE2);
+    // plot_data_div5(&female_data, DIV5_FEMALE_IMG, TMP_DATA_FILE3, TMP_DATA_FILE4);
+    // plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
+    // plot_stacked_data_div5(&male_data, &female_data, DIV5_VS_IMG, TMP_DATA_FILE13, TMP_DATA_FILE14);
 
     // free memory
     free_norm_dist(&input_struct_data_male, "MALE");
