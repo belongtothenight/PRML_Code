@@ -114,6 +114,7 @@ void save_data_div5_cnt(dataset* pData, char* pFilename){
 }
 
 void save_data_div5_norm(char* pFilename, float x_min, float x_max, float mu, float sigma){
+    // https://gist.github.com/JavierJia/e10f7c7d8ce3c42a6e469316a5738f0f
     FILE* gnuplot = plot_save_open();
     fprintf(gnuplot, "set xrange [%g:%g]\n", x_min, x_max);
     fprintf(gnuplot, "invsqrt2pi = 0.398942280401433\n");
@@ -127,6 +128,8 @@ void save_data_div5_norm(char* pFilename, float x_min, float x_max, float mu, fl
 
 void plot_data_div5(dataset* pData, char* pFilename, char* pTMP1, char* pTMP2){
     // plot data vs normal distribution with 8 parts
+    // https://stackoverflow.com/questions/8855332/line-chart-and-bar-chart-in-gnuplot
+    // http://www.gnuplot.info/docs_4.2/node295.html
     float x_min = pData->split_points[0]-(pData->split_step/2);
     float x_max = pData->split_points[SPLIT_PARTS]+(pData->split_step/2);
     float y_min = 0;
@@ -140,7 +143,10 @@ void plot_data_div5(dataset* pData, char* pFilename, char* pTMP1, char* pTMP2){
     fprintf(gnuplot, "set yrange [%g:%g]\n", y_min, y_max);
     fprintf(gnuplot, "set xlabel 'Pinky Knuckle Diameter (%s)'\n", UNIT);
     fprintf(gnuplot, "set ylabel 'Probability'\n");
-    fprintf(gnuplot, "plot '%s' title 'data' with lines lw 3, '%s' title 'normal distribution' with lines lw 3\n", pTMP1, pTMP2);
+    fprintf(gnuplot, "set boxwidth 0.6 relative\n");
+    fprintf(gnuplot, "set style fill solid\n");
+    fprintf(gnuplot, "set xtics ('%g' %g, '%g' %g, '%g' %g, '%g' %g, '%g' %g)\n", pData->split_points_center[0], pData->split_points_center[0], pData->split_points_center[1], pData->split_points_center[1], pData->split_points_center[2], pData->split_points_center[2], pData->split_points_center[3], pData->split_points_center[3], pData->split_points_center[4], pData->split_points_center[4]);
+    fprintf(gnuplot, "plot '%s' title 'data' with boxes, '%s' title 'normal distribution' with lines lw 3\n", pTMP1, pTMP2);
     plot_close(gnuplot);
     return;
 }
