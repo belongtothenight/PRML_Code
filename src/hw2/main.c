@@ -98,10 +98,10 @@ int main(void) {
     output_decision_boundary_csv(OUTPUT_CSV_FILE4, &its);
 
     // plot data
-    // plot_data_div5(&male_data, DIV5_MALE_IMG, TMP_DATA_FILE1, TMP_DATA_FILE2);
-    // plot_data_div5(&female_data, DIV5_FEMALE_IMG, TMP_DATA_FILE3, TMP_DATA_FILE4);
-    // plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
-    // plot_stacked_data_div5(&male_data, &female_data, &its, DIV5_VS_IMG, TMP_DATA_FILE13, TMP_DATA_FILE14, TMP_DATA_FILE15);
+    plot_data_div5(&male_data, DIV5_MALE_IMG, TMP_DATA_FILE1, TMP_DATA_FILE2);
+    plot_data_div5(&female_data, DIV5_FEMALE_IMG, TMP_DATA_FILE3, TMP_DATA_FILE4);
+    plot_data_div5(&all_data, DIV5_ALL_IMG, TMP_DATA_FILE5, TMP_DATA_FILE6);
+    plot_stacked_data_div5(&male_data, &female_data, &its, DIV5_VS_IMG, TMP_DATA_FILE13, TMP_DATA_FILE14, TMP_DATA_FILE15);
 
     // free memory
     free_norm_dist(&input_struct_data_male, "MALE");

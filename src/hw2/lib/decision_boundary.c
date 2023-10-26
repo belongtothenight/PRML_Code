@@ -63,18 +63,7 @@ void get_intersection(input_struct* pIS1, norm_dist* pND1, input_struct* pIS2, n
     // 4. calculate the average x value of the two normal distributions
     pIntersection->avg_x = (pIntersection->x1 + pIntersection->x2) / 2;
     // 5. calculate the portion integral of the two normal distributions
-    //! TODO: fix the bug here, probability is somehow 0 for some reason
-    //! Fix: P(x|w1) + P(x|w2)
-    printf("cal1 x1: %f, x2: %f\n\r", pIntersection->avg_x, pND1->x_max);
-    printf("cal1: %f\n\r", cal_portion_integral(pND1, pIntersection, pIntersection->avg_x, pND1->x_max)); // P(x|w2)
-    printf("cal2 x1: %f, x2: %f\n\r", pIntersection->avg_x, pND2->x_max);
-    printf("cal2: %f\n\r", cal_portion_integral(pND2, pIntersection, pIntersection->avg_x, pND2->x_max)); // P(w2)
-    printf("cal3 x1: %f, x2: %f\n\r", pND2->x_min, pIntersection->avg_x);
-    printf("cal3: %f\n\r", cal_portion_integral(pND2, pIntersection, pND2->x_min, pIntersection->avg_x)); // P(x|w1)
-    printf("cal4 x1: %f, x2: %f\n\r", pND1->x_min, pIntersection->avg_x);
-    printf("cal4: %f\n\r", cal_portion_integral(pND1, pIntersection, pND1->x_min, pIntersection->avg_x)); // P(w1)
-    pIntersection->min_error += cal_portion_integral(pND1, pIntersection, pIntersection->avg_x, pND1->x_max) / cal_portion_integral(pND2, pIntersection, pIntersection->avg_x, pND2->x_max);
-    pIntersection->min_error += cal_portion_integral(pND2, pIntersection, pND2->x_min, pIntersection->avg_x) / cal_portion_integral(pND1, pIntersection, pND1->x_min, pIntersection->avg_x);
-    
+    pIntersection->min_error += cal_portion_integral(pND1, pIntersection, pIntersection->avg_x, pND1->x_max); // P(x|w2)
+    pIntersection->min_error += cal_portion_integral(pND2, pIntersection, pND2->x_min, pIntersection->avg_x); // P(x|w1)
     return;
 }
