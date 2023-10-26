@@ -4,9 +4,9 @@ Code is compiled on Windows 11 x64 platform with command ```make all ; .\main.ex
 
 ## Dependencies
 
-1. [gnuplot=>http://www.gnuplot.info/](http://www.gnuplot.info/).
+1. gcc.exe (x86_64-posix-seh, Built by strawberryperl.com project) 8.3.0
+2. [gnuplot=>http://www.gnuplot.info/](http://www.gnuplot.info/).
 
 ## Things to complete
 
 1. Diameter to perimeter conversion.
-2. Fix x_arr and y_arr to make x_arr are the same.
