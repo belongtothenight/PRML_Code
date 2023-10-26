@@ -5,7 +5,7 @@ Code is compiled on Windows 11 x64 platform with command ```make all ; .\main.ex
 ## Dependencies
 
 1. gcc.exe (x86_64-posix-seh, Built by strawberryperl.com project) 8.3.0
-2. [gnuplot=>http://www.gnuplot.info/](http://www.gnuplot.info/).
+2. [gnuplot 5.4 patchlevel 8=>http://www.gnuplot.info/](http://www.gnuplot.info/).
 
 ## Things to complete
 
