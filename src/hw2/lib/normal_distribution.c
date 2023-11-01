@@ -38,8 +38,9 @@ float* get_norm_dist_x_arr(norm_dist* pNd){
 float* get_norm_dist_y_arr(norm_dist* pNd, float* x_arr){
     float* y_arr = (float*)malloc(sizeof(float) * pNd->arr_length);
     float pi = (float)acos(-1);
+    float sig_sqrt = sqrt(pNd->sigma);
     for(int i = 0; i < pNd->arr_length; i++){
-        y_arr[i] = 1 / (pNd->sigma * sqrt(2 * pi)) * exp(-pow(x_arr[i] - pNd->mu, 2) / (2 * pow(pNd->sigma, 2)));
+        y_arr[i] = 1 / (sig_sqrt * sqrt(2 * pi)) * exp(-pow(x_arr[i] - pNd->mu, 2) / (2 * pow(sig_sqrt, 2)));
     }
     return y_arr;
 }

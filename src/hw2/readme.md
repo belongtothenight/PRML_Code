@@ -1,6 +1,9 @@
 # Pinky Dimension Distribution
 
-Code is compiled on Windows 11 x64 platform with command ```make all ; .\main.exe ; make clean_win```
+Code is compiled on Windows 11 x64 platform with command: 
+
+1. ```make main ; .\main.exe ; make clean_win```
+2. ```python .\data_gen.py ; make test ; .\test.exe ; make clean_win```
 
 ## Dependencies
 
@@ -12,9 +15,11 @@ Code is compiled on Windows 11 x64 platform with command ```make all ; .\main.ex
 1. ```./dataset```: contains the dataset data in CSV format.
 2. ```./lib```: c libraries coded for this project.
 3. ```./output```: stores the result of this project.
-4. ```./main.c```: the entry point of this project.
-5. ```./makefile```: how this project is compiled.
-6. ```./readme.md```: this file you're reading, contains documentations.
+4. ```./data_gen.py```: generate normal distributed data for algorithm testing and debugging.
+5. ```./main.c```: the entry point of this project. Process two set of data at a time and also process merged data and their decision boundary.
+6. ```./test.c```: testing entry point of this project. Process only one set of data.
+7. ```./makefile```: how this project is compiled.
+8. ```./readme.md```: this file you're reading, contains documentations.
 
 ## Things to complete
 

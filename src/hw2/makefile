@@ -2,9 +2,14 @@ CFLAG=-Wno-implicit-function-declaration
 LIB=./lib/
 OUT=./output
 
-all: main data_proc data_plot output_format normal_distribution output_csv decision_boundary
+main: main_code data_proc data_plot output_format normal_distribution output_csv decision_boundary
 	@echo Compiling...
-	gcc $(CFLAG) -o main main.o data_proc.o data_plot.o output_format.o normal_distribution.o output_csv.o decision_boundary.o
+	gcc $(CFLAG) -o main -lm main.o data_proc.o data_plot.o output_format.o normal_distribution.o output_csv.o decision_boundary.o
+	@echo Compiling Done.
+
+test: test_code data_proc data_plot output_format normal_distribution output_csv decision_boundary
+	@echo Compiling...
+	gcc $(CFLAG) -o test -lm test.o data_proc.o data_plot.o output_format.o normal_distribution.o output_csv.o decision_boundary.o
 	@echo Compiling Done.
 
 clean_win:
@@ -16,8 +21,11 @@ clean_linux:
 	rm *.h.gch
 
 # Dependencies ===================================
-main: main.c
+main_code: main.c
 	gcc $(CFLAG) -c main.c
+
+test_code: test.c
+	gcc $(CFLAG) -c test.c
 
 data_proc: $(LIB)data_proc.c $(LIB)data_proc.h
 	gcc $(CFLAG) -c $(LIB)data_proc.c

@@ -1,7 +1,7 @@
 #ifndef DATA_PROC_H
 #define DATA_PROC_H
 
-#define MAX_SIZE            40
+#define MAX_SIZE            1000
 #define SPLIT_PARTS         5
 #define NORMAL_SPLIT_PARTS  6
 #define UNIT                "mm"

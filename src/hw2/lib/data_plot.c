@@ -123,7 +123,7 @@ void save_data_div5_norm(char* pFilename, float x_min, float x_max, float mu, fl
     fprintf(gnuplot, "invsqrt2pi = 0.398942280401433\n");
     fprintf(gnuplot, "normal(x,mu,sigma)=sigma<=0?1/0:invsqrt2pi/sigma*exp(-0.5*((x-mu)/sigma)**2)\n");
     fprintf(gnuplot, "set table '%s'\n", pFilename);
-    fprintf(gnuplot, "plot normal(x,%g,%g) with lines lw 2\n", mu, sigma);
+    fprintf(gnuplot, "plot normal(x,%g,%g) with lines lw 2\n", mu, sqrt(sigma));
     fprintf(gnuplot, "unset table\n");
     plot_save_close(gnuplot);
     printf("%sSUCCESS%s: Data written to file %s.\n\r", Format.foreground.green, Format.style.reset, pFilename);
