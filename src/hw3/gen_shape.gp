@@ -76,11 +76,111 @@ e
 unset table
 reset
 
+# Store shape_1 shrunked to longest side is 50 in shape_1_shrunked.dat
+# X 1
+set table './output/shape_1_shrunked.dat'
+plot '-'
+0 0
+50 0
+50 50
+0 50
+0 0
+e
+unset table
+reset
+
+# Store shape_2 shrunked to longest side is 50 in shape_2_shrunked.dat
+# X 0.25
+set table './output/shape_2_shrunked.dat'
+plot '-'
+0 0
+50 0
+50 25
+25 25
+25 37.5
+0 37.5
+0 0
+e
+unset table
+reset
+
+# Store shape_3 shrunked to longest side is 50 in shape_3_shrunked.dat
+# X 0.25
+set table './output/shape_3_shrunked.dat'
+plot '-'
+0 0
+50 0
+50 25
+0 25
+0 0
+e
+unset table
+reset
+
+# Store shape_4 shrunked to longest side is 50 in shape_4_shrunked.dat
+# X 0.5
+set table './output/shape_4_shrunked.dat'
+plot '-'
+0 0
+50 0
+50 50
+0 50
+0 0
+e
+unset table
+reset
+
+# Store shape_5 shrunked to longest side is 50 in shape_5_shrunked.dat
+# X 0.5
+set table './output/shape_5_shrunked.dat'
+plot '-'
+0 0
+50 0
+50 25
+25 25
+25 37.5
+0 37.5
+0 0
+e
+unset table
+reset
+
+# Store shape_6 shrunked to longest side is 50 in shape_6_shrunked.dat
+# X 0.25
+set table './output/shape_6_shrunked.dat'
+plot '-'
+0 0
+37.5 0
+37.5 50
+12.5 50
+12.5 25
+0 25
+0 0
+e
+unset table
+reset
+
+# Store shape_6 shrunked and rotated in shape_6_shrunked_rotated.dat
+# X 0.25
+# R 90 CW
+set table './output/shape_6_shrunked_rotated.dat'
+plot '-'
+0 0
+50 0
+50 25
+25 25
+25 37.5
+0 37.5
+0 0
+e
+unset table
+reset
+
 # Plot shape_1
 set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
 set size ratio -1
 set output './output/shape_1.png'
-set title 'Shape 1'
+set title 'Shape R_1'
 set xlabel 'x_1'
 set ylabel 'x_2'
 set xrange [125:225]
@@ -94,7 +194,7 @@ reset
 set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
 set size ratio -1
 set output './output/shape_2.png'
-set title 'Shape 2'
+set title 'Shape R_2'
 set xlabel 'x_1'
 set ylabel 'x_2'
 set xrange [325:575]
@@ -106,7 +206,7 @@ reset
 set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
 set size ratio -1
 set output './output/shape_3.png'
-set title 'Shape 3'
+set title 'Shape R_3'
 set xlabel 'x_1'
 set ylabel 'x_2'
 set xrange [25:275]
@@ -119,7 +219,7 @@ reset
 set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
 set size ratio -1
 set output './output/shape_4.png'
-set title 'Shape 4'
+set title 'Shape R_4'
 set xlabel 'x_1'
 set ylabel 'x_2'
 set xrange [175:325]
@@ -133,7 +233,7 @@ reset
 set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
 set size ratio -1
 set output './output/shape_5.png'
-set title 'Shape 5'
+set title 'Shape R_5'
 set xlabel 'x_1'
 set ylabel 'x_2'
 set xrange [75:225]
@@ -147,12 +247,96 @@ reset
 set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
 set size ratio -1
 set output './output/shape_6.png'
-set title 'Shape 6'
+set title 'Shape R_6'
 set xlabel 'x_1'
 set ylabel 'x_2'
 set xrange [375:575]
 set yrange [25:275]
 plot './output/shape_6.dat' notitle with lines lw 5
+reset
+
+# Plot shape_1 shrunked to longest side is 50
+set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
+set size ratio -1
+set output './output/shape_1_shrunked.png'
+set title 'Shape R_1 Shrunked to Longest Side is 50'
+set xlabel 'x_1'
+set ylabel 'x_2'
+set xrange [-10:60]
+set yrange [-10:60]
+plot './output/shape_1_shrunked.dat' notitle with lines lw 5
+reset
+
+# Plot shape_2 shrunked to longest side is 50
+set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
+set size ratio -1
+set output './output/shape_2_shrunked.png'
+set title 'Shape R_2 Shrunked to Longest Side is 50'
+set xlabel 'x_1'
+set ylabel 'x_2'
+set xrange [-10:60]
+set yrange [-10:60]
+plot './output/shape_2_shrunked.dat' notitle with lines lw 5
+reset
+
+# Plot shape_3 shrunked to longest side is 50
+set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
+set size ratio -1
+set output './output/shape_3_shrunked.png'
+set title 'Shape R_3 Shrunked to Longest Side is 50'
+set xlabel 'x_1'
+set ylabel 'x_2'
+set xrange [-10:60]
+set yrange [-10:60]
+plot './output/shape_3_shrunked.dat' notitle with lines lw 5
+reset
+
+# Plot shape_4 shrunked to longest side is 50
+set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
+set size ratio -1
+set output './output/shape_4_shrunked.png'
+set title 'Shape R_4 Shrunked to Longest Side is 50'
+set xlabel 'x_1'
+set ylabel 'x_2'
+set xrange [-10:60]
+set yrange [-10:60]
+plot './output/shape_4_shrunked.dat' notitle with lines lw 5
+reset
+
+# Plot shape_5 shrunked to longest side is 50
+set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
+set size ratio -1
+set output './output/shape_5_shrunked.png'
+set title 'Shape R_5 Shrunked to Longest Side is 50'
+set xlabel 'x_1'
+set ylabel 'x_2'
+set xrange [-10:60]
+set yrange [-10:60]
+plot './output/shape_5_shrunked.dat' notitle with lines lw 5
+reset
+
+# Plot shape_6 shrunked to longest side is 50
+set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
+set size ratio -1
+set output './output/shape_6_shrunked.png'
+set title 'Shape R_6 Shrunked to Longest Side is 50'
+set xlabel 'x_1'
+set ylabel 'x_2'
+set xrange [-10:60]
+set yrange [-10:60]
+plot './output/shape_6_shrunked.dat' notitle with lines lw 5
+reset
+
+# Plot shape_6 shrunked and rotated
+set terminal pngcairo size 1080,1080 enhanced font 'Arial,25'
+set size ratio -1
+set output './output/shape_6_shrunked_rotated.png'
+set title 'Shape R_6 Shrunked and Rotated'
+set xlabel 'x_1'
+set ylabel 'x_2'
+set xrange [-10:60]
+set yrange [-10:60]
+plot './output/shape_6_shrunked_rotated.dat' notitle with lines lw 5
 reset
 
 # Plot the shapes in one figure
