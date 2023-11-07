@@ -2,7 +2,7 @@
 
 Build command: (Execute in base directory)
 
-```bash
+```ps1
 cd ./src/build/
 cmake ../ -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
 make
