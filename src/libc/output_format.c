@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "output_format.h"
 
 void get_format(output_format* pFormat){
@@ -39,5 +40,14 @@ void get_format(output_format* pFormat){
     pFormat->strong_background.magenta = "\033[105m";
     pFormat->strong_background.cyan = "\033[106m";
     pFormat->strong_background.white = "\033[107m";
+    char buf[256];
+    snprintf(buf, sizeof(buf), "%s%s%s%s: ", pFormat->foreground.green, pFormat->style.bold, "SUCCESS", pFormat->style.reset);
+    pFormat->status.success = strdup(buf);
+    snprintf(buf, sizeof(buf), "%s%s%s%s: ", pFormat->foreground.red, pFormat->style.bold, "ERROR", pFormat->style.reset);
+    pFormat->status.error = strdup(buf);
+    snprintf(buf, sizeof(buf), "%s%s%s%s: ", pFormat->foreground.green, pFormat->style.bold, "PASS", pFormat->style.reset);
+    pFormat->status.pass = strdup(buf);
+    snprintf(buf, sizeof(buf), "%s%s%s%s: ", pFormat->foreground.red, pFormat->style.bold, "FAIL", pFormat->style.reset);
+    pFormat->status.fail = strdup(buf);
     return;
 }

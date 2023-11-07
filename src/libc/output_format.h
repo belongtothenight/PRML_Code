@@ -49,6 +49,12 @@ typedef struct{
         char *cyan;
         char *white;
     } strong_background;
+    struct Status{
+        char *success;
+        char *error;
+        char *pass;
+        char *fail;
+    } status;
 } output_format;
 
 void get_format(output_format* pFormat);
