@@ -1,0 +1,374 @@
+Cleaning ...
+Generating Makefile ...
+CMake Warning:
+  Ignoring extra path from command line:
+
+   "CC=C:/MinGW/bin/gcc.exe"
+
+
+-- The C compiler identification is GNU 13.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/MinGW/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- The CXX compiler identification is GNU 13.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/MinGW/bin/c++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done (2.9s)
+-- Generating done (0.0s)
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_SHARED_LIBS
+
+
+-- Build files have been written to: E:/GitHub/PRML_Code/src/build
+Building ...
+[ 12%] Building C object hw3/CMakeFiles/hw3.dir/main.c.obj
+[ 25%] Building C object hw3/CMakeFiles/hw3.dir/lib/data_proc.c.obj
+[ 37%] Building C object hw3/CMakeFiles/hw3.dir/lib/read_csv.c.obj
+[ 50%] Building C object hw3/CMakeFiles/hw3.dir/lib/data_plot.c.obj
+[ 62%] Building C object hw3/CMakeFiles/hw3.dir/__/libc/output_format.c.obj
+[ 75%] Building C object hw3/CMakeFiles/hw3.dir/__/libc/common_macro.c.obj
+[ 87%] Building C object hw3/CMakeFiles/hw3.dir/__/libc/distance.c.obj
+[100%] Linking C executable hw3.exe
+[100%] Built target hw3
+Installing ...
+[100%] Built target hw3
+Install the project...
+-- Install configuration: "Release"
+-- Installing: E:/GitHub/PRML_Code/src/bin/hw3.exe
+Running ...
+Setting csv_t struct for ../hw3/dataset/shape1.csv...
+SUCCESS: csv_t struct has been set.
+SUCCESS: ../hw3/dataset/shape1.csv has been opened.
+filename: ../hw3/dataset/shape1.csv
+num_rows: 5
+num_cols: 2
+read_flag: 1
+max: 50.000000
+str: 0.000.001.000.001.001.000.001.000.000.00
+num_rows: 5
+num_cols: 2
+coord_original:
+  150.000000, 500.000000
+  200.000000, 500.000000
+  200.000000, 550.000000
+  150.000000, 550.000000
+  150.000000, 500.000000
+coord_pan:
+  0.000000, 0.000000
+  50.000000, 0.000000
+  50.000000, 50.000000
+  0.000000, 50.000000
+  0.000000, 0.000000
+coord_zoom:
+  0.000000, 0.000000
+  1.000000, 0.000000
+  1.000000, 1.000000
+  0.000000, 1.000000
+  0.000000, 0.000000
+coord_rotate:
+  0.000000, 0.000000
+  0.000000, -1.000000
+  1.000000, -1.000000
+  1.000000, 0.000000
+  0.000000, 0.000000
+SUCCESS: Saving ../hw3/output/shape_1.dat ...
+SUCCESS: Plotting ../hw3/output/shape_1.png ...
+SUCCESS: Saving ../hw3/output/shape_1_pan.dat ...
+SUCCESS: Plotting ../hw3/output/shape_1_pan.png ...
+SUCCESS: Saving ../hw3/output/shape_1_zoom.dat ...
+SUCCESS: Plotting ../hw3/output/shape_1_zoom.png ...
+SUCCESS: Saving ../hw3/output/shape_1_rotate.dat ...
+SUCCESS: Plotting ../hw3/output/shape_1_rotate.png ...
+Setting csv_t struct for ../hw3/dataset/shape2.csv...
+SUCCESS: csv_t struct has been set.
+SUCCESS: ../hw3/dataset/shape2.csv has been opened.
+filename: ../hw3/dataset/shape2.csv
+num_rows: 7
+num_cols: 2
+read_flag: 1
+max: 200.000000
+str: 0.000.001.000.001.000.500.500.500.500.750.000.750.000.00
+num_rows: 7
+num_cols: 2
+coord_original:
+  350.000000, 350.000000
+  550.000000, 350.000000
+  550.000000, 450.000000
+  450.000000, 450.000000
+  450.000000, 500.000000
+  350.000000, 500.000000
+  350.000000, 350.000000
+coord_pan:
+  0.000000, 0.000000
+  200.000000, 0.000000
+  200.000000, 100.000000
+  100.000000, 100.000000
+  100.000000, 150.000000
+  0.000000, 150.000000
+  0.000000, 0.000000
+coord_zoom:
+  0.000000, 0.000000
+  1.000000, 0.000000
+  1.000000, 0.500000
+  0.500000, 0.500000
+  0.500000, 0.750000
+  0.000000, 0.750000
+  0.000000, 0.000000
+coord_rotate:
+  0.000000, 0.000000
+  0.000000, -1.000000
+  0.500000, -1.000000
+  0.500000, -0.500000
+  0.750000, -0.500000
+  0.750000, 0.000000
+  0.000000, 0.000000
+SUCCESS: Saving ../hw3/output/shape_2.dat ...
+SUCCESS: Plotting ../hw3/output/shape_2.png ...
+SUCCESS: Saving ../hw3/output/shape_2_pan.dat ...
+SUCCESS: Plotting ../hw3/output/shape_2_pan.png ...
+SUCCESS: Saving ../hw3/output/shape_2_zoom.dat ...
+SUCCESS: Plotting ../hw3/output/shape_2_zoom.png ...
+SUCCESS: Saving ../hw3/output/shape_2_rotate.dat ...
+SUCCESS: Plotting ../hw3/output/shape_2_rotate.png ...
+Setting csv_t struct for ../hw3/dataset/shape3.csv...
+SUCCESS: csv_t struct has been set.
+SUCCESS: ../hw3/dataset/shape3.csv has been opened.
+filename: ../hw3/dataset/shape3.csv
+num_rows: 5
+num_cols: 2
+read_flag: 1
+max: 200.000000
+str: 0.000.001.000.001.000.500.000.500.000.00
+num_rows: 5
+num_cols: 2
+coord_original:
+  50.000000, 350.000000
+  250.000000, 350.000000
+  250.000000, 450.000000
+  50.000000, 450.000000
+  50.000000, 350.000000
+coord_pan:
+  0.000000, 0.000000
+  200.000000, 0.000000
+  200.000000, 100.000000
+  0.000000, 100.000000
+  0.000000, 0.000000
+coord_zoom:
+  0.000000, 0.000000
+  1.000000, 0.000000
+  1.000000, 0.500000
+  0.000000, 0.500000
+  0.000000, 0.000000
+coord_rotate:
+  0.000000, 0.000000
+  0.000000, -1.000000
+  0.500000, -1.000000
+  0.500000, 0.000000
+  0.000000, 0.000000
+SUCCESS: Saving ../hw3/output/shape_3.dat ...
+SUCCESS: Plotting ../hw3/output/shape_3.png ...
+SUCCESS: Saving ../hw3/output/shape_3_pan.dat ...
+SUCCESS: Plotting ../hw3/output/shape_3_pan.png ...
+SUCCESS: Saving ../hw3/output/shape_3_zoom.dat ...
+SUCCESS: Plotting ../hw3/output/shape_3_zoom.png ...
+SUCCESS: Saving ../hw3/output/shape_3_rotate.dat ...
+SUCCESS: Plotting ../hw3/output/shape_3_rotate.png ...
+Setting csv_t struct for ../hw3/dataset/shape4.csv...
+SUCCESS: csv_t struct has been set.
+SUCCESS: ../hw3/dataset/shape4.csv has been opened.
+filename: ../hw3/dataset/shape4.csv
+num_rows: 5
+num_cols: 2
+read_flag: 1
+max: 100.000000
+str: 0.000.001.000.001.001.000.001.000.000.00
+num_rows: 5
+num_cols: 2
+coord_original:
+  200.000000, 200.000000
+  300.000000, 200.000000
+  300.000000, 300.000000
+  200.000000, 300.000000
+  200.000000, 200.000000
+coord_pan:
+  0.000000, 0.000000
+  100.000000, 0.000000
+  100.000000, 100.000000
+  0.000000, 100.000000
+  0.000000, 0.000000
+coord_zoom:
+  0.000000, 0.000000
+  1.000000, 0.000000
+  1.000000, 1.000000
+  0.000000, 1.000000
+  0.000000, 0.000000
+coord_rotate:
+  0.000000, 0.000000
+  0.000000, -1.000000
+  1.000000, -1.000000
+  1.000000, 0.000000
+  0.000000, 0.000000
+SUCCESS: Saving ../hw3/output/shape_4.dat ...
+SUCCESS: Plotting ../hw3/output/shape_4.png ...
+SUCCESS: Saving ../hw3/output/shape_4_pan.dat ...
+SUCCESS: Plotting ../hw3/output/shape_4_pan.png ...
+SUCCESS: Saving ../hw3/output/shape_4_zoom.dat ...
+SUCCESS: Plotting ../hw3/output/shape_4_zoom.png ...
+SUCCESS: Saving ../hw3/output/shape_4_rotate.dat ...
+SUCCESS: Plotting ../hw3/output/shape_4_rotate.png ...
+Setting csv_t struct for ../hw3/dataset/shape5.csv...
+SUCCESS: csv_t struct has been set.
+SUCCESS: ../hw3/dataset/shape5.csv has been opened.
+filename: ../hw3/dataset/shape5.csv
+num_rows: 7
+num_cols: 2
+read_flag: 1
+max: 100.000000
+str: 0.000.001.000.001.000.500.500.500.500.750.000.750.000.00
+num_rows: 7
+num_cols: 2
+coord_original:
+  100.000000, 100.000000
+  200.000000, 100.000000
+  200.000000, 150.000000
+  150.000000, 150.000000
+  150.000000, 175.000000
+  100.000000, 175.000000
+  100.000000, 100.000000
+coord_pan:
+  0.000000, 0.000000
+  100.000000, 0.000000
+  100.000000, 50.000000
+  50.000000, 50.000000
+  50.000000, 75.000000
+  0.000000, 75.000000
+  0.000000, 0.000000
+coord_zoom:
+  0.000000, 0.000000
+  1.000000, 0.000000
+  1.000000, 0.500000
+  0.500000, 0.500000
+  0.500000, 0.750000
+  0.000000, 0.750000
+  0.000000, 0.000000
+coord_rotate:
+  0.000000, 0.000000
+  0.000000, -1.000000
+  0.500000, -1.000000
+  0.500000, -0.500000
+  0.750000, -0.500000
+  0.750000, 0.000000
+  0.000000, 0.000000
+SUCCESS: Saving ../hw3/output/shape_5.dat ...
+SUCCESS: Plotting ../hw3/output/shape_5.png ...
+SUCCESS: Saving ../hw3/output/shape_5_pan.dat ...
+SUCCESS: Plotting ../hw3/output/shape_5_pan.png ...
+SUCCESS: Saving ../hw3/output/shape_5_zoom.dat ...
+SUCCESS: Plotting ../hw3/output/shape_5_zoom.png ...
+SUCCESS: Saving ../hw3/output/shape_5_rotate.dat ...
+SUCCESS: Plotting ../hw3/output/shape_5_rotate.png ...
+Setting csv_t struct for ../hw3/dataset/shape6.csv...
+SUCCESS: csv_t struct has been set.
+SUCCESS: ../hw3/dataset/shape6.csv has been opened.
+filename: ../hw3/dataset/shape6.csv
+num_rows: 7
+num_cols: 2
+read_flag: 1
+max: 200.000000
+str: 0.000.000.750.000.751.000.251.000.250.500.000.500.000.00
+num_rows: 7
+num_cols: 2
+coord_original:
+  400.000000, 50.000000
+  550.000000, 50.000000
+  550.000000, 250.000000
+  450.000000, 250.000000
+  450.000000, 150.000000
+  400.000000, 150.000000
+  400.000000, 50.000000
+coord_pan:
+  0.000000, 0.000000
+  150.000000, 0.000000
+  150.000000, 200.000000
+  50.000000, 200.000000
+  50.000000, 100.000000
+  0.000000, 100.000000
+  0.000000, 0.000000
+coord_zoom:
+  0.000000, 0.000000
+  0.750000, 0.000000
+  0.750000, 1.000000
+  0.250000, 1.000000
+  0.250000, 0.500000
+  0.000000, 0.500000
+  0.000000, 0.000000
+coord_rotate:
+  0.000000, 0.000000
+  0.000000, -0.750000
+  1.000000, -0.750000
+  1.000000, -0.250000
+  0.500000, -0.250000
+  0.500000, 0.000000
+  0.000000, 0.000000
+SUCCESS: Saving ../hw3/output/shape_6.dat ...
+SUCCESS: Plotting ../hw3/output/shape_6.png ...
+SUCCESS: Saving ../hw3/output/shape_6_pan.dat ...
+SUCCESS: Plotting ../hw3/output/shape_6_pan.png ...
+SUCCESS: Saving ../hw3/output/shape_6_zoom.dat ...
+SUCCESS: Plotting ../hw3/output/shape_6_zoom.png ...
+SUCCESS: Saving ../hw3/output/shape_6_rotate.dat ...
+SUCCESS: Plotting ../hw3/output/shape_6_rotate.png ...
+line:
+  0.000.001.000.001.001.000.001.000.000.00
+  0.000.001.000.001.000.500.500.500.500.750.000.750.000.00
+  0.000.001.000.001.000.500.000.500.000.00
+  0.000.001.000.001.001.000.001.000.000.00
+  0.000.001.000.001.000.500.500.500.500.750.000.750.000.00
+  0.000.000.750.000.751.000.251.000.250.500.000.500.000.00
+
+
+
+
+hash:
+  (stdin)= 94d5a9a62d4ee3806045778c2b414f29888249e2166ab9eb2af01f4b95f6342d
+
+  (stdin)= 8193babc170e2780e2d2c127df16423359fe454025b0061e44f87e96cd5de0ad
+
+  (stdin)= e49ebca48e37965fb0c4124de31c89bd8eb7773547c979be2c277c868c5ff7dd
+
+  (stdin)= 94d5a9a62d4ee3806045778c2b414f29888249e2166ab9eb2af01f4b95f6342d
+
+  (stdin)= 8193babc170e2780e2d2c127df16423359fe454025b0061e44f87e96cd5de0ad
+
+  (stdin)= 906c2f079d769d8f57717548f19618995af5d2eef4e81d41fd45b8256554cfdf
+
+
+
+
+
+category:
+  -1
+  -1
+  -1
+  -1
+  -1
+  -1
+  -1
+  -1
+  -1
+  -1
+category_count:
+  0
+  0
+  0
+  0
+  0
+  0
+Done.
