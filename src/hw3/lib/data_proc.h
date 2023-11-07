@@ -3,4 +3,6 @@
 
 void print_hello(void);
 
+void print_hello1(void);
+
 #endif // DATA_PROC_H

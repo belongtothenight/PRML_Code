@@ -6,3 +6,7 @@ void print_hello(void){
     get_format(&format);
     printf("%sHello World!%s\n", format.foreground.red, format.style.reset);
 }
+
+void print_hello1(void){
+    printf("Hello World from data_proc.c!\n");
+}
