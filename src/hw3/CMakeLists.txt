@@ -12,8 +12,10 @@ add_executable(
     main.c
     ${LIB_DIR}/data_proc.c
     ${LIB_DIR}/read_csv.c
+    ${LIB_DIR}/data_plot.c
     ${LIBC_DIR}/output_format.c
     ${LIBC_DIR}/common_macro.c
+    ${LIBC_DIR}/distance.c
 )
 
 target_include_directories(

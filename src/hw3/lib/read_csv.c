@@ -26,7 +26,7 @@ void read_csv(csv_t *csv, data_t *data){
 
     int num_rows = 0;
     do {
-        fscanf(fp, "%f,%f", &data->coord_original[num_rows][0], &data->coord_original[num_rows][1]);
+        fscanf(fp, "%lf,%lf", &data->coord_original[num_rows][0], &data->coord_original[num_rows][1]);
         num_rows++;
 
         if (ferror(fp)) {
@@ -36,6 +36,8 @@ void read_csv(csv_t *csv, data_t *data){
     } while (!feof(fp));
     csv->num_rows = num_rows - 1;
     csv->read_flag = true;
+    data->num_cols = csv->num_cols;
+    data->num_rows = csv->num_rows;
 }
 
 void print_csv(csv_t *csv){

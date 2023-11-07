@@ -51,6 +51,7 @@ typedef struct{
     } strong_background;
     struct Status{
         char *success;
+        char *warning;
         char *error;
         char *pass;
         char *fail;

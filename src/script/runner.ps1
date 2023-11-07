@@ -37,10 +37,35 @@ make install
 
 Write-Host "Running ..."
 cd ../bin/
-if ($p -eq "hw3") {
-    Invoke-Expression "./$p.exe ../hw3/dataset/shape1.csv ../hw3/dataset/shape2.csv ../hw3/dataset/shape3.csv ../hw3/dataset/shape4.csv ../hw3/dataset/shape5.csv ../hw3/dataset/shape6.csv"
-} else {
-    Invoke-Expression "./$p.exe"
+$hw3 = "hw3.exe"
+Switch ($p){
+    "hw3-all" {
+        Invoke-Expression "./${hw3} ../hw3/dataset/shape1.csv ../hw3/dataset/shape2.csv ../hw3/dataset/shape3.csv ../hw3/dataset/shape4.csv ../hw3/dataset/shape5.csv ../hw3/dataset/shape6.csv"
+    }
+    "hw3-1" {
+        Invoke-Expression "./${hw3} ../hw3/dataset/shape1.csv"
+    }
+    "hw3-2" {
+        Invoke-Expression "./${hw3} ../hw3/dataset/shape2.csv"
+    }
+    "hw3-3" {
+        Invoke-Expression "./${hw3} ../hw3/dataset/shape3.csv"
+    }
+    "hw3-4" {
+        Invoke-Expression "./${hw3} ../hw3/dataset/shape4.csv"
+    }
+    "hw3-5" {
+        Invoke-Expression "./${hw3} ../hw3/dataset/shape5.csv"
+    }
+    "hw3-6" {
+        Invoke-Expression "./${hw3} ../hw3/dataset/shape6.csv"
+    }
+    "hw3" {
+        Invoke-Expression "./${hw3}"
+    }
+    "default" {
+        Invoke-Expression "./${hw3}"
+    }
 }
 
 Write-Host "Done."

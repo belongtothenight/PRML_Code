@@ -43,6 +43,8 @@ void get_format(output_format* pFormat){
     char buf[256];
     snprintf(buf, sizeof(buf), "%s%s%s%s: ", pFormat->foreground.green, pFormat->style.bold, "SUCCESS", pFormat->style.reset);
     pFormat->status.success = strdup(buf);
+    snprintf(buf, sizeof(buf), "%s%s%s%s: ", pFormat->foreground.yellow, pFormat->style.bold, "WARNING", pFormat->style.reset);
+    pFormat->status.warning = strdup(buf);
     snprintf(buf, sizeof(buf), "%s%s%s%s: ", pFormat->foreground.red, pFormat->style.bold, "ERROR", pFormat->style.reset);
     pFormat->status.error = strdup(buf);
     snprintf(buf, sizeof(buf), "%s%s%s%s: ", pFormat->foreground.green, pFormat->style.bold, "PASS", pFormat->style.reset);
