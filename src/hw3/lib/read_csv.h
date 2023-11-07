@@ -13,7 +13,7 @@ typedef struct {
     bool read_flag;
 } csv_t;
 
-void set_csv(csv_t *csv, char *filename, int num_rows);
+void set_csv(csv_t *csv, char *filename);
 
 void read_csv(csv_t *csv, data_t *data);
 

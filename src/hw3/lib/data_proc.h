@@ -13,6 +13,10 @@ typedef struct {
     float coord_rotate[MAX_LINE_LENGTH][COORDINATE_DIM];
 } data_t;
 
+void clear_data(data_t *data);
+
 void set_data(data_t *data, int num_rows, int num_cols);
+
+void print_data(data_t *data);
 
 #endif // DATA_PROC_H

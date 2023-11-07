@@ -6,31 +6,30 @@
 #include "./lib/read_csv.h"
 #include "./lib/data_proc.h"
 
-#define NUM_SHAPES 6
-
 // *NOTE: Configure the following two arrays to match the number of shapes and their filenames.
-char *filenames[NUM_SHAPES] = {
-    "E:/GitHub/PRML_Code/src/dataset/shape1.csv",
-    "E:/GitHub/PRML_Code/src/dataset/shape2.csv",
-    "E:/GitHub/PRML_Code/src/dataset/shape3.csv",
-    "E:/GitHub/PRML_Code/src/dataset/shape4.csv",
-    "E:/GitHub/PRML_Code/src/dataset/shape5.csv",
-    "E:/GitHub/PRML_Code/src/dataset/shape6.csv"
-};
-int num_rows[NUM_SHAPES] = {5, 7, 5, 5, 7, 7};
+// int num_rows[NUM_SHAPES] = {5, 7, 5, 5, 7, 7};
 
 // !NOTE: Do not modify the following parameters.
-csv_t shapes[NUM_SHAPES];
-data_t datas[NUM_SHAPES];
+csv_t shape;
+data_t data;
 output_format format;
 
-int main(void){    
+int main(int argc, char *argv[]){
+    if (argc < 2){
+        printf("%sUsage: %s [<filename>...]\n", format.status.error, argv[0]);
+        exit(1);
+    }
     get_format(&format);
-    for(int i = 0; i < NUM_SHAPES; i++){
-        printf("Setting csv_t struct for %s...\n", filenames[i]);
-        set_csv(&shapes[i], filenames[i], num_rows[i]);
-        read_csv(&shapes[i], &datas[i]);
-        print_csv(&shapes[i]);
+
+    for (int i = 1; i < argc; i++){
+        char *filename = argv[i];
+        printf("Setting csv_t struct for %s...\n", filename);
+        clear_data(&data);
+        set_csv(&shape, filename);
+        set_data(&data, shape.num_rows, shape.num_cols);
+        read_csv(&shape, &data);
+        print_csv(&shape);
+        print_data(&data);
     }
     return 0;
 }
