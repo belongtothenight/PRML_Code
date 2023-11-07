@@ -275,15 +275,7 @@ void hash_data(data_t *data, history_t *history, int index, int mode){
 
 void classify_data(data_t *data, history_t *history, int index){
     // sort_data(data, 1);
-    printf("before rotate:\n");
-    for (int i = 0; i < data->num_rows; i++){
-        printf("  %f, %f\n", data->coord_zoom[i][0], data->coord_zoom[i][1]);
-    }
     rotate_data(data, -90);
-    printf("after rotate:\n");
-    for (int i = 0; i < data->num_rows; i++){
-        printf("  %f, %f\n", data->coord_rotate[i][0], data->coord_rotate[i][1]);
-    }
     hash_data(data, history, index, 1);
     // if (index == 0) {
     //     history->category[index] = 0;
