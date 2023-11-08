@@ -1,5 +1,7 @@
 # PRML_Code
 
+Holds code for CYCUEE Pattern Recognition and Machine Learning course. Go to ```./src``` to see more.
+
 ## Directory Description
 
 | No. | Directory       | Description                                      |
