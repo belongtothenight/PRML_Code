@@ -276,6 +276,7 @@ void hash_data(data_t *data, history_t *history, int index, int mode){
 void classify_data(data_t *data, history_t *history, int index){
     // sort_data(data, 1);
     rotate_data(data, -90);
+    pan_data(data, 0, 0, 2);
     hash_data(data, history, index, 1);
     // if (index == 0) {
     //     history->category[index] = 0;
