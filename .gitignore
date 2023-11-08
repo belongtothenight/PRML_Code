@@ -3,3 +3,4 @@
 *.o
 *CMakeCache.txt
 *build/
+*bin/
