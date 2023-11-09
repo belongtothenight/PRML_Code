@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['history_5ft_0',['history_t',['../structhistory__t.html',1,'']]]
+  ['norm_5fdist_0',['norm_dist',['../structnorm__dist.html',1,'']]]
 ];

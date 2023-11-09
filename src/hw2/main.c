@@ -1,3 +1,8 @@
+/**
+ * @file main.c
+ * @brief Main function of hw2 - Pinky knuckle dimension distribution.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "./lib/data_proc.h"
@@ -6,36 +11,40 @@
 #include "./lib/output_csv.h"
 #include "./lib/decision_boundary.h"
 
-#define MALE_DATA         "./dataset/data_male.csv"
-#define FEMALE_DATA       "./dataset/data_female.csv"
-#define TEST_IMAGE        "./output/test_image.png"
-#define DIV5_MALE_IMG     "./output/div5_p1.png"
-#define TMP_DATA_FILE1    "./output/div5_p1_tmp_data1.dat"
-#define TMP_DATA_FILE2    "./output/div5_p1_tmp_data2.dat"
-#define DIV5_FEMALE_IMG   "./output/div5_p2.png"
-#define TMP_DATA_FILE3    "./output/div5_p2_tmp_data3.dat"
-#define TMP_DATA_FILE4    "./output/div5_p2_tmp_data4.dat"
-#define DIV5_ALL_IMG      "./output/div5_p3.png"
-#define TMP_DATA_FILE5    "./output/div5_p3_tmp_data5.dat"
-#define TMP_DATA_FILE6    "./output/div5_p3_tmp_data6.dat"
-#define INTEGRAL_STEP     0.000001
-// #define INTEGRAL_STEP     0.0001
-#define INTERSECTION_STEP 0.000001
-#define TMP_DATA_FILE7    "./output/div5_p1_tmp_norm_dist_x.dat"
-#define TMP_DATA_FILE8    "./output/div5_p1_tmp_norm_dist_y.dat"
-#define TMP_DATA_FILE9    "./output/div5_p2_tmp_norm_dist_x.dat"
-#define TMP_DATA_FILE10   "./output/div5_p2_tmp_norm_dist_y.dat"
-#define TMP_DATA_FILE11   "./output/div5_p3_tmp_norm_dist_x.dat"
-#define TMP_DATA_FILE12   "./output/div5_p3_tmp_norm_dist_y.dat"
-#define OUTPUT_CSV_FILE1  "./output/div5_p1_output.csv"
-#define OUTPUT_CSV_FILE2  "./output/div5_p2_output.csv"
-#define OUTPUT_CSV_FILE3  "./output/div5_p3_output.csv"
-#define OUTPUT_CSV_FILE4  "./output/div5_boundary_output.csv"
-#define DIV5_VS_IMG       "./output/div5_boundary.png"
-#define TMP_DATA_FILE13   "./output/div5_p4_tmp_data13.dat"
-#define TMP_DATA_FILE14   "./output/div5_p4_tmp_data14.dat"
-#define TMP_DATA_FILE15   "./output/div5_p4_tmp_data15.dat"
+#define MALE_DATA         "./dataset/data_male.csv"                 ///< dataset 1 path
+#define FEMALE_DATA       "./dataset/data_female.csv"               ///< dataset 2 path
+#define TEST_IMAGE        "./output/test_image.png"                 ///< test image path
+#define DIV5_MALE_IMG     "./output/div5_p1.png"                    ///< dataset 1 plot path
+#define TMP_DATA_FILE1    "./output/div5_p1_tmp_data1.dat"          ///< dataset 1 tmp data path 1
+#define TMP_DATA_FILE2    "./output/div5_p1_tmp_data2.dat"          ///< dataset 1 tmp data path 2
+#define DIV5_FEMALE_IMG   "./output/div5_p2.png"                    ///< dataset 2 plot path
+#define TMP_DATA_FILE3    "./output/div5_p2_tmp_data3.dat"          ///< dataset 2 tmp data path 1
+#define TMP_DATA_FILE4    "./output/div5_p2_tmp_data4.dat"          ///< dataset 2 tmp data path 2
+#define DIV5_ALL_IMG      "./output/div5_p3.png"                    ///< dataset 3 plot path
+#define TMP_DATA_FILE5    "./output/div5_p3_tmp_data5.dat"          ///< dataset 3 tmp data path 1
+#define TMP_DATA_FILE6    "./output/div5_p3_tmp_data6.dat"          ///< dataset 3 tmp data path 2
+#define INTEGRAL_STEP     0.000001                                  ///< integral step
+// #define INTEGRAL_STEP     0.0001                                    ///< integral step
+#define INTERSECTION_STEP 0.000001                                  ///< intersection step
+#define TMP_DATA_FILE7    "./output/div5_p1_tmp_norm_dist_x.dat"    ///< dataset 1 tmp normal distribution path 1
+#define TMP_DATA_FILE8    "./output/div5_p1_tmp_norm_dist_y.dat"    ///< dataset 1 tmp normal distribution path 2
+#define TMP_DATA_FILE9    "./output/div5_p2_tmp_norm_dist_x.dat"    ///< dataset 2 tmp normal distribution path 1
+#define TMP_DATA_FILE10   "./output/div5_p2_tmp_norm_dist_y.dat"    ///< dataset 2 tmp normal distribution path 2
+#define TMP_DATA_FILE11   "./output/div5_p3_tmp_norm_dist_x.dat"    ///< dataset 3 tmp normal distribution path 1
+#define TMP_DATA_FILE12   "./output/div5_p3_tmp_norm_dist_y.dat"    ///< dataset 3 tmp normal distribution path 2
+#define OUTPUT_CSV_FILE1  "./output/div5_p1_output.csv"             ///< output csv path 1 of dataset 1
+#define OUTPUT_CSV_FILE2  "./output/div5_p2_output.csv"             ///< output csv path 2 of dataset 2
+#define OUTPUT_CSV_FILE3  "./output/div5_p3_output.csv"             ///< output csv path 3 of combined dataset (dataset 3)
+#define OUTPUT_CSV_FILE4  "./output/div5_boundary_output.csv"       ///< output csv path of decision boundary
+#define DIV5_VS_IMG       "./output/div5_boundary.png"              ///< decision boundary plot path
+#define TMP_DATA_FILE13   "./output/div5_p4_tmp_data13.dat"         ///< decision boundary tmp data path 1
+#define TMP_DATA_FILE14   "./output/div5_p4_tmp_data14.dat"         ///< decision boundary tmp data path 2
+#define TMP_DATA_FILE15   "./output/div5_p4_tmp_data15.dat"         ///< decision boundary tmp data path 3
 
+/**
+ * @brief main function
+ * @return 0
+ */
 int main(void) {
     printf("Program started!\n");
     dataset male_data;

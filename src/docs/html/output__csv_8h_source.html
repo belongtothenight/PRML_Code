@@ -99,26 +99,33 @@ $(document).ready(function(){initNavTree('output__csv_8h_source.html',''); initR
   <div class="headertitle"><div class="title">output_csv.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;data_proc.h&quot;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;normal_distribution.h&quot;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#ifndef OUTPUT_CSV_H</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#define OUTPUT_CSV_H</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keywordtype">void</span> output_csv(<span class="keywordtype">char</span> *pFilename, <a class="code hl_struct" href="structdataset.html">dataset</a> *pDS, <a class="code hl_struct" href="structnorm__dist.html">norm_dist</a> *pND);</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keywordtype">void</span> output_decision_boundary_csv(<span class="keywordtype">char</span> *pFilename, <a class="code hl_struct" href="structintersection.html">intersection</a> *pIntersection);</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#endif </span><span class="comment">// OUTPUT_CSV_H</span></div>
-<div class="ttc" id="astructdataset_html"><div class="ttname"><a href="structdataset.html">dataset</a></div><div class="ttdef"><b>Definition</b> hw2/lib/data_proc.h:9</div></div>
-<div class="ttc" id="astructintersection_html"><div class="ttname"><a href="structintersection.html">intersection</a></div><div class="ttdef"><b>Definition</b> hw2/lib/decision_boundary.h:6</div></div>
-<div class="ttc" id="astructnorm__dist_html"><div class="ttname"><a href="structnorm__dist.html">norm_dist</a></div><div class="ttdef"><b>Definition</b> hw2/lib/normal_distribution.h:6</div></div>
+<a href="output__csv_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="hw3_2lib_2data__proc_8h.html">data_proc.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="libc_2normal__distribution_8h.html">normal_distribution.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="libc_2decision__boundary_8h.html">decision_boundary.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifndef OUTPUT_CSV_H</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define OUTPUT_CSV_H</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keywordtype">void</span> <a class="code hl_function" href="output__csv_8h.html#a22af2ec7ba9f1ecddbbf42712589eeb2">output_csv</a>(<span class="keywordtype">char</span> *pFilename, <a class="code hl_struct" href="structdataset.html">dataset</a> *pDS, <a class="code hl_struct" href="structnorm__dist.html">norm_dist</a> *pND);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> <a class="code hl_function" href="output__csv_8h.html#a9fab5fa043b8dbcb791b29b8a22fb90d">output_decision_boundary_csv</a>(<span class="keywordtype">char</span> *pFilename, <a class="code hl_struct" href="structintersection.html">intersection</a> *pIntersection);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif </span><span class="comment">// OUTPUT_CSV_H</span></div>
+<div class="ttc" id="ahw3_2lib_2data__proc_8h_html"><div class="ttname"><a href="hw3_2lib_2data__proc_8h.html">data_proc.h</a></div><div class="ttdoc">Data processing functions.</div></div>
+<div class="ttc" id="alibc_2decision__boundary_8h_html"><div class="ttname"><a href="libc_2decision__boundary_8h.html">decision_boundary.h</a></div><div class="ttdoc">The decision boundary header file to calculate the intersection of two normal distributions.</div></div>
+<div class="ttc" id="alibc_2normal__distribution_8h_html"><div class="ttname"><a href="libc_2normal__distribution_8h.html">normal_distribution.h</a></div><div class="ttdoc">Normal distribution functions.</div></div>
+<div class="ttc" id="aoutput__csv_8h_html_a22af2ec7ba9f1ecddbbf42712589eeb2"><div class="ttname"><a href="output__csv_8h.html#a22af2ec7ba9f1ecddbbf42712589eeb2">output_csv</a></div><div class="ttdeci">void output_csv(char *pFilename, dataset *pDS, norm_dist *pND)</div><div class="ttdoc">Output the dataset to a csv file.</div><div class="ttdef"><b>Definition</b> output_csv.c:8</div></div>
+<div class="ttc" id="aoutput__csv_8h_html_a9fab5fa043b8dbcb791b29b8a22fb90d"><div class="ttname"><a href="output__csv_8h.html#a9fab5fa043b8dbcb791b29b8a22fb90d">output_decision_boundary_csv</a></div><div class="ttdeci">void output_decision_boundary_csv(char *pFilename, intersection *pIntersection)</div><div class="ttdoc">Output the decision boundary to a csv file.</div><div class="ttdef"><b>Definition</b> output_csv.c:47</div></div>
+<div class="ttc" id="astructdataset_html"><div class="ttname"><a href="structdataset.html">dataset</a></div><div class="ttdoc">Data struct for hw2.</div><div class="ttdef"><b>Definition</b> hw2/lib/data_proc.h:18</div></div>
+<div class="ttc" id="astructintersection_html"><div class="ttname"><a href="structintersection.html">intersection</a></div><div class="ttdoc">The input_struct struct.</div><div class="ttdef"><b>Definition</b> hw2/lib/decision_boundary.h:15</div></div>
+<div class="ttc" id="astructnorm__dist_html"><div class="ttname"><a href="structnorm__dist.html">norm_dist</a></div><div class="ttdoc">Normal distribution struct.</div><div class="ttdef"><b>Definition</b> hw2/lib/normal_distribution.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_e6b2b31f4762273d3a6e7f7cf9ea4f34.html">hw2</a></li><li class="navelem"><a class="el" href="dir_2f1ff469cea8115b8f2b722921cfc809.html">lib</a></li><li class="navelem"><b>output_csv.h</b></li>
+    <li class="navelem"><a class="el" href="dir_e6b2b31f4762273d3a6e7f7cf9ea4f34.html">hw2</a></li><li class="navelem"><a class="el" href="dir_2f1ff469cea8115b8f2b722921cfc809.html">lib</a></li><li class="navelem"><a class="el" href="output__csv_8h.html">output_csv.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>

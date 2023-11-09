@@ -1,3 +1,8 @@
+/**
+ * @file main.c
+ * @brief Main function of hw3 - 2 dimensional shape classification.
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -7,15 +12,17 @@
 #include "./lib/data_proc.h"
 #include "./lib/data_plot.h"
 
-// *NOTE: Configure the following two arrays to match the number of shapes and their filenames.
-// int num_rows[NUM_SHAPES] = {5, 7, 5, 5, 7, 7};
+csv_t shape;            ///< csv_t struct
+data_t data;            ///< data_t struct
+history_t history;      ///< history_t struct
+output_format format;   ///< output_format struct
 
-// !NOTE: Do not modify the following parameters.
-csv_t shape;
-data_t data;
-history_t history;
-output_format format;
-
+/**
+ * @brief main function
+ * @param argc argument count
+ * @param argv argument vector
+ * @return 0
+ */
 int main(int argc, char *argv[]){
     get_format(&format);
     if (argc < 2){

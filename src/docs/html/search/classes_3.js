@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['foreground_0',['Foreground',['../structoutput__format_1_1_foreground.html',1,'output_format']]]
+  ['input_5fstruct_0',['input_struct',['../structinput__struct.html',1,'']]],
+  ['intersection_1',['intersection',['../structintersection.html',1,'']]]
 ];

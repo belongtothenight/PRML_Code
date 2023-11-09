@@ -41,18 +41,36 @@ var NAVTREE =
     [ "SRC", "md__e_1_2_git_hub_2_p_r_m_l___code_2src_2readme.html", [
       [ "Directory Structure", "md__e_1_2_git_hub_2_p_r_m_l___code_2src_2readme.html#autotoc_md12", null ]
     ] ],
+    [ "Scripts", "md__e_1_2_git_hub_2_p_r_m_l___code_2src_2script_2readme.html", [
+      [ "Execute entire progress with documents opened", "md__e_1_2_git_hub_2_p_r_m_l___code_2src_2script_2readme.html#autotoc_md14", null ],
+      [ "Execute Normally", "md__e_1_2_git_hub_2_p_r_m_l___code_2src_2script_2readme.html#autotoc_md15", null ],
+      [ "Options", "md__e_1_2_git_hub_2_p_r_m_l___code_2src_2script_2readme.html#autotoc_md16", null ]
+    ] ],
     [ "Data Structures", "annotated.html", [
-      [ "Data Structures", "annotated.html", "annotated_dup" ]
+      [ "Data Structures", "annotated.html", "annotated_dup" ],
+      [ "Data Structure Index", "classes.html", null ],
+      [ "Data Fields", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
     ] ],
     [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ]
+      [ "File List", "files.html", "files_dup" ],
+      [ "Globals", "globals.html", [
+        [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ],
+        [ "Variables", "globals_vars.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Macros", "globals_defs.html", null ]
+      ] ]
     ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"annotated.html",
+"structhistory__t.html#a20b24e529e11411f2f32c8f252966989"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

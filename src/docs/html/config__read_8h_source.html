@@ -99,35 +99,44 @@ $(document).ready(function(){initNavTree('config__read_8h_source.html',''); init
   <div class="headertitle"><div class="title">config_read.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// This code is heavily referenced from https://stackoverflow.com/questions/48413430/c-code-to-read-config-file-and-parse-directives</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#ifndef CONFIG_READ_H</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#define CONFIG_READ_H</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="structconfig.html">   11</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structconfig.html">config</a> {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">double</span> line1_param1; <span class="comment">// a_x1</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">double</span> line1_param2; <span class="comment">// b_y1</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">double</span> line1_param3; <span class="comment">// c_1</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">double</span> line2_param1; <span class="comment">// a_x2</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">double</span> line2_param2; <span class="comment">// b_y2</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">double</span> line2_param3; <span class="comment">// c_2</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">double</span> initial_step; <span class="comment">// learning rate</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">bool</span>   dynamic_step; <span class="comment">// dynamic learning rate or not</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif </span><span class="comment">// CONFIG_READ_H</span></div>
-<div class="ttc" id="astructconfig_html"><div class="ttname"><a href="structconfig.html">config</a></div><div class="ttdef"><b>Definition</b> config_read.h:11</div></div>
+<a href="config__read_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef CONFIG_READ_H</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define CONFIG_READ_H</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structconfig.html">   16</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structconfig.html">config</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structconfig.html#ad17066dc19916d7c23c334c0c022e2ab">   17</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structconfig.html#ad17066dc19916d7c23c334c0c022e2ab">line1_param1</a>; </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structconfig.html#aecfc27dc18b0959bd3b0e35876d0c4b6">   18</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structconfig.html#aecfc27dc18b0959bd3b0e35876d0c4b6">line1_param2</a>; </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structconfig.html#a107905b840c52c49ff0e6fd26bcb45f7">   19</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structconfig.html#a107905b840c52c49ff0e6fd26bcb45f7">line1_param3</a>; </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structconfig.html#a07e9927adbb23c49f1b7724f26553ac3">   20</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structconfig.html#a07e9927adbb23c49f1b7724f26553ac3">line2_param1</a>; </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="structconfig.html#a4041f678e42f0e5b9c129fad92cf988d">   21</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structconfig.html#a4041f678e42f0e5b9c129fad92cf988d">line2_param2</a>; </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structconfig.html#ad77aed80bbcd9e2e840f45531a0b4ba6">   22</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structconfig.html#ad77aed80bbcd9e2e840f45531a0b4ba6">line2_param3</a>; </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structconfig.html#a625f373a2c501739208f00e118d5f3ec">   23</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structconfig.html#a625f373a2c501739208f00e118d5f3ec">initial_step</a>; </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structconfig.html#a6bb8ea267f455a4894a81439ece7f95d">   24</a></span>    <span class="keywordtype">bool</span>   <a class="code hl_variable" href="structconfig.html#a6bb8ea267f455a4894a81439ece7f95d">dynamic_step</a>; </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="config__read_8h.html#a261f57fc59ad07837082c43ef8a443e3">   25</a></span>} <a class="code hl_typedef" href="config__read_8h.html#a261f57fc59ad07837082c43ef8a443e3">config_t</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif </span><span class="comment">// CONFIG_READ_H</span></div>
+<div class="ttc" id="aconfig__read_8h_html_a261f57fc59ad07837082c43ef8a443e3"><div class="ttname"><a href="config__read_8h.html#a261f57fc59ad07837082c43ef8a443e3">config_t</a></div><div class="ttdeci">struct config config_t</div><div class="ttdoc">This code is heavily referenced from https://stackoverflow.com/questions/48413430/c-code-to-read-conf...</div></div>
+<div class="ttc" id="astructconfig_html"><div class="ttname"><a href="structconfig.html">config</a></div><div class="ttdoc">This code is heavily referenced from https://stackoverflow.com/questions/48413430/c-code-to-read-conf...</div><div class="ttdef"><b>Definition</b> config_read.h:16</div></div>
+<div class="ttc" id="astructconfig_html_a07e9927adbb23c49f1b7724f26553ac3"><div class="ttname"><a href="structconfig.html#a07e9927adbb23c49f1b7724f26553ac3">config::line2_param1</a></div><div class="ttdeci">double line2_param1</div><div class="ttdoc">a_x2</div><div class="ttdef"><b>Definition</b> config_read.h:20</div></div>
+<div class="ttc" id="astructconfig_html_a107905b840c52c49ff0e6fd26bcb45f7"><div class="ttname"><a href="structconfig.html#a107905b840c52c49ff0e6fd26bcb45f7">config::line1_param3</a></div><div class="ttdeci">double line1_param3</div><div class="ttdoc">c_1</div><div class="ttdef"><b>Definition</b> config_read.h:19</div></div>
+<div class="ttc" id="astructconfig_html_a4041f678e42f0e5b9c129fad92cf988d"><div class="ttname"><a href="structconfig.html#a4041f678e42f0e5b9c129fad92cf988d">config::line2_param2</a></div><div class="ttdeci">double line2_param2</div><div class="ttdoc">b_y2</div><div class="ttdef"><b>Definition</b> config_read.h:21</div></div>
+<div class="ttc" id="astructconfig_html_a625f373a2c501739208f00e118d5f3ec"><div class="ttname"><a href="structconfig.html#a625f373a2c501739208f00e118d5f3ec">config::initial_step</a></div><div class="ttdeci">double initial_step</div><div class="ttdoc">learning rate</div><div class="ttdef"><b>Definition</b> config_read.h:23</div></div>
+<div class="ttc" id="astructconfig_html_a6bb8ea267f455a4894a81439ece7f95d"><div class="ttname"><a href="structconfig.html#a6bb8ea267f455a4894a81439ece7f95d">config::dynamic_step</a></div><div class="ttdeci">bool dynamic_step</div><div class="ttdoc">dynamic learning rate or not</div><div class="ttdef"><b>Definition</b> config_read.h:24</div></div>
+<div class="ttc" id="astructconfig_html_ad17066dc19916d7c23c334c0c022e2ab"><div class="ttname"><a href="structconfig.html#ad17066dc19916d7c23c334c0c022e2ab">config::line1_param1</a></div><div class="ttdeci">double line1_param1</div><div class="ttdoc">a_x1</div><div class="ttdef"><b>Definition</b> config_read.h:17</div></div>
+<div class="ttc" id="astructconfig_html_ad77aed80bbcd9e2e840f45531a0b4ba6"><div class="ttname"><a href="structconfig.html#ad77aed80bbcd9e2e840f45531a0b4ba6">config::line2_param3</a></div><div class="ttdeci">double line2_param3</div><div class="ttdoc">c_2</div><div class="ttdef"><b>Definition</b> config_read.h:22</div></div>
+<div class="ttc" id="astructconfig_html_aecfc27dc18b0959bd3b0e35876d0c4b6"><div class="ttname"><a href="structconfig.html#aecfc27dc18b0959bd3b0e35876d0c4b6">config::line1_param2</a></div><div class="ttdeci">double line1_param2</div><div class="ttdoc">b_y1</div><div class="ttdef"><b>Definition</b> config_read.h:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_1f5f4ad905d3feabd255247410f5a848.html">hw4</a></li><li class="navelem"><a class="el" href="dir_21ac3939c242d252ab123d94e11dd3e4.html">lib</a></li><li class="navelem"><b>config_read.h</b></li>
+    <li class="navelem"><a class="el" href="dir_1f5f4ad905d3feabd255247410f5a848.html">hw4</a></li><li class="navelem"><a class="el" href="dir_21ac3939c242d252ab123d94e11dd3e4.html">lib</a></li><li class="navelem"><a class="el" href="config__read_8h.html">config_read.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>

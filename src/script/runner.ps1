@@ -1,7 +1,9 @@
 param(
     [Parameter(Mandatory=$true)][string]$p,
     [Parameter(Mandatory=$false)][switch]$h,
-    [Parameter(Mandatory=$false)][switch]$nc
+    [Parameter(Mandatory=$false)][switch]$nc,
+    [Parameter(Mandatory=$false)][switch]$spsd,
+    [Parameter(Mandatory=$false)][switch]$odw
 )
 
 Function help () {
@@ -9,6 +11,8 @@ Function help () {
     Write-Host "  -p <program> : project to run"
     Write-Host "  -h           : help"
     Write-Host "  -nc          : no cleaning"
+    Write-Host "  -spsd        : start python simple http server for documentation"
+    Write-Host "  -odw         : open documentation in web browser (firefox)"
 }
 
 if ($h) {
@@ -83,6 +87,23 @@ Switch ($p){
         Invoke-Expression "./${hw3}"
         Invoke-Expression "./${hw4}"
     }
+}
+
+if ($spsd) {
+    Write-Host "Starting python simple http server ..." @output_format
+    Start-Process pwsh -ArgumentList "-c" , {
+        Write-Host "Server started at localhost:8000 hosting documentation ..."
+        Write-Host "Press Enter to exit" @output_format
+        cd $pwd/../docs/html/
+        python "-m http.server --directory ."
+        # Read-Host -Prompt "Press Enter to exit"
+        Read-Host
+    }, "-noexit" -WindowStyle Maximized
+}
+
+if ($odw) {
+    Write-Host "Opening documentation in web browser ..." @output_format
+    Start-Process firefox "--new-tab -url localhost:8000"
 }
 
 Write-Host "Done." @output_format
