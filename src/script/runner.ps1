@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory=$false)][switch]$h,
     [Parameter(Mandatory=$false)][switch]$nc,
     [Parameter(Mandatory=$false)][switch]$spsd,
-    [Parameter(Mandatory=$false)][switch]$odw
+    [Parameter(Mandatory=$false)][switch]$odw,
+    [Parameter(Mandatory=$false)][switch]$dgp
 )
 
 Function help () {
@@ -13,6 +14,7 @@ Function help () {
     Write-Host "  -nc          : no cleaning"
     Write-Host "  -spsd        : start python simple http server for documentation"
     Write-Host "  -odw         : open documentation in web browser (firefox)"
+    Write-Host "  -dgp         : deploy to github pages"
 }
 
 if ($h) {
@@ -25,8 +27,8 @@ $output_format = @{
     # BackgroundColor = "white"
 }
 
-$cwd = Get-Location
-cd ../build/
+$project_dir = "E:/GitHub/PRML_Code/"
+cd $project_dir/src/build/
 
 if ($nc) {
     Write-Host "Skipped cleaning." @output_format
@@ -44,12 +46,8 @@ make
 Write-Host "Installing $p ..." @output_format
 make install
 
-Write-Host "Generating documentation ..." @output_format
-cd $cwd/../../docs/
-doxygen ./Doxyfile
-
 Write-Host "Running $p ..." @output_format
-cd $cwd/../bin/
+cd $project_dir/src/bin/
 $hw3 = "hw3.exe"
 $hw4 = "hw4.exe"
 Switch ($p){
@@ -87,13 +85,17 @@ Switch ($p){
     }
 }
 
+Write-Host "Generating documentation ..." @output_format
+cd $project_dir/docs/
+doxygen ./Doxyfile
+
 if ($spsd) {
     Write-Host "Starting python simple http server ..." @output_format
     Start-Process pwsh -ArgumentList "-c" , {
         Write-Host "Server started at localhost:8000 hosting documentation ..."
-        Write-Host "Press Enter to exit" @output_format
-        cd $pwd/../../docs/html/
-        python "-m http.server --directory ."
+        Write-Host "Press Enter to exit"
+        cd "E:/GitHub/PRML_Code/docs/html/"
+        python "-m http.server"
         # Read-Host -Prompt "Press Enter to exit"
         Read-Host
     }, "-noexit" -WindowStyle Maximized
@@ -104,5 +106,14 @@ if ($odw) {
     Start-Process firefox "--new-tab -url localhost:8000"
 }
 
+if ($dgp) {
+    Write-Host "Deploying to github pages ..." @output_format
+    cp $project_dir/docs/html/* $project_dir/../belongtothenight.github.io/PRML_Code/
+    cd $project_dir/../belongtothenight.github.io/
+    git add .
+    git commit -m "Deploy to GitHub Pages"
+    git push -f
+}
+
 Write-Host "Done." @output_format
-cd $cwd
+cd $project_dir/src/script/
