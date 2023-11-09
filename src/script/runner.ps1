@@ -45,7 +45,7 @@ Write-Host "Installing $p ..." @output_format
 make install
 
 Write-Host "Generating documentation ..." @output_format
-cd $cwd/../../PRML_Code.wiki/
+cd $cwd/../../docs/
 doxygen ./Doxyfile
 
 Write-Host "Running $p ..." @output_format
@@ -92,7 +92,7 @@ if ($spsd) {
     Start-Process pwsh -ArgumentList "-c" , {
         Write-Host "Server started at localhost:8000 hosting documentation ..."
         Write-Host "Press Enter to exit" @output_format
-        cd $pwd/../../PRML_Code.wiki/docs/
+        cd $pwd/../../docs/html/
         python "-m http.server --directory ."
         # Read-Host -Prompt "Press Enter to exit"
         Read-Host
