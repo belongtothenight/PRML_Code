@@ -1,4 +1,4 @@
-# Pinky Dimension Distribution
+# HW2 - Pinky Dimension Distribution
 
 Code is compiled on Windows 11 x64 platform with command: 
 

@@ -1,0 +1,22 @@
+\doxysection{hw3/lib/data\+\_\+plot.h}
+\hypertarget{hw3_2lib_2data__plot_8h_source}{}\label{hw3_2lib_2data__plot_8h_source}\index{data\_plot.h@{data\_plot.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DATA\_PLOT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DATA\_PLOT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}data\_proc.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ PATH\_LEN\ 50}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ FILE*\ plot\_save\_open(\textcolor{keywordtype}{char}*\ filename);}
+\DoxyCodeLine{00010\ \textcolor{keywordtype}{void}\ plot\_save\_close(FILE*\ gnuplot);}
+\DoxyCodeLine{00011\ FILE*\ plot\_open(\textcolor{keywordtype}{char}*\ filename,\ \textcolor{keywordtype}{float}\ xmin,\ \textcolor{keywordtype}{float}\ xmax,\ \textcolor{keywordtype}{float}\ ymin,\ \textcolor{keywordtype}{float}\ ymax);}
+\DoxyCodeLine{00012\ \textcolor{keywordtype}{void}\ plot\_close(FILE*\ gnuplot);}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keywordtype}{void}\ plot\_shape(\textcolor{keywordtype}{int}\ index,\ \mbox{\hyperlink{structdata__t}{data\_t}}\ *data);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DATA\_PLOT\_H}}
+
+\end{DoxyCode}

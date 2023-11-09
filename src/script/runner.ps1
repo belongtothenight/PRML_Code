@@ -16,28 +16,40 @@ if ($h) {
     exit
 }
 
+$output_format = @{
+    ForegroundColor = "blue"
+    # BackgroundColor = "white"
+}
+
 $cwd = Get-Location
 cd ../build/
 
 if ($nc) {
-    Write-Host "Skipped cleaning."
+    Write-Host "Skipped cleaning." @output_format
 } else {
-    Write-Host "Cleaning ..."
+    Write-Host "Cleaning ..." @output_format
     rm -R *
 }
 
-Write-Host "Generating Makefile ..."
+Write-Host "Generating Makefiles ..." @output_format
 cmake ../ CC="C:/MinGW/bin/gcc.exe" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
 
-Write-Host "Building ..."
+Write-Host "Building $p ..." @output_format
 make
 
-Write-Host "Installing ..."
+Write-Host "Installing $p ..." @output_format
 make install
 
-Write-Host "Running ..."
+Write-Host "Generating documentation ..." @output_format
+cd $cwd
+cd ../docs/
+doxygen ./Doxyfile
+
+Write-Host "Running $p ..." @output_format
+cd $cwd
 cd ../bin/
 $hw3 = "hw3.exe"
+$hw4 = "hw4.exe"
 Switch ($p){
     "hw3-all" {
         Invoke-Expression "./${hw3} ../hw3/dataset/shape1.csv ../hw3/dataset/shape2.csv ../hw3/dataset/shape3.csv ../hw3/dataset/shape4.csv ../hw3/dataset/shape5.csv ../hw3/dataset/shape6.csv"
@@ -63,10 +75,15 @@ Switch ($p){
     "hw3" {
         Invoke-Expression "./${hw3}"
     }
+    "hw4" {
+        Invoke-Expression "./${hw4}"
+    }
     "default" {
+        Write-Host "Option not found. Running all ..." @output_format
         Invoke-Expression "./${hw3}"
+        Invoke-Expression "./${hw4}"
     }
 }
 
-Write-Host "Done."
+Write-Host "Done." @output_format
 cd $cwd

@@ -1,0 +1,56 @@
+\doxysection{hw2/lib/data\+\_\+proc.h}
+\hypertarget{hw2_2lib_2data__proc_8h_source}{}\label{hw2_2lib_2data__proc_8h_source}\index{data\_proc.h@{data\_proc.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DATA\_PROC\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DATA\_PROC\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ MAX\_SIZE\ \ \ \ \ \ \ \ \ \ \ \ 1000}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ SPLIT\_PARTS\ \ \ \ \ \ \ \ \ 5}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ NORMAL\_SPLIT\_PARTS\ \ 6}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ UNIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}mm"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}\{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{int}\ size;}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{float}\ data\_element[MAX\_SIZE];}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{float}\ min;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{float}\ max;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{float}\ mean;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{float}\ variance\_biased;}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{float}\ variance\_unbiased;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{float}\ mu;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{float}\ sigma;\ \textcolor{comment}{//\ standard\ deviation}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{float}\ split\_points[SPLIT\_PARTS\ +\ 1];}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{float}\ split\_step;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{float}\ split\_points\_center[SPLIT\_PARTS];}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{float}\ split\_data[SPLIT\_PARTS][MAX\_SIZE];}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ split\_count[SPLIT\_PARTS];}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{float}\ normal\_split\_points[NORMAL\_SPLIT\_PARTS+1];\ \textcolor{comment}{//\ m\_p\_3std,\ m\_p\_2std,\ m\_p\_1std,\ m,\ m\_m\_1std,\ m\_m\_2std,\ m\_m\_3std}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{float}\ normal\_split\_points\_center[NORMAL\_SPLIT\_PARTS\ +\ 2];}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{float}\ normal\_split\_data[NORMAL\_SPLIT\_PARTS+2][MAX\_SIZE];}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ normal\_split\_count[NORMAL\_SPLIT\_PARTS+2];}
+\DoxyCodeLine{00030\ \}\ \mbox{\hyperlink{structdataset}{dataset}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{void}\ initialize\_data(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00033\ \textcolor{keywordtype}{void}\ read\_csv(\textcolor{keywordtype}{char}*\ pFilename,\ \mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00034\ \textcolor{keywordtype}{void}\ combine\_data(\mbox{\hyperlink{structdataset}{dataset}}*\ pMaleData,\ \mbox{\hyperlink{structdataset}{dataset}}*\ pFemaleData,\ \mbox{\hyperlink{structdataset}{dataset}}*\ pAllData);}
+\DoxyCodeLine{00035\ \textcolor{keywordtype}{void}\ print\_data(\mbox{\hyperlink{structdataset}{dataset}}*\ pData,\ \textcolor{keywordtype}{char}*\ pName);}
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ get\_min(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ get\_max(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{void}\ get\_mean(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ get\_variance(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ get\_sigma(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ get\_split\_points(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ get\_split\_points\_center(\mbox{\hyperlink{structdataset}{dataset}}\ *pData);}
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ get\_split\_data(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{void}\ split\_data\_checker(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ get\_normal\_split\_points(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ get\_normal\_split\_points\_center(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ get\_normal\_split\_data(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ get\_stats(\mbox{\hyperlink{structdataset}{dataset}}*\ pData);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DATA\_PROC\_H}}
+
+\end{DoxyCode}

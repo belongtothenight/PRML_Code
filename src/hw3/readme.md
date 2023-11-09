@@ -1,4 +1,4 @@
-# HW3
+# HW3 - 2 dimensional shape classification.
 
 There are two methods included in here. 
 

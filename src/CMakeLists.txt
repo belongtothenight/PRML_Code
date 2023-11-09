@@ -6,7 +6,5 @@ set(PROJECT_NAME "PRML_Code")
 
 project(${PROJECT_NAME} VERSION 1.0.0 LANGUAGES C)
 
-add_subdirectory(
-    ${CMAKE_SOURCE_DIR}/hw3
-    # ${BASE_DIR}/hw4
-)
+add_subdirectory(${CMAKE_SOURCE_DIR}/hw3)
+add_subdirectory(${CMAKE_SOURCE_DIR}/hw4)

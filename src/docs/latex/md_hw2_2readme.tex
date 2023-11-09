@@ -1,0 +1,31 @@
+\chapter{Pinky Dimension Distribution}
+\hypertarget{md_hw2_2readme}{}\label{md_hw2_2readme}\index{Pinky Dimension Distribution@{Pinky Dimension Distribution}}
+\label{md_hw2_2readme_autotoc_md0}%
+\Hypertarget{md_hw2_2readme_autotoc_md0}%
+ Code is compiled on Windows 11 x64 platform with command\+:
+
+
+\begin{DoxyEnumerate}
+\item {\ttfamily make main ; .\textbackslash{}main.\+exe ; make clean\+\_\+win}
+\item {\ttfamily python .\textbackslash{}data\+\_\+gen.\+py ; make test ; .\textbackslash{}test.\+exe ; make clean\+\_\+win}
+\end{DoxyEnumerate}\hypertarget{md_hw2_2readme_autotoc_md1}{}\doxysection{\texorpdfstring{Dependencies}{Dependencies}}\label{md_hw2_2readme_autotoc_md1}
+
+\begin{DoxyEnumerate}
+\item gcc.\+exe (Min\+GW-\/\+W64 x86\+\_\+64-\/ucrt-\/mcf-\/seh, built by Brecht Sanders) 13.\+2.\+0
+\item \href{http://www.gnuplot.info/}{\texttt{ gnuplot 5.\+4 patchlevel 8=\texorpdfstring{$>$}{>}http\+://www.\+gnuplot.\+info/}}.
+\end{DoxyEnumerate}\hypertarget{md_hw2_2readme_autotoc_md2}{}\doxysection{\texorpdfstring{Directory Structure}{Directory Structure}}\label{md_hw2_2readme_autotoc_md2}
+
+\begin{DoxyEnumerate}
+\item {\ttfamily ./dataset}\+: contains the dataset data in CSV format.
+\item {\ttfamily ./lib}\+: c libraries coded for this project.
+\item {\ttfamily ./output}\+: stores the result of this project.
+\item {\ttfamily ./data\+\_\+gen.py}\+: generate normal distributed data for algorithm testing and debugging.
+\item {\ttfamily ./main.c}\+: the entry point of this project. Process two set of data at a time and also process merged data and their decision boundary.
+\item {\ttfamily ./test.c}\+: testing entry point of this project. Process only one set of data.
+\item {\ttfamily ./makefile}\+: how this project is compiled.
+\item {\ttfamily ./readme.md}\+: this file you\textquotesingle{}re reading, contains documentations.
+\end{DoxyEnumerate}\hypertarget{md_hw2_2readme_autotoc_md3}{}\doxysection{\texorpdfstring{Things to complete}{Things to complete}}\label{md_hw2_2readme_autotoc_md3}
+
+\begin{DoxyEnumerate}
+\item Diameter to perimeter conversion. 
+\end{DoxyEnumerate}
