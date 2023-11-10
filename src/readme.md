@@ -1,6 +1,6 @@
 # SRC
 
-Return to [github homepage](https://belongtothenight.github.io/).
+Return to [documentation homepage](https://belongtothenight.github.io/).
 
 This directory contains all source code and related files of this repository.
 
