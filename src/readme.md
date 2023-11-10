@@ -30,4 +30,4 @@ hwX directories contains source code for each homework.
 
 ## Deploy doxygen-awesome-css Doxyfile settings
 
-Matching ```./docs/Doxyfile``` (used for generating docs) with ```./doxygen-awesome-css/Doxyfile``` (template provided by doxygen-awesome-css, require following installation steps), focusing on settings like HTML_EXTRA_STYLESHEET, HTML_COLORSTYLE, GENERATE_TREEVIEW.
+Matching ```./docs/Doxyfile``` (used for generating docs) with ```./docs/doxygen-awesome-css/Doxyfile``` (template provided by doxygen-awesome-css, require following installation steps), focusing on settings like HTML_EXTRA_STYLESHEET, HTML_COLORSTYLE, GENERATE_TREEVIEW.
