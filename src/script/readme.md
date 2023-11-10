@@ -1,16 +1,14 @@
 # Scripts
 
-## Execute entire progress with documents opened
+## Development Steps
 
-```ps1
-.\runner.ps1 -spsd -odw -p hw3
-```
+Use project "hw3" for example.
 
-## Execute Normally
-
-```ps1
-.\runner.ps1 -p hw3
-```
+1. Code completion: ```./runner.ps1 -p hw3``` or ```./runner.ps1 -p hw3 -nc```
+2. Evaluate documentation:
+   1. Start python http server: ```./runner.ps1 -p hw3 -spsd```
+   2. Open document on http server: ```./runner.ps1 -p hw3 -spsd -odw```
+3. Deploy documentation to github pages: ```./runner.ps1 -p hw3 -dgp```
 
 ## Options
 

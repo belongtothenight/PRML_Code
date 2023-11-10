@@ -14,7 +14,7 @@ Function help () {
     Write-Host "  -nc          : no cleaning"
     Write-Host "  -spsd        : start python simple http server for documentation"
     Write-Host "  -odw         : open documentation in web browser (firefox)"
-    Write-Host "  -dgp         : deploy to github pages"
+    Write-Host "  -dgp         : deploy documentation to github pages"
 }
 
 if ($h) {
