@@ -1048,7 +1048,8 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = Third_party_library
+EXCLUDE                = Third_party_library \
+                         ../src/build
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -1402,8 +1403,6 @@ HTML_STYLESHEET        =
 HTML_EXTRA_STYLESHEET  = ./doxygen-awesome-css/doxygen-awesome.css \
                          ./doxygen-awesome-css/doxygen-custom/custom.css \
                          ./doxygen-awesome-css/doxygen-custom/custom-alternative.css
-                        #  ./doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
-                        #  ./doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css \
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1500,7 +1499,7 @@ HTML_CODE_FOLDING      = YES
 # Minimum value: 0, maximum value: 9999, default value: 100.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_INDEX_NUM_ENTRIES = 100
+HTML_INDEX_NUM_ENTRIES = 20
 
 # If the GENERATE_DOCSET tag is set to YES, additional index files will be
 # generated that can be used as input for Apple's Xcode 3 integrated development
@@ -2758,7 +2757,7 @@ DOT_IMAGE_FORMAT       = svg
 # The default value is: NO.
 # This tag requires that the tag HAVE_DOT is set to YES.
 
-INTERACTIVE_SVG        = NO
+INTERACTIVE_SVG        = YES
 
 # The DOT_PATH tag can be used to specify the path where the dot tool can be
 # found. If left blank, it is assumed the dot tool can be found in the path.
