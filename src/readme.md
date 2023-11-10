@@ -4,6 +4,8 @@ Return to [github homepage](https://belongtothenight.github.io/).
 
 This directory contains all source code and related files of this repository.
 
+Note: This likely isn't the lastest content, visit [PRML_Code repository](https://github.com/belongtothenight/PRML_Code) for up-to-date content.
+
 ## Directory Structure
 
 hwX directories contains source code for each homework.

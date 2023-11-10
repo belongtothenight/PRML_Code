@@ -1,7 +1,5 @@
 # Scripts
 
-Note: This likely isn't the lastest content, visit [PRML_Code repository](https://github.com/belongtothenight/PRML_Code) for up-to-date content.
-
 ## Development Steps
 
 Use project "hw3" for example.
