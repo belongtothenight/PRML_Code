@@ -5,3 +5,5 @@
 *build/
 *bin/
 *docs/html/
+*doxygen-awesome-css/
+*node_modules/

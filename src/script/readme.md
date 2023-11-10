@@ -21,4 +21,5 @@ Usage: runner.ps1 -p <project> [-h] [-nc] [-spsd] [-odw]
   -nc          : no cleaning
   -spsd        : start python simple http server for documentation
   -odw         : open documentation in web browser (firefox)
+  -dgp         : deploy to github pages (https://belongtothenight.github.io)
 ```

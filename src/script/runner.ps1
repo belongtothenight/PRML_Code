@@ -31,22 +31,22 @@ $project_dir = "E:/GitHub/PRML_Code/"
 cd $project_dir/src/build/
 
 if ($nc) {
-    Write-Host "Skipped cleaning." @output_format
+    Write-Host "`nSkipped cleaning." @output_format
 } else {
-    Write-Host "Cleaning ..." @output_format
+    Write-Host "`nCleaning ..." @output_format
     rm -R *
 }
 
-Write-Host "Generating Makefiles ..." @output_format
+Write-Host "`nGenerating Makefiles ..." @output_format
 cmake ../ CC="C:/MinGW/bin/gcc.exe" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
 
-Write-Host "Building $p ..." @output_format
+Write-Host "`nBuilding $p ..." @output_format
 make
 
-Write-Host "Installing $p ..." @output_format
+Write-Host "`nInstalling $p ..." @output_format
 make install
 
-Write-Host "Running $p ..." @output_format
+Write-Host "`nRunning $p ..." @output_format
 cd $project_dir/src/bin/
 $hw3 = "hw3.exe"
 $hw4 = "hw4.exe"
@@ -79,41 +79,40 @@ Switch ($p){
         Invoke-Expression "./${hw4}"
     }
     "default" {
-        Write-Host "Option not found. Running all ..." @output_format
+        Write-Host "`nOption not found. Running all ..." @output_format
         Invoke-Expression "./${hw3}"
         Invoke-Expression "./${hw4}"
     }
 }
 
-Write-Host "Generating documentation ..." @output_format
+Write-Host "`nGenerating documentation ..." @output_format
 cd $project_dir/docs/
 doxygen ./Doxyfile
 
 if ($spsd) {
-    Write-Host "Starting python simple http server ..." @output_format
+    Write-Host "`nStarting python simple http server ..." @output_format
     Start-Process pwsh -ArgumentList "-c" , {
         Write-Host "Server started at localhost:8000 hosting documentation ..."
         Write-Host "Press Enter to exit"
-        cd "E:/GitHub/PRML_Code/docs/html/"
-        python "-m http.server"
+        python "-m http.server --directory E:/GitHub/belongtothenight.github.io/docs/PRML_Code/"
         # Read-Host -Prompt "Press Enter to exit"
         Read-Host
     }, "-noexit" -WindowStyle Maximized
 }
 
 if ($odw) {
-    Write-Host "Opening documentation in web browser ..." @output_format
+    Write-Host "`nOpening documentation in web browser ..." @output_format
     Start-Process firefox "--new-tab -url localhost:8000"
 }
 
 if ($dgp) {
-    Write-Host "Deploying to github pages ..." @output_format
-    cp $project_dir/docs/html/* $project_dir/../belongtothenight.github.io/PRML_Code/
+    Write-Host "`nDeploying to github pages ..." @output_format
     cd $project_dir/../belongtothenight.github.io/
     git add .
     git commit -m "Deploy to GitHub Pages"
     git push -f
+    Start-Process firefox "--new-tab -url https://github.com/belongtothenight/belongtothenight.github.io/actions"
 }
 
-Write-Host "Done." @output_format
+Write-Host "`nDone." @output_format
 cd $project_dir/src/script/
