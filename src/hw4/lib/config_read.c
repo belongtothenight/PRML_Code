@@ -1,26 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "config_read.h"
+#include "../../libc/output_format.h"
 
-void config_init(config_t *config, int initial_step_CONF_MAX_LEN, int dynamic_step_CONF_MAX_LEN, int line_cnt_CONF_MAX_LEN){
+void config_read_status_print(int config_read_status, char *message){
+    output_format format;
+    get_format(&format);
+    switch (config_read_status) {
+        case 0:
+            printf("%sSuccess%s: %s\n", format.status.success, format.style.reset, message);
+            break;
+        case -1:
+            printf("%sFailure: Failed to open file.%s: %s\n", format.status.error, format.style.reset, message);
+            break;
+        case 1:
+            printf("%sFailure: Invalid initial_step.%s: %s\n", format.status.error, format.style.reset, message);
+            break;
+        case 2:
+            printf("%sFailure: Invalid dynamic_step.%s: %s\n", format.status.error, format.style.reset, message);
+            break;
+        case 3:
+            printf("%sFailure: Invalid line_cnt.%s: %s\n", format.status.error, format.style.reset, message);
+            break;
+        case 4:
+            printf("%sFailure: Invalid line_param1.%s: %s\n", format.status.error, format.style.reset, message);
+            break;
+        case 5:
+            printf("%sFailure: Invalid line_param2.%s: %s\n", format.status.error, format.style.reset, message);
+            break;
+        case 6:
+            printf("%sFailure: Invalid line_param3.%s: %s\n", format.status.error, format.style.reset, message);
+            break;
+        default:
+            printf("%sFailure: Unknown error.%s: %s\n", format.status.error, format.style.reset, message);
+            break;
+    }
+    return;
+}
+
+void config_init(config_t *config){
     config->set = 0u;
     config->initial_step = 0.0;
     config->dynamic_step = false;
     config->line_cnt = 0;
-    config->initial_step_CONF_MAX_LEN = initial_step_CONF_MAX_LEN;
-    config->dynamic_step_CONF_MAX_LEN = dynamic_step_CONF_MAX_LEN;
-    config->line_cnt_CONF_MAX_LEN = line_cnt_CONF_MAX_LEN;
     return;
 }
 
-void config_line_init(config_line_t *config_line, int line_param1_CONF_MAX_LEN, int line_param2_CONF_MAX_LEN, int line_param3_CONF_MAX_LEN){
+void config_line_init(config_line_t *config_line){
     config_line->set = 0u;
     config_line->line_param1 = 0.0;
     config_line->line_param2 = 0.0;
     config_line->line_param3 = 0.0;
-    config_line->line_param1_CONF_MAX_LEN = line_param1_CONF_MAX_LEN;
-    config_line->line_param2_CONF_MAX_LEN = line_param2_CONF_MAX_LEN;
-    config_line->line_param3_CONF_MAX_LEN = line_param3_CONF_MAX_LEN;
     return;
 }
 
@@ -28,9 +59,6 @@ void config_print(config_t *config){
     printf("initial_step: %lf\n", config->initial_step);
     printf("dynamic_step: %d\n", config->dynamic_step);
     printf("line_cnt: %d\n", config->line_cnt);
-    printf("initial_step_CONF_MAX_LEN: %d\n", config->initial_step_CONF_MAX_LEN);
-    printf("dynamic_step_CONF_MAX_LEN: %d\n", config->dynamic_step_CONF_MAX_LEN);
-    printf("line_cnt_CONF_MAX_LEN: %d\n", config->line_cnt_CONF_MAX_LEN);
     return;
 }
 
@@ -38,28 +66,50 @@ void config_line_print(config_line_t *config_line){
     printf("line_param1: %lf\n", config_line->line_param1);
     printf("line_param2: %lf\n", config_line->line_param2);
     printf("line_param3: %lf\n", config_line->line_param3);
-    printf("line_param1_CONF_MAX_LEN: %d\n", config_line->line_param1_CONF_MAX_LEN);
-    printf("line_param2_CONF_MAX_LEN: %d\n", config_line->line_param2_CONF_MAX_LEN);
-    printf("line_param3_CONF_MAX_LEN: %d\n", config_line->line_param3_CONF_MAX_LEN);
+}
+
+int config_parse(char *buf, config_t *config){
+    char dummy[CONFIG_LINE_MAX_SIZE];
+    if (sscanf(buf, " %s", dummy) == EOF) return CONFIG_READ_STATUS_SUCCESS; // Empty line
+    if (sscanf(buf, " %[#]", dummy) == 1) return CONFIG_READ_STATUS_SUCCESS; // Comment line
+    if (sscanf(buf, " "))
+}
+
+int config_line_parse(char *buf, config_line_t *config_line){
+
 }
 
 int config_read(config_t *config, config_line_t (*config_line)[], char *filename){
-    // Get enum value of config_read_status
-    enum config_read_status config_read_status_success = CONFIG_READ_SUCCESS;
-    enum config_read_status config_read_status_failure = CONFIG_READ_FAILURE;
-    enum config_read_status config_read_status_initial_step_invalid = CONFIG_READ_INITIAL_STEP_INVALID;
-    enum config_read_status config_read_status_dynamic_step_invalid = CONFIG_READ_DYNAMIC_STEP_INVALID;
-    enum config_read_status config_read_status_line_cnt_invalid = CONFIG_READ_LINE_CNT_INVALID;
-    enum config_read_status config_read_status_line_param1_invalid = CONFIG_READ_LINE_PARAM1_INVALID;
-    enum config_read_status config_read_status_line_param2_invalid = CONFIG_READ_LINE_PARAM2_INVALID;
-    enum config_read_status config_read_status_line_param3_invalid = CONFIG_READ_LINE_PARAM3_INVALID;
     // Open file
     FILE *fp = fopen(filename, "r");
     if(fp == NULL){
         printf("Error: cannot open file %s\n", filename);
-        return config_read_status_failure;
+        return CONFIG_READ_STATUS_FAILURE;
+    }
+    // Initialize variables
+    int current_line = 0;
+    int current_config_line = 0;
+    char buf[CONFIG_LINE_MAX_SIZE];
+    memset(buf, 0, sizeof(buf)); // Clear buffer
+    char msg[CONFIG_LINE_MAX_SIZE];
+    memset(msg, 0, sizeof(msg)); // Clear buffer
+    config_init(config);
+    for (int i = 0; i < MAX_LINE_CNT; i++){
+        config_line_init(&(*config_line)[i]);
     }
     // Read file
-    char buf[CONFIG_LINE_MAX_SIZE];
-    
+    while (fgets(buf, sizeof(buf), fp)) {
+        ++current_line;
+        if (current_line < CONFIG_GLOBAL_SET_NUM) {
+            // Read global settings
+            int err = config_parse(buf, config);
+            sprintf(msg, "line %d", current_line);
+            if (err) {config_read_status_print(err, msg);}
+            memset(buf, 0, sizeof(msg)); // Clear buffer
+        } else {
+            // Read individual line settings
+            int err = config_line_parse(buf, &(*config_line)[current_config_line]);
+            if (err == 0) {++current_config_line;}
+        }
+    }
 }
