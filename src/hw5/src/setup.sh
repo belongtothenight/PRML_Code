@@ -1,15 +1,27 @@
 #!/bin/bash
 
-# cd /home/11278041/11278041/frcnn_chicken_1
-cd "/home/lab353/Documents/GitHub/PRML_Code/src/hw5/frcnn_chicken_1"
-currentPath=$(pwd)
+run_env_setup=0     # 1: run env_setup
+run_xml_to_csv=0    # 1: run xml_to_csv.py
+run_copy_img=1      # 1: run copy_img.py
+run_annotate=1      # 1: run annotate.py
+run_train=1         # 1: run train_frcnn.py
+run_test=1          # 1: run test_frcnn.py
 
-pip install --upgrade pip;
-pip install pandas matplotlib pillow "keras==2.3" opencv-python scikit-learn;
-apt-get update
-sudo apt install -y libgl1-mesa-glx;
+srcPath="/home/lab353/Documents/GitHub/PRML_Code/src/hw5/src"
+projPath="/home/lab353/Documents/GitHub/PRML_Code/src/hw5/frcnn_chicken_1"
 
-bash "${currentPath}/run.sh";
+function env_setup () {
+    pip install --upgrade pip
+    pip install pandas matplotlib pillow "keras==2.3" opencv-python scikit-learn tensorflow[and-cuda]
+    apt-get update
+    sudo apt install -y libgl1-mesa-glx
+    python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+}
 
-python3 "${currentPath}/train_frcnn.py";
-python3 "${currentPath}/test_frcnn.py";
+if [ $run_env_setup  -eq 1 ]; then env_setup;                           fi
+if [ $run_xml_to_csv -eq 1 ]; then python3 "${projPath}/xml_to_csv.py"; fi
+if [ $run_copy_img   -eq 1 ]; then python3 "${projPath}copy_img.py";    fi
+if [ $run_annotate   -eq 1 ]; then python3 "${projPath}annotate.py";    fi
+if [ $run_train      -eq 1 ]; then python3 "${srcPath}/train_frcnn.py"; fi
+if [ $run_test       -eq 1 ]; then python3 "${srcPath}/test_frcnn.py";  fi
+
