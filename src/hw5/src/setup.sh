@@ -10,5 +10,5 @@ apt-get update
 # sudo apt update;
 sudo apt install -y libgl1-mesa-glx;
 
-python "../src/train_frcnn.py";
-python "../src/test_frcnn.py";
+python train_frcnn.py;
+python test_frcnn.py;
