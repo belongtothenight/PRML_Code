@@ -8,8 +8,7 @@ config = Config()
 # copy train images
 train = pd.read_csv(config.train_csv)
 train.head()
-path = config.train_img_dst
-fatherpath= os.path.dirname(path)
+fatherpath= config.train_img_dst
 data = pd.DataFrame()
 data['format'] = train['filename']
 for i in range(data.shape[0]):
@@ -19,8 +18,7 @@ for i in range(data.shape[0]):
 # copy test images
 test = pd.read_csv(config.test_csv)
 test.head()
-path = config.test_img_dst
-fatherpath= os.path.dirname(path)
+fatherpath= config.test_img_dst
 data = pd.DataFrame()
 data['format'] = test['filename']
 for i in range(data.shape[0]):

@@ -7,7 +7,7 @@ from config import Config
 config = Config()
 cols = ["filename", "type", "xmin", "xmax", "ymin", "ymax"]
 rows = []
-fatherpath= os.path.dirname(f'{config.basedir}/110-PR/xml/XX')
+fatherpath= config.xml_dir
 files= os.listdir(fatherpath)
 for i in files:
     file= fatherpath+'/'+str(i)
@@ -36,4 +36,4 @@ for i in files:
 df = pd.DataFrame(rows, columns = cols)  
 
 # write dataframe to csv
-df.to_csv(f'{config.basedir}/110-PR/csv/train.csv')
+df.to_csv(config.train_csv)
