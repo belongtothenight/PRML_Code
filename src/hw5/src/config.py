@@ -2,7 +2,7 @@ class Config:
     def __init__(self):
         #! mutual
         # self.basedir = "/home/11278041/11278041/frcnn_chicken_1"
-        self.basedir = "/home/lab353/Documents/frcnn/hw5/frcnn_chicken_1"
+        self.basedir = "/home/lab353/Documents/GitHub/PRML_Code/src/hw5/frcnn_chicken_1"
         #! xml_to_csv.py
         self.xml_dir = f'{self.basedir}/110-PR/xml'
         self.train_csv = f'{self.basedir}/110-PR/csv/train.csv'
