@@ -1,6 +1,6 @@
 #!/bin/bash
 
-run_env_setup=0     # 1: run env_setup
+run_env_setup=1     # 1: run env_setup
 run_xml_to_csv=0    # 1: run xml_to_csv.py
 run_copy_img=1      # 1: run copy_img.py
 run_annotate=1      # 1: run annotate.py
@@ -12,9 +12,10 @@ projPath="/home/lab353/Documents/GitHub/PRML_Code/src/hw5/frcnn_chicken_1"
 
 function env_setup () {
     pip install --upgrade pip
-    pip install pandas matplotlib pillow "keras==2.3" opencv-python scikit-learn tensorflow[and-cuda]
+    pip install pandas matplotlib pillow "keras==2.3" opencv-python scikit-learn
     apt-get update
     sudo apt install -y libgl1-mesa-glx
+    python3 -m pip install tensorflow[and-cuda]
     python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
 }
 
