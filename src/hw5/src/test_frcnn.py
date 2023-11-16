@@ -15,7 +15,7 @@ from keras.backend.tensorflow_backend import set_session
 from keras_frcnn import roi_helpers
 from config import Config
 
-config = Config()
+Runconfig = Config()
 
 sys.setrecursionlimit(40000)
 
@@ -27,12 +27,12 @@ tf.keras.backend.set_session(sess)
 
 parser = OptionParser()
 
-parser.add_option("-p", "--path", dest="test_path", help="Path to test data.", default=config.test_test_images)
+parser.add_option("-p", "--path", dest="test_path", help="Path to test data.", default=Runconfig.test_test_images)
 parser.add_option("-n", "--num_rois", type="int", dest="num_rois",
 				help="Number of ROIs per iteration. Higher means more memory use.", default=32)
 parser.add_option("--config_filename", dest="config_filename", help=
 				"Location to read the metadata related to the training (generated when training).",
-				default=config.train_result_pickle)
+				default=Runconfig.train_result_pickle)
 parser.add_option("--network", dest="network", help="Base network to use. Supports vgg or resnet50.", default='vgg')
 
 (options, args) = parser.parse_args()
