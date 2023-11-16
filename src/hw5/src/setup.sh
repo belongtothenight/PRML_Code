@@ -12,10 +12,10 @@ projPath="/home/lab353/Documents/GitHub/PRML_Code/src/hw5/frcnn_chicken_1"
 
 function env_setup () {
     pip install --upgrade pip
-    pip install pandas matplotlib pillow keras opencv-python scikit-learn keras-rcnn keras-frcnn
+    pip install pandas matplotlib pillow 'keras==2.4.3' opencv-python scikit-learn keras-rcnn
     apt-get update
     sudo apt install -y libgl1-mesa-glx
-    python3 -m pip install tensorflow[and-cuda]
+    python3 -m pip install 'tensorflow[and-cuda]==2.4.0'
     python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
     nvidia-smi
 }
