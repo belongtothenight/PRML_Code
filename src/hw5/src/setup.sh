@@ -12,7 +12,7 @@ projPath="/home/lab353/Documents/GitHub/PRML_Code/src/hw5/frcnn_chicken_1"
 
 function env_setup () {
     pip install --upgrade pip
-    pip install pandas matplotlib pillow "keras==2.3" opencv-python scikit-learn
+    pip install pandas matplotlib pillow keras opencv-python scikit-learn
     apt-get update
     sudo apt install -y libgl1-mesa-glx
     python3 -m pip install tensorflow[and-cuda]
@@ -21,8 +21,8 @@ function env_setup () {
 
 if [ $run_env_setup  -eq 1 ]; then env_setup;                           fi
 if [ $run_xml_to_csv -eq 1 ]; then python3 "${projPath}/xml_to_csv.py"; fi
-if [ $run_copy_img   -eq 1 ]; then python3 "${projPath}copy_img.py";    fi
-if [ $run_annotate   -eq 1 ]; then python3 "${projPath}annotate.py";    fi
+if [ $run_copy_img   -eq 1 ]; then python3 "${projPath}/copy_img.py";    fi
+if [ $run_annotate   -eq 1 ]; then python3 "${projPath}/annotate.py";    fi
 if [ $run_train      -eq 1 ]; then python3 "${srcPath}/train_frcnn.py"; fi
 if [ $run_test       -eq 1 ]; then python3 "${srcPath}/test_frcnn.py";  fi
 
