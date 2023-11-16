@@ -116,6 +116,7 @@ int config_line_parse(char *buf, config_line_t *config_line, int *line_cnt){
         line_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
+    
     return CONFIG_READ_STATUS_FAILURE; // Syntax error
 }
 
