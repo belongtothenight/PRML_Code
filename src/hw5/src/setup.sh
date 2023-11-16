@@ -15,16 +15,15 @@ function env_setup () {
     python3 -m venv venv
     source venv/bin/activate
     pip install --upgrade pip
-    pip install pandas matplotlib pillow 'keras==2.4.3' opencv-python scikit-learn keras-rcnn
-    python3 -m pip install 'tensorflow[and-cuda]==2.4.0'
-    python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+    pip install pandas matplotlib pillow 'keras==2.4.3' opencv-python scikit-learn keras-rcnn 'tensorflow[and-cuda]==2.4.0'
+    venv/bin/python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
     nvidia-smi
 }
 
-if [ $run_env_setup  -eq 1 ]; then env_setup;                           fi
-if [ $run_xml_to_csv -eq 1 ]; then python3 "${projPath}/xml_to_csv.py"; fi
-if [ $run_copy_img   -eq 1 ]; then python3 "${projPath}/copy_img.py";    fi
-if [ $run_annotate   -eq 1 ]; then python3 "${projPath}/annotate.py";    fi
-if [ $run_train      -eq 1 ]; then python3 "${srcPath}/train_frcnn.py"; fi
-if [ $run_test       -eq 1 ]; then python3 "${srcPath}/test_frcnn.py";  fi
+if [ $run_env_setup  -eq 1 ]; then env_setup;                                   fi
+if [ $run_xml_to_csv -eq 1 ]; then venv/bin/python "${projPath}/xml_to_csv.py"; fi
+if [ $run_copy_img   -eq 1 ]; then venv/bin/python "${projPath}/copy_img.py";   fi
+if [ $run_annotate   -eq 1 ]; then venv/bin/python "${projPath}/annotate.py";   fi
+if [ $run_train      -eq 1 ]; then venv/bin/python "${srcPath}/train_frcnn.py"; fi
+if [ $run_test       -eq 1 ]; then venv/bin/python "${srcPath}/test_frcnn.py";  fi
 
