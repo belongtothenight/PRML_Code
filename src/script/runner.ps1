@@ -76,7 +76,7 @@ Switch ($p){
         Invoke-Expression "./${hw3}"
     }
     "hw4" {
-        Invoke-Expression "./${hw4}"
+        Invoke-Expression "./${hw4} ../hw4/config.ini"
     }
     "default" {
         Write-Host "`nOption not found. Running all ..." @output_format

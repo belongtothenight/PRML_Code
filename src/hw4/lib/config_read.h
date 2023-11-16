@@ -6,6 +6,8 @@
  * References:
  * 1. https://stackoverflow.com/questions/48413430/c-code-to-read-config-file-and-parse-directives
  * 2. https://stackoverflow.com/questions/16201607/c-pointer-to-array-of-structs
+ * 3. https://stackoverflow.com/questions/13801196/does-sscanf-support-boolean-type
+ * 4. https://www.tutorialspoint.com/c_standard_library/c_function_strtod.htm
 */
 
 #ifndef CONFIG_READ_H
@@ -20,14 +22,14 @@
 #define MAX_LINE_CNT            (4)     ///< Maximum number of specified lines in config file
 #define CONFIG_GLOBAL_SET_NUM   (3)     ///< Number of global settings in config file
 
-#define CONFIG_READ_STATUS_SUCCESS (0)  ///< Success
-#define CONFIG_READ_STATUS_FAILURE (-1) ///< Can't open file
-#define CONFIG_READ_STATUS_INITIAL_STEP_INVALID (1)  ///< Invalid initial_step
-#define CONFIG_READ_STATUS_DYNAMIC_STEP_INVALID (2)  ///< Invalid dynamic_step
-#define CONFIG_READ_STATUS_LINE_CNT_INVALID (3)      ///< Invalid line_cnt
-#define CONFIG_READ_STATUS_LINE_PARAM1_INVALID (4)   ///< Invalid line_param1
-#define CONFIG_READ_STATUS_LINE_PARAM2_INVALID (5)   ///< Invalid line_param2
-#define CONFIG_READ_STATUS_LINE_PARAM3_INVALID (6)   ///< Invalid line_param3
+#define CONFIG_READ_STATUS_SUCCESS (0)           ///< Success
+#define CONFIG_READ_STATUS_FAILURE (-1)          ///< Can't open file
+#define CONFIG_READ_STATUS_INITIAL_STEP_SET (1)  ///< Invalid initial_step
+#define CONFIG_READ_STATUS_DYNAMIC_STEP_SET (2)  ///< Invalid dynamic_step
+#define CONFIG_READ_STATUS_LINE_CNT_SET     (3)  ///< Invalid line_cnt
+#define CONFIG_READ_STATUS_LINE_PARAM1_SET  (4)  ///< Invalid line_param1
+#define CONFIG_READ_STATUS_LINE_PARAM2_SET  (5)  ///< Invalid line_param2
+#define CONFIG_READ_STATUS_LINE_PARAM3_SET  (6)  ///< Invalid line_param3
 
 /**
  * @brief Data structure for config file general settings
