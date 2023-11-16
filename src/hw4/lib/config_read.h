@@ -8,6 +8,7 @@
  * 2. https://stackoverflow.com/questions/16201607/c-pointer-to-array-of-structs
  * 3. https://stackoverflow.com/questions/13801196/does-sscanf-support-boolean-type
  * 4. https://www.tutorialspoint.com/c_standard_library/c_function_strtod.htm
+ * 5. https://stackoverflow.com/questions/7021725/how-to-convert-a-string-to-integer-in-c
 */
 
 #ifndef CONFIG_READ_H
@@ -35,20 +36,19 @@
  * @brief Data structure for config file general settings
 */
 typedef struct {
-    double  initial_step;               ///< learning rate
-    bool    dynamic_step;               ///< dynamic learning rate or not
-    int     line_cnt;                   ///< number of lines in config file
-    unsigned set;                       ///< set or not
+    double initial_step;                ///< learning rate
+    bool   dynamic_step;                ///< dynamic learning rate or not
+    int    line_cnt;                    ///< number of lines in config file
+    int    param_cnt;                   ///< number of parameters in config file
 } config_t;
 
 /**
  * @brief Data structure for config file individual line settings
 */
 typedef struct {
-    double  line_param1;                ///< a_x1
-    double  line_param2;                ///< b_y1
-    double  line_param3;                ///< c_1
-    unsigned set;                       ///< set or not
+    double line_param1;                 ///< a_x1
+    double line_param2;                 ///< b_y1
+    double line_param3;                 ///< c_1
 } config_line_t;
 
 /**
@@ -98,9 +98,10 @@ int config_parse(char *buf, config_t *config);
  * @brief Parse config file and assign values to config_line_t
  * @param buf Pointer to read buffer
  * @param config_line Pointer to config_line_t struct
+ * @param line_cnt Pointer to line_cnt
  * @retval config_read_status
 */
-int config_line_parse(char *buf, config_line_t *config_line);
+int config_line_parse(char *buf, config_line_t *config_line, int *line_cnt);
 
 /**
  * @brief Read config file and parse directives
