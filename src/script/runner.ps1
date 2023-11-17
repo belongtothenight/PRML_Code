@@ -2,6 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$p,
     [Parameter(Mandatory=$false)][switch]$h,
     [Parameter(Mandatory=$false)][switch]$nc,
+    [Parameter(Mandatory=$false)][switch]$gdoc,
     [Parameter(Mandatory=$false)][switch]$spsd,
     [Parameter(Mandatory=$false)][switch]$odw,
     [Parameter(Mandatory=$false)][switch]$dgp
@@ -12,6 +13,7 @@ Function help () {
     Write-Host "  -p <program> : project to run"
     Write-Host "  -h           : help"
     Write-Host "  -nc          : no cleaning"
+    Write-Host "  -gdoc        : generate documentation"
     Write-Host "  -spsd        : start python simple http server for documentation"
     Write-Host "  -odw         : open documentation in web browser (firefox)"
     Write-Host "  -dgp         : deploy documentation to github pages"
@@ -85,9 +87,11 @@ Switch ($p){
     }
 }
 
-Write-Host "`nGenerating documentation ..." @output_format
-cd $project_dir/docs/
-doxygen ./Doxyfile
+if ($gdoc) {
+    Write-Host "`nGenerating documentation ..." @output_format
+    cd $project_dir/docs/
+    doxygen ./Doxyfile
+}
 
 if ($spsd) {
     Write-Host "`nStarting python simple http server ..." @output_format

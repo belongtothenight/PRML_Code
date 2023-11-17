@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include "./lib/config_read.h"
+#include "./lib/plot_iter.h"
 
 config_t config;
 config_line_t config_lines[MAX_LINE_CNT];
@@ -18,12 +19,12 @@ int main (int argc, char *argv[]) {
         fprintf(stderr, "Usage: %s CONFIG_FILE\n", argv[0]);
         return 1;
     }
-    // config_init(&config, 10, 10, 10);
-    // config_line_init(&config_line1, 10, 10, 10);
-    // config_print(&config);
-    // config_line_print(&config_line1);
     config_read(&config, &config_lines, argv[1]);
-    config_print(&config);
-    config_line_print(&config_lines[0]);
+    config_all_print(&config, &config_lines);
+    FILE* gnuplot = plot_open(&config);
+    add_line(gnuplot, &config_lines[0]);
+    add_line(gnuplot, &config_lines[1]);
+    plot_update(gnuplot, &config, &config_lines);
+    // plot_close(gnuplot);
     return 0;
 }

@@ -8,32 +8,14 @@ void config_read_status_print(int config_read_status, char *message){
     output_format format;
     get_format(&format);
     switch (config_read_status) {
-        case 0:
-            printf("%sSuccess%s: %s\n", format.status.success, format.style.reset, message);
+        case CONFIG_READ_STATUS_SUCCESS:
+            printf("%s%s\n", format.status.success, message);
             break;
-        case -1:
-            printf("%sFailure: Failed to open file.%s: %s\n", format.status.error, format.style.reset, message);
-            break;
-        case 1:
-            printf("%sFailure: Invalid initial_step.%s: %s\n", format.status.error, format.style.reset, message);
-            break;
-        case 2:
-            printf("%sFailure: Invalid dynamic_step.%s: %s\n", format.status.error, format.style.reset, message);
-            break;
-        case 3:
-            printf("%sFailure: Invalid line_cnt.%s: %s\n", format.status.error, format.style.reset, message);
-            break;
-        case 4:
-            printf("%sFailure: Invalid line_param1.%s: %s\n", format.status.error, format.style.reset, message);
-            break;
-        case 5:
-            printf("%sFailure: Invalid line_param2.%s: %s\n", format.status.error, format.style.reset, message);
-            break;
-        case 6:
-            printf("%sFailure: Invalid line_param3.%s: %s\n", format.status.error, format.style.reset, message);
+        case CONFIG_READ_STATUS_FAILURE:
+            printf("%sFailed to open file.: %s\n", message);
             break;
         default:
-            printf("%sFailure: Unknown error.%s: %s\n", format.status.error, format.style.reset, message);
+            printf("%sUnknown error.: %s\n", message);
             break;
     }
     return;
@@ -44,10 +26,15 @@ void config_init(config_t *config){
     config->dynamic_step = false;
     config->line_cnt = 0;
     config->param_cnt = 0;
+    memset(config->output_file, 0, sizeof(config->output_file)); // Clear buffer
+    config->initial_x = 0.0;
+    config->initial_y = 0.0;
     return;
 }
 
 void config_line_init(config_line_t *config_line){
+    memset(config_line->line_title, 0, sizeof(config_line->line_title)); // Clear buffer
+    memset(config_line->line_symbol, 0, sizeof(config_line->line_symbol)); // Clear buffer
     config_line->line_param1 = 0.0;
     config_line->line_param2 = 0.0;
     config_line->line_param3 = 0.0;
@@ -58,19 +45,31 @@ void config_print(config_t *config){
     printf("initial_step: %lf\n", config->initial_step);
     if (config->dynamic_step == 1) printf("dynamic_step: true\n"); else if (config->dynamic_step == 0) printf("dynamic_step: false\n");
     printf("line_cnt: %d\n", config->line_cnt);
+    printf("output_file: %s\n", config->output_file);
+    printf("initial_x: %lf\n", config->initial_x);
+    printf("initial_y: %lf\n", config->initial_y);
     printf("param_cnt: %d\n", config->param_cnt);
     return;
 }
 
 void config_line_print(config_line_t *config_line){
+    printf("line_title: %s\n", config_line->line_title);
+    printf("line_symbol: %s\n", config_line->line_symbol);
     printf("line_param1: %lf\n", config_line->line_param1);
     printf("line_param2: %lf\n", config_line->line_param2);
     printf("line_param3: %lf\n", config_line->line_param3);
 }
 
+void config_all_print(config_t *config, config_line_t (*config_lines)[]){
+    config_print(config);
+    for (int i = 0; i < config->line_cnt; i++) {
+        config_line_print(&(*config_lines)[i]);
+    }
+}
+
 int config_parse(char *buf, config_t *config){
     char dummy[CONFIG_LINE_MAX_SIZE];
-    // printf("buf: %s", buf);
+    if (DISPLAY_CONFIG_PARSING_BUF  == 1) printf("buf: %s", buf);
     if (sscanf(buf, " %s", dummy) == EOF) return CONFIG_READ_STATUS_SUCCESS; // Empty line
     if (sscanf(buf, " %[#]", dummy) == 1) return CONFIG_READ_STATUS_SUCCESS; // Comment line
     if (sscanf(buf, " initial_step = %s", dummy) == 1) {
@@ -93,39 +92,63 @@ int config_parse(char *buf, config_t *config){
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
+    if (sscanf(buf, " output_file = %s", config->output_file) == 1) {
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " initial_x = %s", dummy) == 1) {
+        config->initial_x = strtod(dummy, NULL);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " initial_y = %s", dummy) == 1) {
+        config->initial_y = strtod(dummy, NULL);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
     return CONFIG_READ_STATUS_FAILURE; // Syntax error
 }
 
 int config_line_parse(char *buf, config_line_t *config_line, int *line_cnt){
     char dummy[CONFIG_LINE_MAX_SIZE];
-    printf("buf: %s", buf);
+    if (DISPLAY_CONFIG_LINE_PARSING_BUF == 1) printf("buf: %s", buf);
     if (sscanf(buf, " %s", dummy) == EOF) return CONFIG_READ_STATUS_SUCCESS; // Empty line
     if (sscanf(buf, " %[#]", dummy) == 1) return CONFIG_READ_STATUS_SUCCESS; // Comment line
+    if (sscanf(buf, " line_title = %s", config_line->line_title) == 1){
+        *line_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " line_symbol = %s", config_line->line_symbol) == 1){
+        *line_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
     if (sscanf(buf, " line_param1 = %s", dummy) == 1) {
         config_line->line_param1 = strtod(dummy, NULL);
-        line_cnt += 1;
+        *line_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
     if (sscanf(buf, " line_param2 = %s", dummy) == 1) {
         config_line->line_param2 = strtod(dummy, NULL);
-        line_cnt += 1;
+        *line_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
     if (sscanf(buf, " line_param3 = %s", dummy) == 1) {
         config_line->line_param3 = strtod(dummy, NULL);
-        line_cnt += 1;
+        *line_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
     
     return CONFIG_READ_STATUS_FAILURE; // Syntax error
 }
 
-int config_read(config_t *config, config_line_t (*config_line)[], char *filename){
+int config_read(config_t *config, config_line_t (*config_lines)[], char *filename){
     // Open file
     FILE *fp = fopen(filename, "r");
     if(fp == NULL){
         config_read_status_print(CONFIG_READ_STATUS_FAILURE, "");
         return CONFIG_READ_STATUS_FAILURE;
+    } else {
+        config_read_status_print(CONFIG_READ_STATUS_SUCCESS, "Opened config file successfully.");
     }
     // Initialize variables
     int current_line = 0;
@@ -137,12 +160,14 @@ int config_read(config_t *config, config_line_t (*config_line)[], char *filename
     memset(msg, 0, sizeof(msg)); // Clear buffer
     config_init(config);
     for (int i = 0; i < MAX_LINE_CNT; i++){
-        config_line_init(&(*config_line)[i]);
+        config_line_init(&(*config_lines)[i]);
     }
     // Read file
     while (fgets(buf, sizeof(buf), fp)) {
         ++current_line;
-        if (config->param_cnt <= CONFIG_GLOBAL_SET_NUM) {
+        if (DISPLAY_CONFIG_LINE_PARSING_BUF == 1) printf("Line %d: %s", current_line, buf);
+        if (config->param_cnt < CONFIG_GLOBAL_SET_NUM) {
+            // Read global settings
             int err = config_parse(buf, config);
             if (err) {
                 sprintf(msg, "line %d: Buf: %s", current_line, buf);
@@ -150,17 +175,19 @@ int config_read(config_t *config, config_line_t (*config_line)[], char *filename
                 memset(msg, 0, sizeof(msg)); // Clear buffer
             }
         } else {
-            line_index = current_line / 3;
-            printf("line_index: %d\n", line_index);
-            int err = config_line_parse(buf, &(*config_line)[line_index], &line_param_cnt);
+            // Read line settings
+            line_index = line_param_cnt / CONFIG_LINE_SET_NUM;
+            int err = config_line_parse(buf, &(*config_lines)[line_index], &line_param_cnt);
             if (err) {
                 sprintf(msg, "line %d: Buf: %s", current_line, buf);
                 config_read_status_print(err, msg);
                 memset(msg, 0, sizeof(msg)); // Clear buffer
             }
         }
+
     }
     // Close file
     fclose(fp);
+    printf("Finished reading config file.\n");
     return CONFIG_READ_STATUS_SUCCESS;
 }
