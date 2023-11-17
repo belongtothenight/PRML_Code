@@ -13,6 +13,7 @@ add_executable(
     ${LIB_DIR}/config_read.c
     ${LIB_DIR}/iter.c
     ${LIB_DIR}/plot_iter.c
+    ${LIBC_DIR}/signal_handler.c
     ${LIBC_DIR}/output_format.c
     ${LIBC_DIR}/common_macro.c
     ${LIBC_DIR}/distance.c

@@ -54,6 +54,11 @@ void config_print(config_t *config){
     printf("initial_x: %lf\n", config->initial_x);
     printf("initial_y: %lf\n", config->initial_y);
     printf("param_cnt: %d\n", config->param_cnt);
+    printf("font: %s\n", config->font);
+    printf("font_size: %d\n", config->font_size);
+    printf("plot_x_size: %d\n", config->plot_x_size);
+    printf("plot_y_size: %d\n", config->plot_y_size);
+    printf("plot_filetype: %s\n", config->plot_filetype);
     return;
 }
 
@@ -111,12 +116,35 @@ int config_parse(char *buf, config_t *config){
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
+    if (sscanf(buf, " font = %s", config->font) == 1) {
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " font_size = %s", dummy) == 1) {
+        config->font_size = strtol(dummy, NULL, 10);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_x_size = %s", dummy) == 1) {
+        config->plot_x_size = strtol(dummy, NULL, 10);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_y_size = %s", dummy) == 1) {
+        config->plot_y_size = strtol(dummy, NULL, 10);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_filetype = %s", config->plot_filetype) == 1) {
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
     return CONFIG_READ_STATUS_FAILURE; // Syntax error
 }
 
 int config_line_parse(char *buf, config_line_t *config_line, int *line_cnt){
     char dummy[CONFIG_LINE_MAX_SIZE];
-    if (DISPLAY_CONFIG_LINE_PARSING_BUF == 1) printf("buf: %s", buf);
+    if (DISPLAY_CONFIG_PARSING_BUF == 1) printf("buf: %s", buf);
     if (sscanf(buf, " %s", dummy) == EOF) return CONFIG_READ_STATUS_SUCCESS; // Empty line
     if (sscanf(buf, " %[#]", dummy) == 1) return CONFIG_READ_STATUS_SUCCESS; // Comment line
     if (sscanf(buf, " line_title = %s", config_line->line_title) == 1){

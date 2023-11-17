@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "./lib/config_read.h"
 #include "./lib/plot_iter.h"
+#include "../libc/signal_handler.h"
 
 config_t config;
 config_line_t config_lines[MAX_LINE_CNT];
@@ -15,6 +16,7 @@ config_line_t config_lines[MAX_LINE_CNT];
  * @retval 0
  */
 int main (int argc, char *argv[]) {
+    register_all_signal_handlers();
     if (argc != 2) {
         fprintf(stderr, "Usage: %s CONFIG_FILE\n", argv[0]);
         return 1;

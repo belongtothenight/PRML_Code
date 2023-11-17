@@ -20,14 +20,15 @@
 #define CONFIG_LINE_MAX_SIZE    (256)   ///< Maximum size of config file line (changing number small can take more config lines, weird)
 #define CONFIG_SET_MAX_SIZE     (128)   ///< Maximum size of config file settting in memory
 #define MAX_LINE_CNT            (4)     ///< Maximum number of specified lines in config file
-#define CONFIG_GLOBAL_SET_NUM   (6)    ///< Number of global settings in config file
+#define CONFIG_GLOBAL_SET_NUM   (11)     ///< Number of global settings in config file
+// #define CONFIG_GNUPLOT_SET_NUM  (5)     ///< Number of gnuplot settings in config file
 #define CONFIG_LINE_SET_NUM     (5)     ///< Number of each line settings in config file
 
 #define CONFIG_READ_STATUS_SUCCESS (0)           ///< Success
 #define CONFIG_READ_STATUS_FAILURE (-1)          ///< Can't open file
 
-#define DISPLAY_CONFIG_READ_BUF (1)               ///< Display config read or not
-#define DISPLAY_CONFIG_PARSING_BUF (1)            ///< Display config parsing or not
+#define DISPLAY_CONFIG_READ_BUF (0)               ///< Display config read or not
+#define DISPLAY_CONFIG_PARSING_BUF (0)            ///< Display config parsing or not
 #define DISPLAY_CONFIG_LINE_PARSING_BUF (1)       ///< Display config line parsing or not
 
 /**
