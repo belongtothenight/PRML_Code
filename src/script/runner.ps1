@@ -42,7 +42,12 @@ if ($nc) {
 }
 
 Write-Host "`nGenerating Makefiles ..." @output_format
-cmake ../ CC="C:/MinGW/bin/gcc.exe" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
+if ($dbp) {
+    cmake ../ CC="C:/MinGW/bin/gcc.exe" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
+} else {
+    cmake ../ CC="C:/MinGW/bin/gcc.exe" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
+}
+
 
 Write-Host "`nBuilding $p ..." @output_format
 make
@@ -62,7 +67,8 @@ if ($dbp) {
             Write-Host "  press enter"
             Write-Host "  run"
             Write-Host "  next or nexti"
-            Invoke-Expression "gdb --args hw4.exe `"E:\GitHub\PRML_Code\src\hw4\config.ini`""
+            # Invoke-Expression "gdb --args hw4.exe `"E:\GitHub\PRML_Code\src\hw4\config.ini`""
+            Invoke-Expression "gdb"
         }
     }
 } else {
