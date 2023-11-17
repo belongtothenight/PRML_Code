@@ -2,6 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$p,
     [Parameter(Mandatory=$false)][switch]$h,
     [Parameter(Mandatory=$false)][switch]$nc,
+    [Parameter(Mandatory=$false)][switch]$dbp,
     [Parameter(Mandatory=$false)][switch]$gdoc,
     [Parameter(Mandatory=$false)][switch]$spsd,
     [Parameter(Mandatory=$false)][switch]$odw,
@@ -9,10 +10,11 @@ param(
 )
 
 Function help () {
-    Write-Host "Usage: runner.ps1 -p <project> [-h] [-nc]"
+    Write-Host "Usage: runner.ps1 -p <project> [-h] [-nc] [-dbp] [-gdoc] [-spsd] [-odw] [-dgp]"
     Write-Host "  -p <program> : project to run"
     Write-Host "  -h           : help"
     Write-Host "  -nc          : no cleaning"
+    Write-Host "  -dbp          : debug project"
     Write-Host "  -gdoc        : generate documentation"
     Write-Host "  -spsd        : start python simple http server for documentation"
     Write-Host "  -odw         : open documentation in web browser (firefox)"
@@ -40,7 +42,7 @@ if ($nc) {
 }
 
 Write-Host "`nGenerating Makefiles ..." @output_format
-cmake ../ CC="C:/MinGW/bin/gcc.exe" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
+cmake ../ CC="C:/MinGW/bin/gcc.exe" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
 
 Write-Host "`nBuilding $p ..." @output_format
 make
@@ -48,42 +50,59 @@ make
 Write-Host "`nInstalling $p ..." @output_format
 make install
 
-Write-Host "`nRunning $p ..." @output_format
-cd $project_dir/src/bin/
-$hw3 = "hw3.exe"
-$hw4 = "hw4.exe"
-Switch ($p){
-    "hw3-all" {
-        Invoke-Expression "./${hw3} ../hw3/dataset/shape1.csv ../hw3/dataset/shape2.csv ../hw3/dataset/shape3.csv ../hw3/dataset/shape4.csv ../hw3/dataset/shape5.csv ../hw3/dataset/shape6.csv"
+if ($dbp) {
+    Write-Host "`nDebugging $p ..." @output_format
+    cd $project_dir/src/bin/
+    Switch ($p) {
+        "hw4" {
+            Write-Host "debug commands: " @output_format
+            Write-Host "  target exec hw4.exe"
+            Write-Host "  set args `"../hw4/config.ini`""
+            Write-Host "  lay next"
+            Write-Host "  press enter"
+            Write-Host "  run"
+            Write-Host "  next or nexti"
+            Invoke-Expression "gdb --args hw4.exe `"E:\GitHub\PRML_Code\src\hw4\config.ini`""
+        }
     }
-    "hw3-1" {
-        Invoke-Expression "./${hw3} ../hw3/dataset/shape1.csv"
-    }
-    "hw3-2" {
-        Invoke-Expression "./${hw3} ../hw3/dataset/shape2.csv"
-    }
-    "hw3-3" {
-        Invoke-Expression "./${hw3} ../hw3/dataset/shape3.csv"
-    }
-    "hw3-4" {
-        Invoke-Expression "./${hw3} ../hw3/dataset/shape4.csv"
-    }
-    "hw3-5" {
-        Invoke-Expression "./${hw3} ../hw3/dataset/shape5.csv"
-    }
-    "hw3-6" {
-        Invoke-Expression "./${hw3} ../hw3/dataset/shape6.csv"
-    }
-    "hw3" {
-        Invoke-Expression "./${hw3}"
-    }
-    "hw4" {
-        Invoke-Expression "./${hw4} ../hw4/config.ini"
-    }
-    "default" {
-        Write-Host "`nOption not found. Running all ..." @output_format
-        Invoke-Expression "./${hw3}"
-        Invoke-Expression "./${hw4}"
+} else {
+    Write-Host "`nRunning $p ..." @output_format
+    cd $project_dir/src/bin/
+    $hw3 = "hw3.exe"
+    $hw4 = "hw4.exe"
+    Switch ($p){
+        "hw3-all" {
+            Invoke-Expression "./${hw3} ../hw3/dataset/shape1.csv ../hw3/dataset/shape2.csv ../hw3/dataset/shape3.csv ../hw3/dataset/shape4.csv ../hw3/dataset/shape5.csv ../hw3/dataset/shape6.csv"
+        }
+        "hw3-1" {
+            Invoke-Expression "./${hw3} ../hw3/dataset/shape1.csv"
+        }
+        "hw3-2" {
+            Invoke-Expression "./${hw3} ../hw3/dataset/shape2.csv"
+        }
+        "hw3-3" {
+            Invoke-Expression "./${hw3} ../hw3/dataset/shape3.csv"
+        }
+        "hw3-4" {
+            Invoke-Expression "./${hw3} ../hw3/dataset/shape4.csv"
+        }
+        "hw3-5" {
+            Invoke-Expression "./${hw3} ../hw3/dataset/shape5.csv"
+        }
+        "hw3-6" {
+            Invoke-Expression "./${hw3} ../hw3/dataset/shape6.csv"
+        }
+        "hw3" {
+            Invoke-Expression "./${hw3}"
+        }
+        "hw4" {
+            Invoke-Expression "./${hw4} ../hw4/config.ini"
+        }
+        "default" {
+            Write-Host "`nOption not found. Running all ..." @output_format
+            Invoke-Expression "./${hw3}"
+            Invoke-Expression "./${hw4}"
+        }
     }
 }
 

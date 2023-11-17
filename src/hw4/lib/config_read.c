@@ -22,13 +22,18 @@ void config_read_status_print(int config_read_status, char *message){
 }
 
 void config_init(config_t *config){
-    config->initial_step = 0.0;
+    config->initial_step = 0.1;
     config->dynamic_step = false;
-    config->line_cnt = 0;
-    config->param_cnt = 0;
+    config->line_cnt = 2;
     memset(config->output_file, 0, sizeof(config->output_file)); // Clear buffer
     config->initial_x = 0.0;
     config->initial_y = 0.0;
+    memset(config->font, 0, sizeof(config->font)); // Clear buffer
+    config->font_size = 20;
+    config->plot_x_size = 1080;
+    config->plot_y_size = 1080;
+    memset(config->plot_filetype, 0, sizeof(config->plot_filetype)); // Clear buffer
+    config->param_cnt = 0; // should set as 0
     return;
 }
 
@@ -184,7 +189,7 @@ int config_read(config_t *config, config_line_t (*config_lines)[], char *filenam
                 memset(msg, 0, sizeof(msg)); // Clear buffer
             }
         }
-
+        buf[strlen(buf)-1] = '\0'; // Remove '\n'
     }
     // Close file
     fclose(fp);

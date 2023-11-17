@@ -14,10 +14,11 @@ Use project "hw3" for example.
 ## Options
 
 ```
-Usage: runner.ps1 -p <project> [-h] [-nc] [-gdoc] [-spsd] [-odw] [-dgp]
+Usage: runner.ps1 -p <project> [-h] [-nc] [-dbp] [-gdoc] [-spsd] [-odw] [-dgp]
   -p <program> : project to run
   -h           : help
   -nc          : no cleaning
+  -dbp         : debug project
   -gdoc        : generate documentation
   -spsd        : start python simple http server for documentation
   -odw         : open documentation in web browser (firefox)

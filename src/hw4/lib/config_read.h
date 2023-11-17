@@ -18,36 +18,42 @@
 #include <string.h>
 
 #define CONFIG_LINE_MAX_SIZE    (256)   ///< Maximum size of config file line (changing number small can take more config lines, weird)
+#define CONFIG_SET_MAX_SIZE     (128)   ///< Maximum size of config file settting in memory
 #define MAX_LINE_CNT            (4)     ///< Maximum number of specified lines in config file
-#define CONFIG_GLOBAL_SET_NUM   (6)     ///< Number of global settings in config file
+#define CONFIG_GLOBAL_SET_NUM   (6)    ///< Number of global settings in config file
 #define CONFIG_LINE_SET_NUM     (5)     ///< Number of each line settings in config file
 
 #define CONFIG_READ_STATUS_SUCCESS (0)           ///< Success
 #define CONFIG_READ_STATUS_FAILURE (-1)          ///< Can't open file
 
-#define DISPLAY_CONFIG_READ_BUF (0)               ///< Display config read or not
-#define DISPLAY_CONFIG_PARSING_BUF (0)            ///< Display config parsing or not
-#define DISPLAY_CONFIG_LINE_PARSING_BUF (0)       ///< Display config line parsing or not
+#define DISPLAY_CONFIG_READ_BUF (1)               ///< Display config read or not
+#define DISPLAY_CONFIG_PARSING_BUF (1)            ///< Display config parsing or not
+#define DISPLAY_CONFIG_LINE_PARSING_BUF (1)       ///< Display config line parsing or not
 
 /**
  * @brief Data structure for config file general settings
 */
 typedef struct {
-    double initial_step;                      ///< learning rate
-    bool   dynamic_step;                      ///< dynamic learning rate or not
-    int    line_cnt;                          ///< number of lines in config file
-    char*  output_file[CONFIG_LINE_MAX_SIZE]; ///< output file name
-    double initial_x;                         ///< initial x
-    double initial_y;                         ///< initial y
-    int    param_cnt;                         ///< number of parameters in config file
+    double initial_step;                        ///< learning rate
+    bool   dynamic_step;                        ///< dynamic learning rate or not
+    int    line_cnt;                            ///< number of lines in config file
+    char*  output_file[CONFIG_SET_MAX_SIZE];   ///< output file name
+    double initial_x;                           ///< initial x
+    double initial_y;                           ///< initial y
+    char*  font[CONFIG_SET_MAX_SIZE];          ///< font
+    int    font_size;                           ///< font size
+    int    plot_x_size;                         ///< plot x size
+    int    plot_y_size;                         ///< plot y size
+    char*  plot_filetype[CONFIG_SET_MAX_SIZE]; ///< plot filetype
+    int    param_cnt;                           ///< number of parameters in config file
 } config_t;
 
 /**
  * @brief Data structure for config file individual line settings
 */
 typedef struct {
-    char*  line_title[CONFIG_LINE_MAX_SIZE];  ///< line title (ex: Line 1)
-    char*  line_symbol[CONFIG_LINE_MAX_SIZE]; ///< line symbol (ex: f(x))
+    char*  line_title[CONFIG_SET_MAX_SIZE];  ///< line title (ex: Line 1)
+    char*  line_symbol[CONFIG_SET_MAX_SIZE]; ///< line symbol (ex: f(x))
     double line_param1;                       ///< a_x1
     double line_param2;                       ///< b_y1
     double line_param3;                       ///< c_1
