@@ -1,6 +1,8 @@
 /**
  * @file distance.h
  * @brief Distance calculation functions
+ * Ref:
+ * 1. 
 */
 
 #ifndef DISTANCE_H
