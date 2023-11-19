@@ -25,6 +25,7 @@ typedef struct {
     double y[MAX_POINT_CNT];
     double cost[MAX_POINT_CNT];
     int iter[MAX_POINT_CNT];
+    double max_cost;
 } iter_history_t;
 
 /**
@@ -60,5 +61,6 @@ double iter_history_calculate_cost(iter_history_t* iter_history, config_t* confi
  * @retval void
 */
 void iter_history_iterate(iter_history_t* iter_history, config_t* config, config_line_t (*config_lines)[]);
+
 
 #endif // ITER_H

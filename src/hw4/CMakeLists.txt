@@ -17,6 +17,7 @@ add_executable(
     ${LIBC_DIR}/output_format.c
     ${LIBC_DIR}/common_macro.c
     ${LIBC_DIR}/distance.c
+    ${LIBC_DIR}/intersection.c
 )
 
 target_include_directories(

@@ -31,6 +31,18 @@ int main (int argc, char *argv[]) {
     iter_history_init(&iter_history, &config, &config_lines);
     iter_history_print(&iter_history);
     plot_update(gnuplot, &config, &config_lines, &iter_history, iter_file);
-    // plot_close(gnuplot);
+
+    for (int i = 0; i < config.max_iter; i++){
+        // iter_history_iterate1(&iter_history, &config, &config_lines);
+        iter_history_iterate(&iter_history, &config, &config_lines);
+        iter_history_print(&iter_history);
+        iter_file_flush(iter_file, &iter_history, &config);
+        plot_update(gnuplot, &config, &config_lines, &iter_history, iter_file);
+    }
+
+    // plot_update(gnuplot, &config, &config_lines, &iter_history, iter_file);
+
+    fclose(iter_file);
+    plot_close(gnuplot);
     return 0;
 }

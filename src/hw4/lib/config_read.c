@@ -27,6 +27,7 @@ void config_init(config_t *config){
     config->line_cnt = 2;
     config->initial_x = 0.0;
     config->initial_y = 0.0;
+    config->max_iter = 1000;
     memset(config->output_file, 0, sizeof(config->output_file)); // Clear buffer
     memset(config->iter_file, 0, sizeof(config->iter_file)); // Clear buffer
     memset(config->font, 0, sizeof(config->font)); // Clear buffer
@@ -34,6 +35,10 @@ void config_init(config_t *config){
     config->plot_x_size = 1080;
     config->plot_y_size = 1080;
     memset(config->plot_filetype, 0, sizeof(config->plot_filetype)); // Clear buffer
+    config->plot_x_min = -10;
+    config->plot_x_max = 10;
+    config->plot_y_min = -10;
+    config->plot_y_max = 10;
     config->param_cnt = 0; // should set as 0
     return;
 }
@@ -53,6 +58,7 @@ void config_print(config_t *config){
     printf("line_cnt: %d\n", config->line_cnt);
     printf("initial_x: %lf\n", config->initial_x);
     printf("initial_y: %lf\n", config->initial_y);
+    printf("max_iter: %d\n", config->max_iter);
     printf("output_file: %s\n", config->output_file);
     printf("iter_file: %s\n", config->iter_file);
     printf("font: %s\n", config->font);
@@ -60,6 +66,10 @@ void config_print(config_t *config){
     printf("plot_x_size: %d\n", config->plot_x_size);
     printf("plot_y_size: %d\n", config->plot_y_size);
     printf("plot_filetype: %s\n", config->plot_filetype);
+    printf("plot_x_min: %d\n", config->plot_x_min);
+    printf("plot_x_max: %d\n", config->plot_x_max);
+    printf("plot_y_min: %d\n", config->plot_y_min);
+    printf("plot_y_max: %d\n", config->plot_y_max);
     printf("param_cnt: %d\n", config->param_cnt);
     return;
 }
@@ -114,6 +124,11 @@ int config_parse(char *buf, config_t *config){
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
+    if (sscanf(buf, " max_iter = %s", dummy) == 1) {
+        config->max_iter = strtol(dummy, NULL, 10);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
     if (sscanf(buf, " output_file = %s", config->output_file) == 1) {
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
@@ -142,6 +157,26 @@ int config_parse(char *buf, config_t *config){
         return CONFIG_READ_STATUS_SUCCESS;
     }
     if (sscanf(buf, " plot_filetype = %s", config->plot_filetype) == 1) {
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_x_min = %s", dummy) == 1) {
+        config->plot_x_min = strtol(dummy, NULL, 10);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_x_max = %s", dummy) == 1) {
+        config->plot_x_max = strtol(dummy, NULL, 10);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_y_min = %s", dummy) == 1) {
+        config->plot_y_min = strtol(dummy, NULL, 10);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_y_max = %s", dummy) == 1) {
+        config->plot_y_max = strtol(dummy, NULL, 10);
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }

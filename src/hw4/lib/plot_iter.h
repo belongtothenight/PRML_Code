@@ -18,6 +18,15 @@
 FILE* iter_file_open(config_t* config);
 
 /**
+ * @brief Flush the iteration history to file
+ * @param iter_file The file pointer to the iteration history file
+ * @param iter_history Pointer to iter_history_t struct
+ * @param config Pointer to config_t struct
+ * @retval void
+*/
+void iter_file_flush(FILE* iter_file, iter_history_t* iter_history, config_t* config);
+
+/**
  * @brief Open a gnuplot pipe
  * @param config Pointer to config_t struct
  * @retval FILE* The file pointer to the opened gnuplot pipe
