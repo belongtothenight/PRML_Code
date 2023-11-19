@@ -25,9 +25,10 @@ void config_init(config_t *config){
     config->initial_step = 0.1;
     config->dynamic_step = false;
     config->line_cnt = 2;
-    memset(config->output_file, 0, sizeof(config->output_file)); // Clear buffer
     config->initial_x = 0.0;
     config->initial_y = 0.0;
+    memset(config->output_file, 0, sizeof(config->output_file)); // Clear buffer
+    memset(config->iter_file, 0, sizeof(config->iter_file)); // Clear buffer
     memset(config->font, 0, sizeof(config->font)); // Clear buffer
     config->font_size = 20;
     config->plot_x_size = 1080;
@@ -50,15 +51,16 @@ void config_print(config_t *config){
     printf("initial_step: %lf\n", config->initial_step);
     if (config->dynamic_step == 1) printf("dynamic_step: true\n"); else if (config->dynamic_step == 0) printf("dynamic_step: false\n");
     printf("line_cnt: %d\n", config->line_cnt);
-    printf("output_file: %s\n", config->output_file);
     printf("initial_x: %lf\n", config->initial_x);
     printf("initial_y: %lf\n", config->initial_y);
-    printf("param_cnt: %d\n", config->param_cnt);
+    printf("output_file: %s\n", config->output_file);
+    printf("iter_file: %s\n", config->iter_file);
     printf("font: %s\n", config->font);
     printf("font_size: %d\n", config->font_size);
     printf("plot_x_size: %d\n", config->plot_x_size);
     printf("plot_y_size: %d\n", config->plot_y_size);
     printf("plot_filetype: %s\n", config->plot_filetype);
+    printf("param_cnt: %d\n", config->param_cnt);
     return;
 }
 
@@ -102,10 +104,6 @@ int config_parse(char *buf, config_t *config){
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
-    if (sscanf(buf, " output_file = %s", config->output_file) == 1) {
-        config->param_cnt += 1;
-        return CONFIG_READ_STATUS_SUCCESS;
-    }
     if (sscanf(buf, " initial_x = %s", dummy) == 1) {
         config->initial_x = strtod(dummy, NULL);
         config->param_cnt += 1;
@@ -113,6 +111,14 @@ int config_parse(char *buf, config_t *config){
     }
     if (sscanf(buf, " initial_y = %s", dummy) == 1) {
         config->initial_y = strtod(dummy, NULL);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " output_file = %s", config->output_file) == 1) {
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " iter_file = %s", config->iter_file) == 1) {
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }

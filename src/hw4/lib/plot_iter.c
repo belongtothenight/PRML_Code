@@ -2,11 +2,26 @@
 #include <stdlib.h>
 #include "plot_iter.h"
 #include "config_read.h"
+#include "iter.h"
 #include "../../libc/output_format.h"
+
+FILE* iter_file_open(config_t* config){
+    output_format format;
+    get_format(&format);
+    FILE* iter_file = fopen(config->iter_file, "w");
+    if (iter_file == NULL) {
+        printf("%sCannot open file: %s\n", format.status.error, config->iter_file);
+        exit(1);
+    } else {
+        printf("%sFile opened: %s\n", format.status.success, config->iter_file);
+    }
+    return iter_file;
+}
 
 FILE* plot_open(config_t* config){
     output_format format;
     get_format(&format);
+    // open gnuplot
     FILE* gnuplot = _popen("gnuplot -persist", "w");
     if (gnuplot == NULL) {
         printf("%sCannot open gnuplot, please check your environment.\n", format.status.error);
@@ -21,20 +36,26 @@ FILE* plot_open(config_t* config){
     return gnuplot;
 }
 
-void add_line(FILE* gnuplot, config_line_t* config_line){
-    fprintf(gnuplot, "%s(x) = %lf - %lf * x\n", config_line->line_symbol, config_line->line_param3/config_line->line_param2, config_line->line_param1/config_line->line_param2);
+void add_line(FILE* gnuplot, config_t* config, config_line_t (*config_lines)[]){
+    for (int i = 0; i < config->line_cnt; i++) {
+        fprintf(gnuplot, "%s(x) = %lf - %lf * x\n", &(*config_lines)[i].line_symbol, (*config_lines)[i].line_param3/(*config_lines)[i].line_param2, (*config_lines)[i].line_param1/(*config_lines)[i].line_param2);
+    }
     return;
 }
 
-void plot_update(FILE* gnuplot, config_t* config, config_line_t (*config_lines)[]){
-    // Add lines
+void plot_update(FILE* gnuplot, config_t* config, config_line_t (*config_lines)[], iter_history_t* iter_history, FILE* iter_file){
+    // Add points
+    // save iteration points to file
+    fprintf(iter_file, "%lf %lf\n", iter_history->x[iter_history->cnt], iter_history->y[iter_history->cnt]);
+    fflush(iter_file);
+    // Add lines and points to gnuplot
     fprintf(gnuplot, "plot ");
     for (int i = 0; i < config->line_cnt; i++) {
         fprintf(gnuplot, "%s(x) title \"%s %.1lfx+%.1lfy=%.1lf\" with lines lw 3", &(*config_lines)[i].line_symbol, &(*config_lines)[i].line_title, (*config_lines)[i].line_param1, (*config_lines)[i].line_param2, (*config_lines)[i].line_param3);
         if (i != config->line_cnt - 1) fprintf(gnuplot, ", ");
     }
+    fprintf(gnuplot, ", \"%s\" with points pt 7 ps 2 lc rgb \"red\" title \"iteration points\"\n", config->iter_file);
     fprintf(gnuplot, "\n");
-    // Add points
     fflush(gnuplot);
     return;
 }

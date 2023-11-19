@@ -41,16 +41,16 @@ void iter_history_print(iter_history_t* iter_history);
  * @param config_lines Pointer to config_line_t struct list
  * @retval void
 */
-void iter_history_init(iter_history_t* iter_history, config_t* config, config_line_t* (*config_lines)[]);
+void iter_history_init(iter_history_t* iter_history, config_t* config, config_line_t (*config_lines)[]);
 
 /**
  * @brief Calculate latest point cost
  * @param iter_history Pointer to iter_history_t struct
+ * @param config Pointer to config_t struct
  * @param config_lines Pointer to config_line_t struct list
- * @param line_index Index of the line
  * @retval distance
 */
-double iter_history_calculate_cost(iter_history_t* iter_history, config_line_t* (*config_lines)[]);
+double iter_history_calculate_cost(iter_history_t* iter_history, config_t* config, config_line_t (*config_lines)[]);
 
 /**
  * @brief Iterate through points and fine the point closest to the intersection of lines

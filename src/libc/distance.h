@@ -20,6 +20,16 @@
 float distance_straightline(float x1, float y1, float x2, float y2);
 
 /**
+ * @brief Calculate 2D distance between a point and a line (ax + by = c)
+ * @param x x value of the point
+ * @param y y value of the point
+ * @param a a value of the line
+ * @param b b value of the line
+ * @param c c value of the line
+*/
+double distance_2Dpoint2line(double x, double y, double a, double b, double c);
+
+/**
  * @brief Calculate the hamming distance between two points
  * @param x1 x value of the first point
  * @param y1 y value of the first point

@@ -6,10 +6,12 @@
 #include <stdio.h>
 #include "./lib/config_read.h"
 #include "./lib/plot_iter.h"
+#include "./lib/iter.h"
 #include "../libc/signal_handler.h"
 
 config_t config;
 config_line_t config_lines[MAX_LINE_CNT];
+iter_history_t iter_history;
 
 /**
  * @brief main function
@@ -24,9 +26,11 @@ int main (int argc, char *argv[]) {
     config_read(&config, &config_lines, argv[1]);
     config_all_print(&config, &config_lines);
     FILE* gnuplot = plot_open(&config);
-    add_line(gnuplot, &config_lines[0]);
-    add_line(gnuplot, &config_lines[1]);
-    plot_update(gnuplot, &config, &config_lines);
+    FILE* iter_file = iter_file_open(&config);
+    add_line(gnuplot, &config, &config_lines);
+    iter_history_init(&iter_history, &config, &config_lines);
+    iter_history_print(&iter_history);
+    plot_update(gnuplot, &config, &config_lines, &iter_history, iter_file);
     // plot_close(gnuplot);
     return 0;
 }
