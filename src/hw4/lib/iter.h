@@ -1,6 +1,8 @@
 /**
  * @file iter.h
  * @brief Iterate through points and fine the point closest to the intersection of lines
+ * Ref:
+ * 1. https://www.geogebra.org/graphing?lang=en
 */
 
 #ifndef ITER_H

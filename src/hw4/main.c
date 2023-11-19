@@ -7,6 +7,7 @@
 #include "./lib/config_read.h"
 #include "./lib/plot_iter.h"
 #include "./lib/iter.h"
+#include "./lib/plot_cost.h"
 #include "../libc/signal_handler.h"
 
 config_t config;
@@ -25,24 +26,35 @@ int main (int argc, char *argv[]) {
     }
     config_read(&config, &config_lines, argv[1]);
     config_all_print(&config, &config_lines);
-    FILE* gnuplot = plot_open(&config);
+    FILE* iter_gnuplot = iter_plot_open(&config);
     FILE* iter_file = iter_file_open(&config);
-    add_line(gnuplot, &config, &config_lines);
+    FILE* cost_gnuplot = cost_plot_open(&config);
+    FILE* cost_file = cost_file_open(&config);
+    add_line(iter_gnuplot, &config, &config_lines);
     iter_history_init(&iter_history, &config, &config_lines);
+
+    printf("\nStart Iteration\n");
     iter_history_print(&iter_history);
-    plot_update(gnuplot, &config, &config_lines, &iter_history, iter_file);
 
     for (int i = 0; i < config.max_iter; i++){
-        // iter_history_iterate1(&iter_history, &config, &config_lines);
         iter_history_iterate(&iter_history, &config, &config_lines);
         iter_history_print(&iter_history);
         iter_file_flush(iter_file, &iter_history, &config);
-        plot_update(gnuplot, &config, &config_lines, &iter_history, iter_file);
+        cost_file_flush(cost_file, &iter_history, &config);
+        if (config.show_progress) {
+            iter_plot_update(iter_gnuplot, &config, &config_lines, &iter_history, iter_file);
+            cost_plot_update(cost_gnuplot, &config, &iter_history, cost_file);
+        }
     }
 
-    // plot_update(gnuplot, &config, &config_lines, &iter_history, iter_file);
+    iter_plot_reset(iter_gnuplot, &config);
+    iter_plot_update(iter_gnuplot, &config, &config_lines, &iter_history, iter_file);
+    cost_plot_reset(cost_gnuplot, &config);
+    cost_plot_update(cost_gnuplot, &config, &iter_history, cost_file);
 
     fclose(iter_file);
-    plot_close(gnuplot);
+    iter_plot_close(iter_gnuplot);
+    fclose(cost_file);
+    cost_plot_close(cost_gnuplot);
     return 0;
 }

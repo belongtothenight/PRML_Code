@@ -20,7 +20,7 @@
 #define CONFIG_LINE_MAX_SIZE    (256)   ///< Maximum size of config file line (changing number small can take more config lines, weird)
 #define CONFIG_SET_MAX_SIZE     (128)   ///< Maximum size of config file settting in memory
 #define MAX_LINE_CNT            (4)     ///< Maximum number of specified lines in config file
-#define CONFIG_GLOBAL_SET_NUM   (17)     ///< Number of global settings in config file
+#define CONFIG_GLOBAL_SET_NUM   (20)    ///< Number of global settings in config file
 #define CONFIG_LINE_SET_NUM     (5)     ///< Number of each line settings in config file
 
 #define CONFIG_READ_STATUS_SUCCESS (0)           ///< Success
@@ -40,9 +40,13 @@ typedef struct {
     double initial_x;                           ///< initial x
     double initial_y;                           ///< initial y
     int    max_iter;                            ///< maximum number of iterations (needs to be smaller than MAX_POINT_CNT defined in iter.h)
+    bool   show_progress;                       ///< show progress or not
     char*  font[CONFIG_SET_MAX_SIZE];           ///< font
     char*  output_file[CONFIG_SET_MAX_SIZE];    ///< output file name
-    char*  iter_file[CONFIG_SET_MAX_SIZE];      ///< iteration file name (stores all points)
+    char*  iter_img[CONFIG_SET_MAX_SIZE];       ///< iteration image file name (stores all points)
+    char*  iter_tmp[CONFIG_SET_MAX_SIZE];       ///< iteration temporary file name (stores all points)
+    char*  cost_img[CONFIG_SET_MAX_SIZE];       ///< cost image file name (stores all cost values)
+    char*  cost_tmp[CONFIG_SET_MAX_SIZE];       ///< cost temporary file name (stores all cost values)
     int    font_size;                           ///< font size
     int    plot_x_size;                         ///< plot x size
     int    plot_y_size;                         ///< plot y size

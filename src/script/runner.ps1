@@ -2,6 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$p,
     [Parameter(Mandatory=$false)][switch]$h,
     [Parameter(Mandatory=$false)][switch]$nc,
+    [Parameter(Mandatory=$false)][switch]$nb,
     [Parameter(Mandatory=$false)][switch]$dbp,
     [Parameter(Mandatory=$false)][switch]$gdoc,
     [Parameter(Mandatory=$false)][switch]$spsd,
@@ -10,10 +11,11 @@ param(
 )
 
 Function help () {
-    Write-Host "Usage: runner.ps1 -p <project> [-h] [-nc] [-dbp] [-gdoc] [-spsd] [-odw] [-dgp]"
+    Write-Host "Usage: runner.ps1 -p <project> [-h] [-nc] [-nb] [-dbp] [-gdoc] [-spsd] [-odw] [-dgp]"
     Write-Host "  -p <program> : project to run"
     Write-Host "  -h           : help"
     Write-Host "  -nc          : no cleaning"
+    Write-Host "  -nb          : no building"
     Write-Host "  -dbp          : debug project"
     Write-Host "  -gdoc        : generate documentation"
     Write-Host "  -spsd        : start python simple http server for documentation"
@@ -41,19 +43,22 @@ if ($nc) {
     rm -R *
 }
 
-Write-Host "`nGenerating Makefiles ..." @output_format
-if ($dbp) {
-    cmake ../ CC="C:/MinGW/bin/gcc.exe" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
+if ($nb) {
+    Write-Host "`nSkipped building." @output_format
 } else {
-    cmake ../ CC="C:/MinGW/bin/gcc.exe" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
+    Write-Host "`nGenerating Makefiles ..." @output_format
+    if ($dbp) {
+        cmake ../ CC="C:/MinGW/bin/gcc.exe" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
+    } else {
+        cmake ../ CC="C:/MinGW/bin/gcc.exe" -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../ -DBUILD_SHARED_LIBS=ON
+    }
+
+    Write-Host "`nBuilding $p ..." @output_format
+    make
+
+    Write-Host "`nInstalling $p ..." @output_format
+    make install
 }
-
-
-Write-Host "`nBuilding $p ..." @output_format
-make
-
-Write-Host "`nInstalling $p ..." @output_format
-make install
 
 if ($dbp) {
     Write-Host "`nDebugging $p ..." @output_format
@@ -63,9 +68,9 @@ if ($dbp) {
             Write-Host "debug commands: " @output_format
             Write-Host "  target exec hw4.exe"
             Write-Host "  set args `"../hw4/config.ini`""
+            Write-Host "  run"
             Write-Host "  lay next"
             Write-Host "  press enter"
-            Write-Host "  run"
             Write-Host "  next or nexti"
             # Invoke-Expression "gdb --args hw4.exe `"E:\GitHub\PRML_Code\src\hw4\config.ini`""
             Invoke-Expression "gdb"

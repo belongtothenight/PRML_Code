@@ -14,7 +14,7 @@ Use project "hw3" for example.
 ## Options
 
 ```
-Usage: runner.ps1 -p <project> [-h] [-nc] [-dbp] [-gdoc] [-spsd] [-odw] [-dgp]
+Usage: runner.ps1 -p <project> [-h] [-nc] [-nb] [-dbp] [-gdoc] [-spsd] [-odw] [-dgp]
   -p <program> : project to run
   -h           : help
   -nc          : no cleaning

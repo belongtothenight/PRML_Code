@@ -28,8 +28,12 @@ void config_init(config_t *config){
     config->initial_x = 0.0;
     config->initial_y = 0.0;
     config->max_iter = 1000;
+    config->show_progress = true;
     memset(config->output_file, 0, sizeof(config->output_file)); // Clear buffer
-    memset(config->iter_file, 0, sizeof(config->iter_file)); // Clear buffer
+    memset(config->iter_img, 0, sizeof(config->iter_img)); // Clear buffer
+    memset(config->iter_tmp, 0, sizeof(config->iter_tmp)); // Clear buffer
+    memset(config->cost_img, 0, sizeof(config->cost_img)); // Clear buffer
+    memset(config->cost_tmp, 0, sizeof(config->cost_tmp)); // Clear buffer
     memset(config->font, 0, sizeof(config->font)); // Clear buffer
     config->font_size = 20;
     config->plot_x_size = 1080;
@@ -59,8 +63,12 @@ void config_print(config_t *config){
     printf("initial_x: %lf\n", config->initial_x);
     printf("initial_y: %lf\n", config->initial_y);
     printf("max_iter: %d\n", config->max_iter);
+    if (config->show_progress == 1) printf("show_progress: true\n"); else if (config->show_progress == 0) printf("show_progress: false\n");
     printf("output_file: %s\n", config->output_file);
-    printf("iter_file: %s\n", config->iter_file);
+    printf("iter_img: %s\n", config->iter_img);
+    printf("iter_tmp: %s\n", config->iter_tmp);
+    printf("cost_img: %s\n", config->cost_img);
+    printf("cost_tmp: %s\n", config->cost_tmp);
     printf("font: %s\n", config->font);
     printf("font_size: %d\n", config->font_size);
     printf("plot_x_size: %d\n", config->plot_x_size);
@@ -83,10 +91,13 @@ void config_line_print(config_line_t *config_line){
 }
 
 void config_all_print(config_t *config, config_line_t (*config_lines)[]){
+    printf("\nconfig settings:\n");
     config_print(config);
     for (int i = 0; i < config->line_cnt; i++) {
         config_line_print(&(*config_lines)[i]);
     }
+    printf("\n");
+    return;
 }
 
 int config_parse(char *buf, config_t *config){
@@ -129,11 +140,33 @@ int config_parse(char *buf, config_t *config){
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
+    if (sscanf(buf, " show_progress = %[TtRrUuEe]", dummy) == 1) {
+        config->show_progress = true;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " show_progress = %[FfAaLlSsEe]", dummy) == 1) {
+        config->show_progress = false;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
     if (sscanf(buf, " output_file = %s", config->output_file) == 1) {
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
-    if (sscanf(buf, " iter_file = %s", config->iter_file) == 1) {
+    if (sscanf(buf, " iter_img = %s", config->iter_img) == 1) {
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " iter_tmp = %s", config->iter_tmp) == 1) {
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " cost_img = %s", config->cost_img) == 1) {
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " cost_tmp = %s", config->cost_tmp) == 1) {
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
