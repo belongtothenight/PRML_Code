@@ -221,7 +221,7 @@ int config_parse(char *buf, config_t *config){
         return CONFIG_READ_STATUS_SUCCESS;
     }
     if (sscanf(buf, " plot_y_max = %s", dummy) == 1) {
-        config->plot_y_max = strtol(dummy, NULL, 10);
+        config->plot_y_max = strtod(dummy, NULL);
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }

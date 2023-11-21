@@ -75,8 +75,15 @@ void iter_history_iterate(iter_history_t* iter_history, config_t* config, config
         if (config->debug_mode == true){
             printf("a1: %lf ->b1: %lf ->c1: %lf ->a2: %lf ->b2: %lf ->c2: %lf ->d2_point.x: %lf ->d2_point.y: %lf ->next_x: %lf ->next_y: %lf\n", a1, b1, c1, a2, b2, c2, d2_point.x, d2_point.y, next_x, next_y);
         }
-        if (((next_x > config->plot_x_min) || (next_x < config->plot_x_max) || (next_y > config->plot_y_min) || (next_y < config->plot_y_max)) && (iter_history->iter_min_set == false)){
-            iter_history->iter_min = iter;
+        if (((next_x > config->plot_x_min) && (next_y > config->plot_y_min) && (next_x < config->plot_x_max) && (next_y < config->plot_y_max)) || (iter_history->iter_min_set == true)){
+            if (iter_history->iter_min_set == false){
+                iter_history->iter_min = iter_history->cnt;
+                iter_history->iter_min_set = true;
+                printf("entering plot view at cnt: %d\n", iter_history->iter_min);
+                if (config->debug_mode) {
+                    printf("iter_history->iter_min_set: %d\n", iter_history->iter_min_set);
+                }
+            }
         }
     }
 }

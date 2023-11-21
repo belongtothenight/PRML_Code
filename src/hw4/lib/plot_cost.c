@@ -47,7 +47,7 @@ void cost_plot_update(FILE* gnuplot, config_t* config, iter_history_t* iter_hist
     fflush(cost_tmp);
     // Add lines and points to gnuplot
     fprintf(gnuplot, "plot \"%s\" with lines title \"cost\"\n", config->cost_tmp);
-    fprintf(gnuplot, "set xrange [%g:%g]\n", iter_history->iter_min, iter_history->cnt);
+    fprintf(gnuplot, "set xrange [%d:%d]\n", iter_history->iter_min, iter_history->cnt);
     fflush(gnuplot);
     return;
 }
@@ -59,7 +59,7 @@ void cost_plot_reset(FILE* gnuplot, config_t* config, iter_history_t* iter_histo
     fprintf(gnuplot, "set title \"cost\"\n");
     fprintf(gnuplot, "set xlabel \"iteration (each iter has %d points)\"\n", config->line_cnt);
     fprintf(gnuplot, "set ylabel \"relative cost\"\n");
-    fprintf(gnuplot, "set xrange [%g:%g]\n", iter_history->iter_min, iter_history->cnt);
+    fprintf(gnuplot, "set xrange [%d:%d]\n", iter_history->iter_min, iter_history->cnt);
     return;
 }
 

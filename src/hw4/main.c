@@ -47,6 +47,12 @@ int main (int argc, char *argv[]) {
         }
     }
 
+    if (iter_history.iter_min_set) {
+        printf("iteration enters plot view at cnt %d\n", iter_history.iter_min);
+    } else {
+        printf("iteration never enters plot view\n");
+    }
+
     iter_plot_reset(iter_gnuplot, &config);
     iter_plot_update(iter_gnuplot, &config, &config_lines, &iter_history, iter_file);
     cost_plot_reset(cost_gnuplot, &config, &iter_history);
