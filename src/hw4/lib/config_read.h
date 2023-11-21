@@ -20,15 +20,11 @@
 #define CONFIG_LINE_MAX_SIZE    (256)   ///< Maximum size of config file line (changing number small can take more config lines, weird)
 #define CONFIG_SET_MAX_SIZE     (128)   ///< Maximum size of config file settting in memory
 #define MAX_LINE_CNT            (4)     ///< Maximum number of specified lines in config file
-#define CONFIG_GLOBAL_SET_NUM   (20)    ///< Number of global settings in config file
+#define CONFIG_GLOBAL_SET_NUM   (21)    ///< Number of global settings in config file
 #define CONFIG_LINE_SET_NUM     (5)     ///< Number of each line settings in config file
 
 #define CONFIG_READ_STATUS_SUCCESS (0)           ///< Success
 #define CONFIG_READ_STATUS_FAILURE (-1)          ///< Can't open file
-
-#define DISPLAY_CONFIG_READ_BUF (0)               ///< Display config read or not
-#define DISPLAY_CONFIG_PARSING_BUF (0)            ///< Display config parsing or not
-#define DISPLAY_CONFIG_LINE_PARSING_BUF (0)       ///< Display config line parsing or not
 
 /**
  * @brief Data structure for config file general settings
@@ -41,7 +37,7 @@ typedef struct {
     double initial_y;                           ///< initial y
     int    max_iter;                            ///< maximum number of iterations (needs to be smaller than MAX_POINT_CNT defined in iter.h)
     bool   show_progress;                       ///< show progress or not
-    bool debug_mode;                            ///< show debug info or not
+    bool   debug_mode;                          ///< show debug info or not
     char*  font[CONFIG_SET_MAX_SIZE];           ///< font
     char*  output_file[CONFIG_SET_MAX_SIZE];    ///< output file name
     char*  iter_img[CONFIG_SET_MAX_SIZE];       ///< iteration image file name (stores all points)
@@ -52,10 +48,10 @@ typedef struct {
     int    plot_x_size;                         ///< plot x size
     int    plot_y_size;                         ///< plot y size
     char*  plot_filetype[CONFIG_SET_MAX_SIZE];  ///< plot filetype
-    int    plot_x_min;                          ///< plot x min
-    int    plot_x_max;                          ///< plot x max
-    int    plot_y_min;                          ///< plot y min
-    int    plot_y_max;                          ///< plot y max
+    double plot_x_min;                          ///< plot x min
+    double plot_x_max;                          ///< plot x max
+    double plot_y_min;                          ///< plot y min
+    double plot_y_max;                          ///< plot y max
     int    param_cnt;                           ///< number of parameters in config file
 } config_t;
 
@@ -126,9 +122,10 @@ int config_parse(char *buf, config_t *config);
  * @param buf Pointer to read buffer
  * @param config_line Pointer to config_line_t struct
  * @param line_cnt Pointer to line_cnt
+ * @param config Pointer to config_t struct
  * @retval config_read_status
 */
-int config_line_parse(char *buf, config_line_t *config_line, int *line_cnt);
+int config_line_parse(char *buf, config_line_t *config_line, int *line_cnt, config_t *config);
 
 /**
  * @brief Read config file and parse directives

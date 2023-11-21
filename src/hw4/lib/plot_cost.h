@@ -48,9 +48,10 @@ void cost_plot_update(FILE* gnuplot, config_t* config, iter_history_t* iter_hist
  * @brief Reset the cost plot to export to file
  * @param gnuplot Pipe to gnuplot
  * @param config Pointer to config_t struct
+ * @param iter_history Pointer to iter_history_t struct
  * @return void
 */
-void cost_plot_reset(FILE* gnuplot, config_t* config);
+void cost_plot_reset(FILE* gnuplot, config_t* config, iter_history_t* iter_history);
 
 /**
  * @brief Close the cost plot

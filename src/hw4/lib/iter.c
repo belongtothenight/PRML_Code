@@ -20,6 +20,8 @@ void iter_history_init(iter_history_t* iter_history, config_t* config, config_li
         iter_history->iter[i] = 0;
     }
     iter_history->max_cost = 0;
+    iter_history->iter_min = 0;
+    iter_history->iter_min_set = false;
     iter_history->x[iter_history->cnt] = config->initial_x;
     iter_history->y[iter_history->cnt] = config->initial_y;
     iter_history->cost[iter_history->cnt] = iter_history_calculate_cost(iter_history, config, &(*config_lines));
@@ -70,15 +72,11 @@ void iter_history_iterate(iter_history_t* iter_history, config_t* config, config
         iter_history->y[iter_history->cnt] = next_y;
         iter_history->cost[iter_history->cnt] = iter_history_calculate_cost(iter_history, config, &(*config_lines));
         iter_history->iter[iter_history->cnt] = iter;
-        // printf("a1: %lf\n", a1);
-        // printf("b1: %lf\n", b1);
-        // printf("c1: %lf\n", c1);
-        // printf("a2: %lf\n", a2);
-        // printf("b2: %lf\n", b2);
-        // printf("c2: %lf\n", c2);
-        // printf("d2_point.x: %lf\n", d2_point.x);
-        // printf("d2_point.y: %lf\n", d2_point.y);
-        // printf("next_x: %lf\n", next_x);
-        // printf("next_y: %lf\n", next_y);
+        if (config->debug_mode == true){
+            printf("a1: %lf ->b1: %lf ->c1: %lf ->a2: %lf ->b2: %lf ->c2: %lf ->d2_point.x: %lf ->d2_point.y: %lf ->next_x: %lf ->next_y: %lf\n", a1, b1, c1, a2, b2, c2, d2_point.x, d2_point.y, next_x, next_y);
+        }
+        if (((next_x > config->plot_x_min) || (next_x < config->plot_x_max) || (next_y > config->plot_y_min) || (next_y < config->plot_y_max)) && (iter_history->iter_min_set == false)){
+            iter_history->iter_min = iter;
+        }
     }
 }

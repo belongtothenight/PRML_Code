@@ -34,14 +34,14 @@ FILE* iter_plot_open(config_t* config){
         printf("%sCannot open gnuplot, please check your environment.\n", format.status.error);
         exit(1);
     } else {
-        printf("%sgnuplot opened.\n", format.status.success);
+        printf("%sgnuplot opened for iter plot.\n", format.status.success);
     }
     fprintf(gnuplot, "set terminal qt persist font \"%s,%d\" size %d,%d\n", config->font, config->font_size, config->plot_x_size, config->plot_y_size);
     fprintf(gnuplot, "set title \"iteration points\"\n");
     fprintf(gnuplot, "set xlabel \"x axis\"\n");
     fprintf(gnuplot, "set ylabel \"y axis\"\n");
-    fprintf(gnuplot, "set xrange [%d:%d]\n", config->plot_x_min, config->plot_x_max);
-    fprintf(gnuplot, "set yrange [%d:%d]\n", config->plot_y_min, config->plot_y_max);
+    fprintf(gnuplot, "set xrange [%g:%g]\n", config->plot_x_min, config->plot_x_max);
+    fprintf(gnuplot, "set yrange [%g:%g]\n", config->plot_y_min, config->plot_y_max);
     return gnuplot;
 }
 
@@ -74,8 +74,8 @@ void iter_plot_reset(FILE* gnuplot, config_t* config){
     fprintf(gnuplot, "set title \"iteration points\"\n");
     fprintf(gnuplot, "set xlabel \"x axis\"\n");
     fprintf(gnuplot, "set ylabel \"y axis\"\n");
-    fprintf(gnuplot, "set xrange [%d:%d]\n", config->plot_x_min, config->plot_x_max);
-    fprintf(gnuplot, "set yrange [%d:%d]\n", config->plot_y_min, config->plot_y_max);
+    fprintf(gnuplot, "set xrange [%g:%g]\n", config->plot_x_min, config->plot_x_max);
+    fprintf(gnuplot, "set yrange [%g:%g]\n", config->plot_y_min, config->plot_y_max);
     return;
 }
 

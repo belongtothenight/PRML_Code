@@ -49,7 +49,7 @@ int main (int argc, char *argv[]) {
 
     iter_plot_reset(iter_gnuplot, &config);
     iter_plot_update(iter_gnuplot, &config, &config_lines, &iter_history, iter_file);
-    cost_plot_reset(cost_gnuplot, &config);
+    cost_plot_reset(cost_gnuplot, &config, &iter_history);
     cost_plot_update(cost_gnuplot, &config, &iter_history, cost_file);
 
     fclose(iter_file);

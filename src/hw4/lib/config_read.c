@@ -29,6 +29,7 @@ void config_init(config_t *config){
     config->initial_y = 0.0;
     config->max_iter = 1000;
     config->show_progress = true;
+    config->debug_mode = false;
     memset(config->output_file, 0, sizeof(config->output_file)); // Clear buffer
     memset(config->iter_img, 0, sizeof(config->iter_img)); // Clear buffer
     memset(config->iter_tmp, 0, sizeof(config->iter_tmp)); // Clear buffer
@@ -64,6 +65,7 @@ void config_print(config_t *config){
     printf("initial_y: %lf\n", config->initial_y);
     printf("max_iter: %d\n", config->max_iter);
     if (config->show_progress == 1) printf("show_progress: true\n"); else if (config->show_progress == 0) printf("show_progress: false\n");
+    if (config->debug_mode == 1) printf("debug_mode: true\n"); else if (config->debug_mode == 0) printf("debug_mode: false\n");
     printf("output_file: %s\n", config->output_file);
     printf("iter_img: %s\n", config->iter_img);
     printf("iter_tmp: %s\n", config->iter_tmp);
@@ -74,10 +76,10 @@ void config_print(config_t *config){
     printf("plot_x_size: %d\n", config->plot_x_size);
     printf("plot_y_size: %d\n", config->plot_y_size);
     printf("plot_filetype: %s\n", config->plot_filetype);
-    printf("plot_x_min: %d\n", config->plot_x_min);
-    printf("plot_x_max: %d\n", config->plot_x_max);
-    printf("plot_y_min: %d\n", config->plot_y_min);
-    printf("plot_y_max: %d\n", config->plot_y_max);
+    printf("plot_x_min: %lf\n", config->plot_x_min);
+    printf("plot_x_max: %lf\n", config->plot_x_max);
+    printf("plot_y_min: %lf\n", config->plot_y_min);
+    printf("plot_y_max: %lf\n", config->plot_y_max);
     printf("param_cnt: %d\n", config->param_cnt);
     return;
 }
@@ -102,7 +104,7 @@ void config_all_print(config_t *config, config_line_t (*config_lines)[]){
 
 int config_parse(char *buf, config_t *config){
     char dummy[CONFIG_LINE_MAX_SIZE];
-    if (DISPLAY_CONFIG_PARSING_BUF  == 1) printf("buf: %s", buf);
+    if (config->debug_mode == true) printf("config_parse buf: %s", buf);
     if (sscanf(buf, " %s", dummy) == EOF) return CONFIG_READ_STATUS_SUCCESS; // Empty line
     if (sscanf(buf, " %[#]", dummy) == 1) return CONFIG_READ_STATUS_SUCCESS; // Comment line
     if (sscanf(buf, " initial_step = %s", dummy) == 1) {
@@ -150,6 +152,16 @@ int config_parse(char *buf, config_t *config){
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
+    if (sscanf(buf, " debug_mode = %[TtRrUuEe]", dummy) == 1) {
+        config->debug_mode = true;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " debug_mode = %[FfAaLlSsEe]", dummy) == 1) {
+        config->debug_mode = false;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
     if (sscanf(buf, " output_file = %s", config->output_file) == 1) {
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
@@ -194,17 +206,17 @@ int config_parse(char *buf, config_t *config){
         return CONFIG_READ_STATUS_SUCCESS;
     }
     if (sscanf(buf, " plot_x_min = %s", dummy) == 1) {
-        config->plot_x_min = strtol(dummy, NULL, 10);
+        config->plot_x_min = strtod(dummy, NULL);
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
     if (sscanf(buf, " plot_x_max = %s", dummy) == 1) {
-        config->plot_x_max = strtol(dummy, NULL, 10);
+        config->plot_x_max = strtod(dummy, NULL);
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
     if (sscanf(buf, " plot_y_min = %s", dummy) == 1) {
-        config->plot_y_min = strtol(dummy, NULL, 10);
+        config->plot_y_min = strtod(dummy, NULL);
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
@@ -216,9 +228,9 @@ int config_parse(char *buf, config_t *config){
     return CONFIG_READ_STATUS_FAILURE; // Syntax error
 }
 
-int config_line_parse(char *buf, config_line_t *config_line, int *line_cnt){
+int config_line_parse(char *buf, config_line_t *config_line, int *line_cnt, config_t *config){
     char dummy[CONFIG_LINE_MAX_SIZE];
-    if (DISPLAY_CONFIG_PARSING_BUF == 1) printf("buf: %s", buf);
+    if (config->debug_mode == true) printf("config_line_parse buf: %s", buf);
     if (sscanf(buf, " %s", dummy) == EOF) return CONFIG_READ_STATUS_SUCCESS; // Empty line
     if (sscanf(buf, " %[#]", dummy) == 1) return CONFIG_READ_STATUS_SUCCESS; // Comment line
     if (sscanf(buf, " line_title = %s", config_line->line_title) == 1){
@@ -272,7 +284,7 @@ int config_read(config_t *config, config_line_t (*config_lines)[], char *filenam
     // Read file
     while (fgets(buf, sizeof(buf), fp)) {
         ++current_line;
-        if (DISPLAY_CONFIG_LINE_PARSING_BUF == 1) printf("Line %d: %s", current_line, buf);
+        if (config->debug_mode == true) printf("Line %d: %s", current_line, buf);
         if (config->param_cnt < CONFIG_GLOBAL_SET_NUM) {
             // Read global settings
             int err = config_parse(buf, config);
@@ -284,7 +296,7 @@ int config_read(config_t *config, config_line_t (*config_lines)[], char *filenam
         } else {
             // Read line settings
             line_index = line_param_cnt / CONFIG_LINE_SET_NUM;
-            int err = config_line_parse(buf, &(*config_lines)[line_index], &line_param_cnt);
+            int err = config_line_parse(buf, &(*config_lines)[line_index], &line_param_cnt, config);
             if (err) {
                 sprintf(msg, "line %d: Buf: %s", current_line, buf);
                 config_read_status_print(err, msg);

@@ -20,6 +20,9 @@
  * @param y Y coordinate list
  * @param cost Cost list of the coordinate (learning curve)
  * @param iter Iteration number list
+ * @param max_cost Maximum cost
+ * @param iter_min Minimum iteration number enters plot view
+ * @param iter_min_set Whether iter_min is set or not
 */
 typedef struct {
     int cnt;
@@ -28,6 +31,8 @@ typedef struct {
     double cost[MAX_POINT_CNT];
     int iter[MAX_POINT_CNT];
     double max_cost;
+    int iter_min;
+    bool iter_min_set;
 } iter_history_t;
 
 /**

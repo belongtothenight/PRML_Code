@@ -33,7 +33,7 @@ FILE* cost_plot_open(config_t* config){
         printf("%sCannot open gnuplot, please check your environment.\n", format.status.error);
         exit(1);
     } else {
-        printf("%sgnuplot opened.\n", format.status.success);
+        printf("%sgnuplot opened for cost plot.\n", format.status.success);
     }
     fprintf(gnuplot, "set terminal qt persist font \"%s,%d\" size %d,%d\n", config->font, config->font_size, config->plot_x_size, config->plot_y_size);
     fprintf(gnuplot, "set title \"cost\"\n");
@@ -47,17 +47,19 @@ void cost_plot_update(FILE* gnuplot, config_t* config, iter_history_t* iter_hist
     fflush(cost_tmp);
     // Add lines and points to gnuplot
     fprintf(gnuplot, "plot \"%s\" with lines title \"cost\"\n", config->cost_tmp);
+    fprintf(gnuplot, "set xrange [%g:%g]\n", iter_history->iter_min, iter_history->cnt);
     fflush(gnuplot);
     return;
 }
 
-void cost_plot_reset(FILE* gnuplot, config_t* config){
+void cost_plot_reset(FILE* gnuplot, config_t* config, iter_history_t* iter_history){
     fprintf(gnuplot, "reset\n");
     fprintf(gnuplot, "set terminal pngcairo enhanced font \"%s,%d\" size %d,%d\n", config->font, config->font_size, config->plot_x_size, config->plot_y_size);
     fprintf(gnuplot, "set output \"%s.%s\"\n", config->cost_img, config->plot_filetype);
     fprintf(gnuplot, "set title \"cost\"\n");
     fprintf(gnuplot, "set xlabel \"iteration (each iter has %d points)\"\n", config->line_cnt);
     fprintf(gnuplot, "set ylabel \"relative cost\"\n");
+    fprintf(gnuplot, "set xrange [%g:%g]\n", iter_history->iter_min, iter_history->cnt);
     return;
 }
 
