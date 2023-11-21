@@ -23,7 +23,7 @@ void config_read_status_print(int config_read_status, char *message){
 
 void config_init(config_t *config){
     config->initial_step = 0.1;
-    config->dynamic_step = false;
+    config->dynamic_step = true;
     config->line_cnt = 2;
     config->initial_x = 0.0;
     config->initial_y = 0.0;

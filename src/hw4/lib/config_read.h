@@ -41,6 +41,7 @@ typedef struct {
     double initial_y;                           ///< initial y
     int    max_iter;                            ///< maximum number of iterations (needs to be smaller than MAX_POINT_CNT defined in iter.h)
     bool   show_progress;                       ///< show progress or not
+    bool debug_mode;                            ///< show debug info or not
     char*  font[CONFIG_SET_MAX_SIZE];           ///< font
     char*  output_file[CONFIG_SET_MAX_SIZE];    ///< output file name
     char*  iter_img[CONFIG_SET_MAX_SIZE];       ///< iteration image file name (stores all points)

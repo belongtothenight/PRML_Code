@@ -57,9 +57,9 @@ void iter_history_iterate(iter_history_t* iter_history, config_t* config, config
         c1 = -(*config_lines)[i].line_param3;
         a2 = -(*config_lines)[i].line_param2;
         b2 = (*config_lines)[i].line_param1;
-        c2 = iter_history->x[iter_history->cnt - 1] * a2 + iter_history->y[iter_history->cnt - 1] * b2;
+        c2 = -(iter_history->x[iter_history->cnt - 1] * a2 + iter_history->y[iter_history->cnt - 1] * b2);
         d2_intersection(a1, b1, c1, a2, b2, c2, &d2_point);
-        if (config->dynamic_step == true){
+        if (config->dynamic_step == false){
             step_normalize_coeff = config->initial_step / sqrt(pow(d2_point.x - iter_history->x[iter_history->cnt - 1], 2) + pow(d2_point.y - iter_history->y[iter_history->cnt - 1], 2));
         } else {
             step_normalize_coeff = config->initial_step;
