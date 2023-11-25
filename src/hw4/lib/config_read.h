@@ -21,7 +21,7 @@
 #define CONFIG_SET_MAX_SIZE     (128)   ///< Maximum size of config file settting in memory
 #define MAX_LINE_CNT            (4)     ///< Maximum number of specified lines in config file
 #define CONFIG_GLOBAL_SET_NUM   (29)    ///< Number of global settings in config file
-#define CONFIG_LINE_SET_NUM     (5)     ///< Number of each line settings in config file
+#define CONFIG_LINE_SET_NUM     (6)     ///< Number of each line settings in config file
 
 #define CONFIG_READ_STATUS_SUCCESS (0)           ///< Success
 #define CONFIG_READ_STATUS_FAILURE (-1)          ///< Can't open file
@@ -69,9 +69,10 @@ typedef struct {
 typedef struct {
     char*  line_title[CONFIG_SET_MAX_SIZE];  ///< line title (ex: Line 1)
     char*  line_symbol[CONFIG_SET_MAX_SIZE]; ///< line symbol (ex: f(x))
-    double line_param1;                       ///< a_x1
-    double line_param2;                       ///< b_y1
-    double line_param3;                       ///< c_1
+    char*  line_color[CONFIG_SET_MAX_SIZE];  ///< line color (ex: red)
+    double line_param1;                      ///< a_x1
+    double line_param2;                      ///< b_y1
+    double line_param3;                      ///< c_1
 } config_line_t;
 
 /**

@@ -59,6 +59,7 @@ void config_init(config_t *config){
 void config_line_init(config_line_t *config_line){
     memset(config_line->line_title, 0, sizeof(config_line->line_title)); // Clear buffer
     memset(config_line->line_symbol, 0, sizeof(config_line->line_symbol)); // Clear buffer
+    memset(config_line->line_color, 0, sizeof(config_line->line_color)); // Clear buffer
     config_line->line_param1 = 0.0;
     config_line->line_param2 = 0.0;
     config_line->line_param3 = 0.0;
@@ -102,6 +103,7 @@ void config_print(config_t *config){
 void config_line_print(config_line_t *config_line){
     printf("line_title: %s\n", config_line->line_title);
     printf("line_symbol: %s\n", config_line->line_symbol);
+    printf("line_color: %s\n", config_line->line_color);
     printf("line_param1: %lf\n", config_line->line_param1);
     printf("line_param2: %lf\n", config_line->line_param2);
     printf("line_param3: %lf\n", config_line->line_param3);
@@ -312,6 +314,10 @@ int config_line_parse(char *buf, config_line_t *config_line, int *line_cnt, conf
         return CONFIG_READ_STATUS_SUCCESS;
     }
     if (sscanf(buf, " line_symbol = %s", config_line->line_symbol) == 1){
+        *line_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " line_color = %s", config_line->line_color) == 1){
         *line_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }

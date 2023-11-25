@@ -13,7 +13,7 @@
 config_t config;
 config_line_t config_lines[MAX_LINE_CNT];
 iter_history_t iter_history;
-dotted_line_cord_t dotted_line_cord;
+FILE* iter_dt_files[MAX_LINE_CNT];
 
 /**
  * @brief main function
@@ -28,15 +28,19 @@ int main (int argc, char *argv[]) {
     config_read(&config, &config_lines, argv[1]);
     config_all_print(&config, &config_lines);
     FILE* iter_gnuplot = iter_plot_open(&config);
-    FILE* iter_point_file = iter_file_open(&config, 1);
-    FILE* iter_dt_file = iter_file_open(&config, 2);
+    FILE* iter_point_file = iter_file_open(&config, config.iter_point_tmp);
+    for (int i = 0; i < config.line_cnt; i++) {
+        char temp_str[100];
+        sprintf(temp_str, "%s_%d.dat", config.iter_dt_tmp, i+1);
+        iter_dt_files[i] = iter_file_open(&config, temp_str);
+    }
     FILE* cost_gnuplot = cost_plot_open(&config);
     FILE* cost_file = cost_file_open(&config);
     if (config.plot_iter_with_line) {
         add_line(iter_gnuplot, &config, &config_lines);
     }
     if (config.plot_iter_with_dotted_line) {
-        dotted_line_cord_generate(&config, &config_lines, &dotted_line_cord, iter_dt_file);
+        dotted_line_cord_generate(&config, &config_lines, &iter_dt_files);
     }
     iter_history_init(&iter_history, &config, &config_lines);
 
@@ -53,7 +57,7 @@ int main (int argc, char *argv[]) {
             cost_file_flush(cost_file, &iter_history, &config);
         }
         if (config.show_progress) {
-            iter_plot_update(iter_gnuplot, &config, &config_lines, &iter_history, iter_point_file, iter_dt_file);
+            iter_plot_update(iter_gnuplot, &config, &config_lines, &iter_history, iter_point_file, &iter_dt_files);
             cost_plot_update(cost_gnuplot, &config, &iter_history, cost_file);
         }
     }
@@ -66,7 +70,7 @@ int main (int argc, char *argv[]) {
 
     if (config.plot_iter) {
         iter_plot_reset(iter_gnuplot, &config);
-        iter_plot_update(iter_gnuplot, &config, &config_lines, &iter_history, iter_point_file, iter_dt_file);
+        iter_plot_update(iter_gnuplot, &config, &config_lines, &iter_history, iter_point_file, &iter_dt_files);
     }
     if (config.plot_cost) {
         cost_plot_reset(cost_gnuplot, &config, &iter_history);
@@ -74,7 +78,9 @@ int main (int argc, char *argv[]) {
     }
 
     fclose(iter_point_file);
-    fclose(iter_dt_file);
+    for (int i = 0; i < config.line_cnt; i++) {
+        fclose(iter_dt_files[i]);
+    }
     iter_plot_close(iter_gnuplot);
     fclose(cost_file);
     cost_plot_close(cost_gnuplot);

@@ -11,37 +11,22 @@
 #include "config_read.h"
 #include "iter.h"
 
-#define MAX_DOTTED_LINE_CORD_CNT (1000000)   ///< Maximum number of dotted lines
-
-/**
- * @brief Structure for dotted line coorindates
- * @param x X coordinate list
- * @param y Y coordinate list
- * @param cnt Number of coordinates
-*/
-typedef struct {
-    double x[MAX_DOTTED_LINE_CORD_CNT];
-    double y[MAX_DOTTED_LINE_CORD_CNT];
-    int cnt;
-} dotted_line_cord_t;
-
 /**
  * @brief Generate dotted line coordinates
  * @param config Pointer to config_t struct
  * @param config_lines Pointer to config_line_t struct list
- * @param dotted_line_cord Pointer to dotted_line_cord_t struct
- * @param iter_dt_tmp The file pointer to the iteration dotted line temporary file
+ * @param iter_dt_tmps The file pointer list to the iteration dotted line temporary file
  * @retval void
 */
-void dotted_line_cord_generate(config_t* config, config_line_t (*config_lines)[], dotted_line_cord_t* dotted_line_cord, FILE* iter_dt_tmp);
+void dotted_line_cord_generate(config_t* config, config_line_t (*config_lines)[], FILE* iter_dt_tmps[]);
 
 /**
  * @brief Open a temporary file to store iteration history
  * @param config Pointer to config_t struct
- * @param file_num The number of the file to open
+ * @param filename The file name of the temporary file
  * @retval FILE* The file pointer to the opened file
 */
-FILE* iter_file_open(config_t* config, int file_num);
+FILE* iter_file_open(config_t* config, char* filename);
 
 /**
  * @brief Flush the iteration history to file
@@ -75,10 +60,10 @@ void add_line(FILE* gnuplot, config_t* config, config_line_t (*config_lines)[]);
  * @param config_lines Pointer to config_line_t struct
  * @param iter_history Pointer to iter_history_t struct
  * @param iter_point_tmp The file pointer to the iteration history file
- * @param iter_dt_tmp The file pointer to the iteration dotted line temporary file
+ * @param iter_dt_tmps The file pointer to the iteration dotted line temporary file
  * @retval void
 */
-void iter_plot_update(FILE* gnuplot, config_t* config, config_line_t (*config_lines)[], iter_history_t* iter_history, FILE* iter_point_tmp, FILE* iter_dt_tmp);
+void iter_plot_update(FILE* gnuplot, config_t* config, config_line_t (*config_lines)[], iter_history_t* iter_history, FILE* iter_point_tmp, FILE* iter_dt_tmps[]);
 
 /**
  * @brief Reset the plot to export to file
