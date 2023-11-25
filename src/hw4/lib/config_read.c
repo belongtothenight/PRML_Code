@@ -32,7 +32,8 @@ void config_init(config_t *config){
     config->debug_mode = false;
     memset(config->output_file, 0, sizeof(config->output_file)); // Clear buffer
     memset(config->iter_img, 0, sizeof(config->iter_img)); // Clear buffer
-    memset(config->iter_tmp, 0, sizeof(config->iter_tmp)); // Clear buffer
+    memset(config->iter_point_tmp, 0, sizeof(config->iter_point_tmp)); // Clear buffer
+    memset(config->iter_dt_tmp, 0, sizeof(config->iter_dt_tmp)); // Clear buffer
     memset(config->cost_img, 0, sizeof(config->cost_img)); // Clear buffer
     memset(config->cost_tmp, 0, sizeof(config->cost_tmp)); // Clear buffer
     memset(config->font, 0, sizeof(config->font)); // Clear buffer
@@ -44,6 +45,13 @@ void config_init(config_t *config){
     config->plot_x_max = 10;
     config->plot_y_min = -10;
     config->plot_y_max = 10;
+    config->plot_iter = true;
+    config->plot_iter_with_line = true;
+    config->plot_iter_with_dotted_line = true;
+    config->plot_cost = true;
+    config->iter_dotted_line_range = 0.5;
+    config->iter_dotted_line_step = 0.1;
+    config->iter_dotted_line_num_per_x = 1;
     config->param_cnt = 0; // should set as 0
     return;
 }
@@ -68,7 +76,8 @@ void config_print(config_t *config){
     if (config->debug_mode == 1) printf("debug_mode: true\n"); else if (config->debug_mode == 0) printf("debug_mode: false\n");
     printf("output_file: %s\n", config->output_file);
     printf("iter_img: %s\n", config->iter_img);
-    printf("iter_tmp: %s\n", config->iter_tmp);
+    printf("iter_point_tmp: %s\n", config->iter_point_tmp);
+    printf("iter_dt_tmp: %s\n", config->iter_dt_tmp);
     printf("cost_img: %s\n", config->cost_img);
     printf("cost_tmp: %s\n", config->cost_tmp);
     printf("font: %s\n", config->font);
@@ -80,7 +89,13 @@ void config_print(config_t *config){
     printf("plot_x_max: %lf\n", config->plot_x_max);
     printf("plot_y_min: %lf\n", config->plot_y_min);
     printf("plot_y_max: %lf\n", config->plot_y_max);
-    printf("param_cnt: %d\n", config->param_cnt);
+    if (config->plot_iter == 1) printf("plot_iter: true\n"); else if (config->plot_iter == 0) printf("plot_iter: false\n");
+    if (config->plot_iter_with_line == 1) printf("plot_iter_with_line: true\n"); else if (config->plot_iter_with_line == 0) printf("plot_iter_with_line: false\n");
+    if (config->plot_iter_with_dotted_line == 1) printf("plot_iter_with_dotted_line: true\n"); else if (config->plot_iter_with_dotted_line == 0) printf("plot_iter_with_dotted_line: false\n");
+    if (config->plot_cost == 1) printf("plot_cost: true\n"); else if (config->plot_cost == 0) printf("plot_cost: false\n");
+    printf("iter_dotted_line_range: %lf\n", config->iter_dotted_line_range);
+    printf("iter_dotted_line_step: %lf\n", config->iter_dotted_line_step);
+    printf("iter_dotted_line_num_per_x: %d\n", config->iter_dotted_line_num_per_x);
     return;
 }
 
@@ -170,7 +185,11 @@ int config_parse(char *buf, config_t *config){
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
-    if (sscanf(buf, " iter_tmp = %s", config->iter_tmp) == 1) {
+    if (sscanf(buf, " iter_point_tmp = %s", config->iter_point_tmp) == 1) {
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " iter_dt_tmp = %s", config->iter_dt_tmp) == 1) {
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }
@@ -222,6 +241,61 @@ int config_parse(char *buf, config_t *config){
     }
     if (sscanf(buf, " plot_y_max = %s", dummy) == 1) {
         config->plot_y_max = strtod(dummy, NULL);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_iter = %[TtRrUuEe]", dummy) == 1) {
+        config->plot_iter = true;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_iter = %[FfAaLlSsEe]", dummy) == 1) {
+        config->plot_iter = false;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_iter_with_line = %[TtRrUuEe]", dummy) == 1) {
+        config->plot_iter_with_line = true;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_iter_with_line = %[FfAaLlSsEe]", dummy) == 1) {
+        config->plot_iter_with_line = false;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_iter_with_dotted_line = %[TtRrUuEe]", dummy) == 1) {
+        config->plot_iter_with_dotted_line = true;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_iter_with_dotted_line = %[FfAaLlSsEe]", dummy) == 1) {
+        config->plot_iter_with_dotted_line = false;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_cost = %[TtRrUuEe]", dummy) == 1) {
+        config->plot_cost = true;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " plot_cost = %[FfAaLlSsEe]", dummy) == 1) {
+        config->plot_cost = false;
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " iter_dotted_line_range = %s", dummy) == 1) {
+        config->iter_dotted_line_range = strtod(dummy, NULL);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " iter_dotted_line_step = %s", dummy) == 1) {
+        config->iter_dotted_line_step = strtod(dummy, NULL);
+        config->param_cnt += 1;
+        return CONFIG_READ_STATUS_SUCCESS;
+    }
+    if (sscanf(buf, " iter_dotted_line_num_per_x = %s", dummy) == 1) {
+        config->iter_dotted_line_num_per_x = strtol(dummy, NULL, 10);
         config->param_cnt += 1;
         return CONFIG_READ_STATUS_SUCCESS;
     }

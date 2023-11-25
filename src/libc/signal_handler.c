@@ -14,6 +14,7 @@ void sig_SIGINT_handler(int signum){
     output_format format;
     get_format(&format);
     printf("%sSIGINT received.\n", format.status.warning);
+    exit(1);
     return;
 }
 

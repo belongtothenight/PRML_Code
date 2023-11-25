@@ -20,7 +20,7 @@
 #define CONFIG_LINE_MAX_SIZE    (256)   ///< Maximum size of config file line (changing number small can take more config lines, weird)
 #define CONFIG_SET_MAX_SIZE     (128)   ///< Maximum size of config file settting in memory
 #define MAX_LINE_CNT            (4)     ///< Maximum number of specified lines in config file
-#define CONFIG_GLOBAL_SET_NUM   (21)    ///< Number of global settings in config file
+#define CONFIG_GLOBAL_SET_NUM   (29)    ///< Number of global settings in config file
 #define CONFIG_LINE_SET_NUM     (5)     ///< Number of each line settings in config file
 
 #define CONFIG_READ_STATUS_SUCCESS (0)           ///< Success
@@ -41,7 +41,8 @@ typedef struct {
     char*  font[CONFIG_SET_MAX_SIZE];           ///< font
     char*  output_file[CONFIG_SET_MAX_SIZE];    ///< output file name
     char*  iter_img[CONFIG_SET_MAX_SIZE];       ///< iteration image file name (stores all points)
-    char*  iter_tmp[CONFIG_SET_MAX_SIZE];       ///< iteration temporary file name (stores all points)
+    char*  iter_point_tmp[CONFIG_SET_MAX_SIZE]; ///< iteration point temporary file name (stores all points)
+    char*  iter_dt_tmp[CONFIG_SET_MAX_SIZE];    ///< iteration dotted line temporary file name (stores all dt values)
     char*  cost_img[CONFIG_SET_MAX_SIZE];       ///< cost image file name (stores all cost values)
     char*  cost_tmp[CONFIG_SET_MAX_SIZE];       ///< cost temporary file name (stores all cost values)
     int    font_size;                           ///< font size
@@ -52,6 +53,13 @@ typedef struct {
     double plot_x_max;                          ///< plot x max
     double plot_y_min;                          ///< plot y min
     double plot_y_max;                          ///< plot y max
+    bool   plot_iter;                           ///< plot iteration or not
+    bool   plot_iter_with_line;                 ///< plot iteration with line or not
+    bool   plot_iter_with_dotted_line;          ///< plot iteration with dotted line or not
+    bool   plot_cost;                           ///< plot cost or not
+    double iter_dotted_line_range;              ///< range of dotted line (y max diff)
+    double iter_dotted_line_step;               ///< step of dotted line
+    int    iter_dotted_line_num_per_x;          ///< number of dotted lines per x
     int    param_cnt;                           ///< number of parameters in config file
 } config_t;
 
