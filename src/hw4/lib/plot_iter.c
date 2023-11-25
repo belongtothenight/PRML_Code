@@ -30,9 +30,9 @@ void dotted_line_cord_generate(config_t* config, config_line_t (*config_lines)[]
                 fprintf(iter_dt_tmps[j], "%lf %lf\n", i, y);
                 // Print debug info
                 if (config->debug_mode) {
-                    printf("Generated %d/%d %.2lf%% x: %.2lf y: %.2lf i: %.2lf j: %d k: %d\n", cnt, total_cnt, cnt / total_cnt * 100, i, y, i, j, k);
+                    printf("Generated %d/%d %.2lf%% x: %.2lf y: %.2lf i: %.2lf j: %d k: %d\n", cnt, total_cnt, (double)cnt / total_cnt * 100, i, y, i, j, k);
                 } else {
-                    printf("Generated %d/%d %.2lf%% x: %.2lf y: %.2lf i: %.2lf j: %d k: %d\r", cnt, total_cnt, cnt / total_cnt * 100, i, y, i, j, k);
+                    printf("Generated %d/%d %.2lf%% x: %.2lf y: %.2lf i: %.2lf j: %d k: %d\r", cnt, total_cnt, (double)cnt / total_cnt * 100, i, y, i, j, k);
                 }
                 if (cnt > total_cnt) {
                     printf("\ndotted line cnt exceeds total cnt\n");
