@@ -8,9 +8,14 @@ This work won't be possible without the help of <https://www.geogebra.org/graphi
 
 ## Result - Video
 
-1. Two line approximation demo video: <https://youtu.be/ysrils6EjMQ>
-2. Three line approximation demo video: <https://youtu.be/Ehv5jl6ck3U>
-3. Four line approximation demo video: <https://youtu.be/q6xPvh4n1L0>
+1. Commit: ![13cb101](https://github.com/belongtothenight/PRML_Code/commit/13cb1015a9198f3d75f6815992d4773e35b2cbfd)
+    1. Two line approximation demo video: <https://youtu.be/ysrils6EjMQ>
+    2. Three line approximation demo video: <https://youtu.be/Ehv5jl6ck3U>
+    3. Four line approximation demo video: <https://youtu.be/q6xPvh4n1L0>
+2. Commit: ![9516020](https://github.com/belongtothenight/PRML_Code/commit/9516020107289deaf0aec9e3d038194cc0804237)
+   1. Two line approximation demo video: <https://youtu.be/dboFm8W1vio>
+   2. Three line approximation demo video: <https://youtu.be/pQpyle1hzN4>
+   3. Four line approximation demo video: <https://youtu.be/lb1l_Jzk-Bk>
 
 ## Result - Image
 
