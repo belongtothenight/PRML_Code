@@ -19,7 +19,7 @@
 
 #define CONFIG_LINE_MAX_SIZE    (256)   ///< Maximum size of config file line (changing number small can take more config lines, weird)
 #define CONFIG_SET_MAX_SIZE     (128)   ///< Maximum size of config file settting in memory
-#define MAX_LINE_CNT            (4)     ///< Maximum number of specified lines in config file
+#define MAX_LINE_CNT            (10)    ///< Maximum number of specified lines in config file
 #define CONFIG_GLOBAL_SET_NUM   (29)    ///< Number of global settings in config file
 #define CONFIG_LINE_SET_NUM     (6)     ///< Number of each line settings in config file
 
