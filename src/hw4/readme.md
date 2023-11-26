@@ -14,8 +14,29 @@ This work won't be possible without the help of <https://www.geogebra.org/graphi
 
 ## Result - Image
 
-| Line Num |      Iteration with Line      |     Iteration with Dot (enlarged)     |     Iteration with Both (enlarged)      |             Cost              |
-| :------: | :---------------------------: | :-----------------------------------: | :-------------------------------------: | :---------------------------: |
-|    2     | ![iter](output/iter_img2.png) | ![iter](output/iter_img2_enl_dtl.png) | ![iter](output/iter_img2_enl_dtlwl.png) | ![cost](output/cost_img2.png) |
-|    3     | ![iter](output/iter_img3.png) | ![iter](output/iter_img3_enl_dtl.png) | ![iter](output/iter_img3_enl_dtlwl.png) | ![cost](output/cost_img3.png) |
-|    4     | ![iter](output/iter_img4.png) | ![iter](output/iter_img4_enl_dtl.png) | ![iter](output/iter_img4_enl_dtlwl.png) | ![cost](output/cost_img4.png) |
+<table width="100%">
+    <tr>
+        <th width="25%">Iteration with Line</td>
+        <th width="25%">Iteration with Dot (enlarged)</td>
+        <th width="25%">Iteration with Both (enlarged)</td>
+        <th width="25%">Cost</td>
+    </tr>
+    <tr>
+        <td width="25%"><img src="output/iter_img2.png"></td>
+        <td width="25%"><img src="output/iter_img2_enl_dtl.png"></td>
+        <td width="25%"><img src="output/iter_img2_enl_dtlwl.png"></td>
+        <td width="25%"><img src="output/cost_img2.png"></td>
+    </tr>
+    <tr>
+        <td width="25%"><img src="output/iter_img3.png"></td>
+        <td width="25%"><img src="output/iter_img3_enl_dtl.png"></td>
+        <td width="25%"><img src="output/iter_img3_enl_dtlwl.png"></td>
+        <td width="25%"><img src="output/cost_img3.png"></td>
+    </tr>
+    <tr>
+        <td width="25%"><img src="output/iter_img4.png"></td>
+        <td width="25%"><img src="output/iter_img4_enl_dtl.png"></td>
+        <td width="25%"><img src="output/iter_img4_enl_dtlwl.png"></td>
+        <td width="25%"><img src="output/cost_img4.png"></td>
+    </tr>
+</table>
