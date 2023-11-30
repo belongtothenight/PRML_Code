@@ -100,7 +100,6 @@ void get_format(output_format* pFormat, int Ps){
     pFormat->action.scroll_up = strdup(buf);
     snprintf(buf, sizeof(buf), "\033[%dT", Ps);
     pFormat->action.scroll_down = strdup(buf);
-    
     // status
     snprintf(buf, sizeof(buf), "%s%s%s%s: ", pFormat->foreground.green, pFormat->style.bold, "SUCCESS", pFormat->style.reset);
     pFormat->status.success = strdup(buf);
